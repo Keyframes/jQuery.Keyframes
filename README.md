@@ -25,6 +25,6 @@ keyframesjs.play('.trapdoor #trapdoor', {
 		direction: 'normal', // which direction you want the frames to flow
 		fillMode: 'forwards' // how to apply the styles outside the animation time
 	},
-	callback // Function fired after the animation is complete.
+	callback // Function fired after the first cycle is complete.
 );
 ```
