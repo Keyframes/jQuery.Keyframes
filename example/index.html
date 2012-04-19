@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>keyframesJS Example</title>
+	<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
+	<script type="text/javascript" src="../keyframes.js"></script>
+	
+	<script type="text/javascript">
+		
+		// Adding a new animation sequence (keyframe)
+		keyframesjs.add("ball-roll", {
+		    "0%": keyframesjs.browserDetect()+"transform:rotate(0deg);margin-left:0px",
+    		"50%": keyframesjs.browserDetect()+"transform:rotate(360deg);margin-left:600px",
+    		"100%": keyframesjs.browserDetect()+"transform:rotate(0deg);margin-left:0px"
+		});
+		
+		$(window).load(function(){
+			$('.ball').css(keyframesjs.browserDetect()+'border-radius', '50px 0px 50px 50px');
+			$('.ball').css(keyframesjs.browserDetect()+'box-shadow', 'inset 0px 0px 25px 3px #fff');
+			
+			keyframesjs.play('.ball', {
+		        name: 'ball-roll',
+		        duration: 7000,
+		        timingFunction: 'ease',
+		        delay: 0,
+		        repeat: 'infinite',
+		        direction: 'normal',
+		        fillMode: 'forwards'
+			});
+			
+		});
+		
+	</script>
+	
+	<style>
+		.ball-container{
+			width:600px;
+			margin-left:auto;
+			margin-right:auto;
+			text-align:left;
+			margin-top:20px;
+		}
+		.ball{
+			width:100px;
+			height:60px;
+			background-color:lightblue;
+			text-align:center;
+			color:#fff;
+			padding-top:40px;
+			font-size:20px;
+			font-weight:bold;
+		}
+	</style>
+</head>
+<body>	
+		<div class="ball-container">
+			<div class="ball">WEEEE</div>
+		</div>
+</body>
+</html>
