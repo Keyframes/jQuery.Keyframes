@@ -27,4 +27,10 @@ keyframesjs.play('.trapdoor #trapdoor', {
 	},
 	callback // Function fired after the first cycle is complete.
 );
+
+// Adding browser specific frame styles
+keyframesjs.add("ball-roll", {
+	"0%": keyframesjs.browserDetect()+"transform:rotate(0deg)",
+	"100%": keyframesjs.browserDetect()+"transform:rotate(360deg)",
+});
 ```
