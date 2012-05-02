@@ -1,8 +1,7 @@
-KeyframesJS
+jQuery-Keyframes
 ===========
 
-KeyframesJS generates and plays CSS3 keyframes quickly and easily allowing you to concentrate on the content of your project whilst cutting down code.
-KeyframesJS requires the latest jQuery.
+jQuery-Keyframes generates and plays CSS3 keyframes quickly and easily allowing you to concentrate on the content of your project whilst cutting down code.
 
 Example Usage
 -------------
