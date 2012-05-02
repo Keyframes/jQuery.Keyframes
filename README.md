@@ -8,7 +8,7 @@ Example Usage
 ```javascript
 
 // Get browser style prefix
-var stylepre = $.keyframe.browserCode();
+$.keyframe.browserCode();
 
 // Adding a new animation sequence (keyframe)
 $.fn.addKeyframe([{
@@ -20,10 +20,10 @@ $.fn.addKeyframe([{
 }]);
 
 // Adding browser specific frame styles
-keyframesjs.add([{
+$.fn.addKeyframe([{
 	name: "ball-roll",
-	"0%": stylepre+"transform:rotate(0deg)",
-	"100%": stylepre+"transform:rotate(360deg)",
+	"0%": $.keyframe.browserCode()+"transform:rotate(0deg)",
+	"100%": $.keyframe.browserCode()+"transform:rotate(360deg)",
 }]);
 
 // Playing an animation
@@ -37,6 +37,7 @@ $(selector).playKeyframe({
 		fillMode: 'forwards' // how to apply the styles outside the animation time
 	},
 	callback // Function fired after the animation is complete. If repeat is infinite, the function will be fired every time the animation is restarted.
+);
 	
 // Reset the animation
 $(selector).resetKeyframe(callback);
@@ -49,5 +50,4 @@ $(selector).resumeKeyframe();
 
 // Get the current running keyframe animation name applied to an element. If false, no animation is running.
 var framename = $(selector).data('keyframe');
-);
 ```
