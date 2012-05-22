@@ -23,7 +23,7 @@ $.keyframe = {
 		var browserType = this.browserCode();
 		
 		for(var frameName in $.frameCollection){
-			var css = '.boostKeyframe{transform:scale3d(1,1,1);} @'+browserType+'keyframes '+frameName+'{';
+			var css = '@'+browserType+'keyframes '+frameName+'{';
 			
 			for(var frameData in $.frameCollection[frameName].data){
 				if(frameData != 'name'){
@@ -37,6 +37,7 @@ $.keyframe = {
 				
 			$('#keyframes-style').append(css);
 		}
+		$('#keyframes-style').append(' .boostKeyframe{transform:scale3d(1,1,1);}');
 	}
 };
 
