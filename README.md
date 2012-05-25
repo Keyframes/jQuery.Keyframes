@@ -22,8 +22,8 @@ $.fn.addKeyframe([{
 // Adding browser specific frame styles
 $.fn.addKeyframe([{
 	name: "ball-roll",
-	"0%": $.keyframe.browserCode()+"transform:rotate(0deg)",
-	"100%": $.keyframe.browserCode()+"transform:rotate(360deg)",
+	"from": $.keyframe.browserCode()+"transform:rotate(0deg)",
+	"to": $.keyframe.browserCode()+"transform:rotate(360deg)",
 }]);
 
 // Playing an animation
