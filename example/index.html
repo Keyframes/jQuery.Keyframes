@@ -48,16 +48,8 @@
 						break;
 					case 'spin':
 						
-						// run spin keyframes
-						$('.ball').playKeyframe({
-					        name: 'ball-spin',
-					        duration: 500,
-					        timingFunction: 'linear',
-					        delay: 0,
-					        repeat: 3,
-					        direction: 'normal',
-					        fillMode: 'forwards'
-						}, increment);
+						// run spin keyframes using the shorthand method.
+						$('.ball').playKeyframe('ball-spin 500 linear 0 3 normal forwards', increment);
 						
 						break;
 					case 'linear':

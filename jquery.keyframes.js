@@ -73,25 +73,41 @@ $.fn.addKeyframe = function(frameData){
 };
 
 $.fn.playKeyframe = function(frameOptions, callback){
-	var duration = frameOptions.duration;
-	var delay = frameOptions.delay;
-	frameOptions.duration = frameOptions.duration + 'ms';
-	frameOptions.delay = frameOptions.delay + 'ms';
 	
-	var animationcss = '';
-	$.each(frameOptions, function(index,opt){
-		animationcss += opt + ' ';
-	});
-	animationcss = animationcss.trim();
+	if(typeof frameOptions == 'string'){
+		frameOptions = frameOptions.trim();
+		frameOptSplit = frameOptions.split(' ');
+		var name = frameOptSplit[0];
+		var duration = parseInt(frameOptSplit[1]);
+		var delay = parseInt(frameOptSplit[3]);
+		var repeat = parseInt(frameOptSplit[4]);
+		frameOptSplit[1] += 'ms';
+		frameOptSplit[3] += 'ms';
+		
+		var animationcss = frameOptSplit.join(' ');
+	}else{
+		var name = frameOptions.name;
+		var duration = frameOptions.duration;
+		var delay = frameOptions.delay;
+		var repeat = frameOptions.repeat;
+		frameOptions.duration = frameOptions.duration + 'ms';
+		frameOptions.delay = frameOptions.delay + 'ms';
+		
+		var animationcss = '';
+		$.each(frameOptions, function(index,opt){
+			animationcss += opt + ' ';
+		});
+		animationcss = animationcss.trim();
+	}
 	
 	var animationkey = $.keyframe.browserCode() + 'animation';
 	
 	var _this = this;
-	if(frameOptions.repeat != 'infinite'){
+	if(repeat != 'infinite'){
 		if(callback != null){
-			$(this).data('keyframeTimer', setTimeout(callback, (duration + delay) * frameOptions.repeat));
+			$(this).data('keyframeTimer', setTimeout(callback, (duration + delay) * repeat));
 		}
-		setTimeout(function(){ $(_this).data('keyframe',false); }, (duration + delay) * frameOptions.repeat);
+		setTimeout(function(){ $(_this).data('keyframe',false); }, (duration + delay) * repeat);
 	}else{
 		if(callback != null){
 			$(_this).data('keyframeTimer', setTimeout(function(){ callback(); $(_this).data('keyframeTimer', setInterval(callback, duration)); }, duration + delay));
@@ -99,7 +115,7 @@ $.fn.playKeyframe = function(frameOptions, callback){
 	}
 	
 	$(this).css($.keyframe.browserCode() + 'animation-play-state','running');
-	$(this).data('keyframe',frameOptions.name);
+	$(this).data('keyframe',name);
 	$(this).css(animationkey, animationcss);
 }
 
