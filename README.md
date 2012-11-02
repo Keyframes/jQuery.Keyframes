@@ -1,7 +1,7 @@
 jQuery-Keyframes
 ===========
 
-See it in action: http://jsfiddle.net/GcJP8/
+See it in action: http://jsfiddle.net/GcJP8/3/
 
 jQuery-Keyframes generates and plays CSS3 keyframes quickly and easily allowing you to concentrate on the content of your project whilst cutting down code.
 
