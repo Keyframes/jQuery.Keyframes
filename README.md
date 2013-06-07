@@ -1,3 +1,8 @@
+keyframes.js
+===========
+
+Want a pure javascript version with more features? Check out https://github.com/krazyjakee/keyframes.js
+
 jQuery-Keyframes
 ===========
 
