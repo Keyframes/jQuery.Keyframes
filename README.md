@@ -35,13 +35,13 @@ $.fn.addKeyframe([{
 
 // Playing an animation
 $(selector).playKeyframe({
-		name: 'trapdoor-sequence', // name of the keyframe you want to bind to the selected element
-		duration: 1000, // how long you want it to last in milliseconds
-		timingFunction: 'linear', // specifies the speed curve of the animation
-		delay: 0, // how long you want to wait before the animation starts in milliseconds
-		repeat: 'infinite', // how many times you want the animation to repeat
-		direction: 'normal', // which direction you want the frames to flow
-		fillMode: 'forwards' // how to apply the styles outside the animation time
+		name: 'trapdoor-sequence', // name of the keyframe you want to bind to the selected element, mandatory parameter
+		duration: 1000, // how long you want it to last in milliseconds, mandatory parameter
+		timingFunction: 'linear', // specifies the speed curve of the animation, mandatory parameter
+		delay: 0, // how long you want to wait before the animation starts in milliseconds, default value is 0
+		repeat: 'infinite', // how many times you want the animation to repeat, default value is 1
+		direction: 'normal', // which direction you want the frames to flow, default value is normal
+		fillMode: 'forwards' // how to apply the styles outside the animation time, default value is forwards
 	},
 	callback // Function fired after the animation is complete. If repeat is infinite, the function will be fired every time the animation is restarted.
 );

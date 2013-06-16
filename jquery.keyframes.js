@@ -86,6 +86,14 @@ $.fn.playKeyframe = function(frameOptions, callback){
         
         var animationcss = frameOptSplit.join(' ');
     }else{
+        var defaultsOptions = {
+            delay: 0,
+            repeat: 1,
+            direction: 'normal',
+            fillMode: 'forwards'
+        };
+        var frameOptions = $.extend({}, defaultsOptions, frameOptions);
+
         var name = frameOptions.name;
         var duration = frameOptions.duration;
         var delay = frameOptions.delay;
