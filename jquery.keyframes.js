@@ -51,17 +51,17 @@ $.fn.resetKeyframe = function(callback){
     if(callback){
         setTimeout(callback,1);
     }
-}
+};
 
 $.fn.pauseKeyframe = function(){
     $(this).css($.keyframe.browserCode() + 'animation-play-state','paused');
     clearInterval($(this).data('keyframeTimer'));
     clearTimeout($(this).data('keyframeTimer'));
-}
+};
 
 $.fn.resumeKeyframe = function(){
     $(this).css($.keyframe.browserCode() + 'animation-play-state','running');
-}
+};
 
 $.fn.addKeyframe = function(frameData){
     $.each(frameData, function(index, data){
@@ -117,7 +117,7 @@ $.fn.playKeyframe = function(frameOptions, callback){
     $(this).css($.keyframe.browserCode() + 'animation-play-state','running');
     $(this).data('keyframe',name);
     $(this).css(animationkey, animationcss);
-}
+};
 
 $('head').append('<style id="keyframes-style" type="text/css"></style>');
 
