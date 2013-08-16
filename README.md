@@ -26,28 +26,42 @@ $.fn.addKeyframe([{
 	"100%": "height:10px"
 }]);
 
-// Adding browser specific frame styles
-$.fn.addKeyframe([{
+// Adding browser a single frame style
+$.keyframe.add({
 	name: "ball-roll",
 	"from": $.keyframe.browserCode()+"transform:rotate(0deg)",
 	"to": $.keyframe.browserCode()+"transform:rotate(360deg)",
-}]);
+});
+
+// Adding browser specific frame styles
+$.keyframe.add([{
+	name: "ball-roll",
+	"from": $.keyframe.browserCode()+"transform:rotate(0deg)",
+	"to": $.keyframe.browserCode()+"transform:rotate(360deg)",
+	},
+	{
+	name: "rotation",
+	"from": $.keyframe.browserCode()+"transform:rotate(0deg)",
+	"to": $.keyframe.browserCode()+"transform:rotate(360deg)",
+	}
+]);
+
+
+
+
 
 // Playing an animation
 $(selector).playKeyframe({
-		name: 'trapdoor-sequence', // name of the keyframe you want to bind to the selected element, mandatory parameter
-		duration: 1000, // how long you want it to last in milliseconds, mandatory parameter
-		timingFunction: 'linear', // specifies the speed curve of the animation, mandatory parameter
-		delay: 0, // how long you want to wait before the animation starts in milliseconds, default value is 0
-		repeat: 'infinite', // how many times you want the animation to repeat, default value is 1
-		direction: 'normal', // which direction you want the frames to flow, default value is normal
-		fillMode: 'forwards' // how to apply the styles outside the animation time, default value is forwards
+		name: 'trapdoor-sequence', // name of the keyframe you want to bind to the selected element
+		duration: 1000, // [optional, default: 0] how long you want it to last in milliseconds
+		timingFunction: 'linear', // [optional, default: ease] specifies the speed curve of the animation
+		delay: 0, //[optional, default: 0]  how long you want to wait before the animation starts in milliseconds, default value is 0
+		repeat: 'infinite', //[optional, default:1]  how many times you want the animation to repeat, default value is 1
+		direction: 'normal', //[optional, default: 'normal']  which direction you want the frames to flow, default value is normal
+		fillMode: 'forwards' //[optional, default: 'forward']  how to apply the styles outside the animation time, default value is forwards
+	      complete: function(){} //[optional]  Function fired after the animation is complete. If repeat is infinite, the function will be fired every time the animation is restarted.
 	},
-	callback // Function fired after the animation is complete. If repeat is infinite, the function will be fired every time the animation is restarted.
 );
-
-// Playing the same animation but using the shorthand method
-$(selector).playKeyframe('trapdoor-sequence 1000 linear 0 infinite normal forwards',callback);
 	
 // Reset the animation
 $(selector).resetKeyframe(callback);

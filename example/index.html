@@ -7,154 +7,27 @@
 	
 	<script type="text/javascript">
 		
-		$(window).load(function(){
-			
-			// Get the css browser code (ie: -moz-)
-			var bcode = $.keyframe.browserCode();
-			
-			// Setup the initial transform style.
-			$('.ball').css(bcode+'transform','rotate(90deg) scale3d(1,1,1)');
-			
-			// Adding a new animation sequences (keyframe)
-			$.fn.addKeyframe([{
-				name: "ball-roll",
-			    "0%": bcode+"transform:rotate(90deg);margin-left:0px",
-	    		"50%": bcode+"transform:rotate(450deg);margin-left:600px",
-	    		"100%": bcode+"transform:rotate(90deg);margin-left:0px"
-			},{
-				name: "ball-spin",
-			    "0%": bcode+"transform:rotate(90deg)",
-	    		"100%": bcode+"transform:rotate(450deg)"
-			}]);
-			
+		$(function(){
+			$.keyframe.add({
+				name: "rotation",
+				"from": $.keyframe.browserCode()+"transform:rotate(0deg)",
+    				"to": $.keyframe.browserCode()+"transform:rotate(360deg)",
+			});	
 		});
-				
-		function play(animation){
-			$('.ball').resetKeyframe(function(){
-				switch(animation){
-					case 'normal':
-						
-						// roll with easing
-						$('.ball').playKeyframe({
-					        name: 'ball-roll',
-					        duration: 3000,
-					        timingFunction: 'ease',
-					        delay: 0,
-					        repeat: 'infinite',
-					        direction: 'normal',
-					        fillMode: 'forwards'
-						}, increment);
-						
-						break;
-					case 'spin':
-						
-						// run spin keyframes using the shorthand method.
-						$('.ball').playKeyframe('ball-spin 500 linear 0 3 normal forwards', increment);
-						
-						break;
-					case 'linear':
-						
-						// roll with linear timing
-						$('.ball').playKeyframe({
-					        name: 'ball-roll',
-					        duration: 3000,
-					        timingFunction: 'linear',
-					        repeat: 'infinite'
-						}, increment);
-						
-						break;
-					case 'delay':
-						
-						// set a 2 second delay before starting
-						$('.ball').playKeyframe({
-					        name: 'ball-roll',
-					        duration: 3000,
-					        timingFunction: 'linear',
-					        delay: 2000,
-					        repeat: 'infinite'
-						}, increment);
-						
-						break;
-					case 'once':
-						
-						// only play the animation once
-						$('.ball').playKeyframe({
-					        name: 'ball-roll',
-					        duration: 3000,
-					        timingFunction: 'ease'
-						}, increment);
-
-						break;
-				}
-			})
-			
-		}
-		
-		function pause(){
-			// freeze keyframe animation and kill callback
-			$('.ball').pauseKeyframe();
-		}
-		
-		function resume(){
-			// resume keyframe animation
-			$('.ball').resumeKeyframe();
-		}
-		
-		// example callback function
-		function increment(){
-			$('#cb').html(parseInt($('#cb').html())+1);
-		}
-		
-		setInterval(function(){
-			if($('.ball').data('keyframe')){
-				$('.ball').html(': )');
-				
-				// Get keyframe name that is applied to the element.
-				$('#ba').html($('.ball').data('keyframe'));
-				
-			}else{
-				$('.ball').html(': (');
-				$('#ba').html('None');
-			}
-		}, 100);
 		
 	</script>
 	
 	<style>
 		.ball-container{
-			width:600px;
-			margin-left:auto;
-			margin-right:auto;
-			text-align:center;
-			margin-top:20px;
-		}
-		.ball{
 			width:100px;
-			height:90px;
-			padding-top:10px;
-			background-color:yellow;
-			text-align:center;
-			font-family:tahoma;
-			font-size:56px;
-			font-weight:bold;
-			border-radius: 50px;
-			box-shadow: 0px 0px 10px 0px #000;
+			height: 100px;
+			background: blue;
 		}
 	</style>
 </head>
 <body>	
 		<div class="ball-container">
-			<div class="ball">: (</div><br />
-			<input type="button" onclick="play('normal')" value="Ease Roll" />
-			<input type="button" onclick="play('linear')" value="Linear Roll" />
-			<input type="button" onclick="play('delay')" value="2 Second Delay" />
-			<input type="button" onclick="play('once')" value="Roll Once" />
-			<input type="button" onclick="play('spin')" value="Spin" />
-			<input type="button" onclick="play()" value="Reset" /><br />
-			<input type="button" onclick="pause()" value="Pause" />
-			<input type="button" onclick="resume()" value="Resume" /><br /><br />
-			Callback count: <b id="cb">0</b><br />
-			Ball Animation: <b id="ba"></b><br />
+			
 		</div>
 </body>
 </html>
