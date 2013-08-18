@@ -1,9 +1,15 @@
 jQuery-Keyframes
 ===========
 
-jQuery.Keyframes is forked from @krazyjakee 's [jQuery-Keyframes](https://github.com/krazyjakee/jQuery-Keyframes/)
+jQuery.Keyframes is forked from [@krazyjakee](https://github.com/krazyjakee/)'s [jQuery-Keyframes](https://github.com/krazyjakee/jQuery-Keyframes/)
 
 jQuery.Keyframes as [jQuery-Keyframes](https://github.com/krazyjakee/jQuery-Keyframes/) generates and plays CSS3 keyframes quickly and easily allowing you to concentrate on the content of your project whilst cutting down code.
+
+jQuery.Keyframes introduces
++ some changes in the API 
++ $.keyframe.isSupported() to detect CSS animation support
++ 20% smaller (minified, 2.084 kb vs 2.453 kb)
+
 Example Usage
 -------------
 ```javascript
@@ -12,7 +18,7 @@ Example Usage
 $.keyframe.browserCode();
 
 // Detecting CSS animation support
-$.keyframe.isSupported()
+$.keyframe.isSupported();
 
 // Adding a new animation sequence (keyframe)
 $.fn.addKeyframe([{
