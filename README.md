@@ -1,12 +1,9 @@
 jQuery-Keyframes
 ===========
 
-See it in action: http://jsfiddle.net/GcJP8/3/
+jQuery.Keyframes is forked from @krazyjakee 's [jQuery-Keyframes](https://github.com/krazyjakee/jQuery-Keyframes/)
 
-jQuery.Keyframes is forked from @krazyjakee's [jQuery-Keyframes](https://github.com/krazyjakee/jQuery-Keyframes/)
-
- generates and plays CSS3 keyframes quickly and easily allowing you to concentrate on the content of your project whilst cutting down code.
-
+jQuery.Keyframes as [jQuery-Keyframes](https://github.com/krazyjakee/jQuery-Keyframes/) generates and plays CSS3 keyframes quickly and easily allowing you to concentrate on the content of your project whilst cutting down code.
 Example Usage
 -------------
 ```javascript
