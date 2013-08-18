@@ -1,6 +1,16 @@
-title = "jquery.keyframes"
-comment = "jQuery-Keyframes generates and plays CSS3 keyframes quickly and easily allowing you to concentrate on the content of your project whilst cutting down code."
+title = "jQuery.keyframes"
+comment = """
+<p><a href="https://github.com/Ianus/jQuery-Keyframes">jQuery.Keyframes</a> is forked from <a href="https://github.com/krazyjakee/">@krazyjakee</a>'s <a href="https://github.com/krazyjakee/jQuery-Keyframes/">jQuery-Keyframes</a></p>
+<p><a href="https://github.com/Ianus/jQuery-Keyframes">jQuery.Keyframes</a> like <a href="https://github.com/krazyjakee/jQuery-Keyframes/">jQuery-Keyframes</a> generates and plays CSS3 keyframes quickly and easily allowing you to concentrate on the content of your project whilst cutting down code.</p>
+<p><a href="https://github.com/Ianus/jQuery-Keyframes">jQuery.Keyframes</a> introduces</p>
+<ul>
+<li>some changes in the API </li>
+<li>$.keyframe.isSupported() to detect CSS animation support</li>
+<li>20% smaller minified version (2.084 kb vs 2.453 kb)</li>
+</ul>
+"""
 githubLink = "https://github.com/Ianus/jQuery-Keyframes"
+downloadSuffix = "/archive/master.zip"
 sourceCode = """
 <html>
   <head>
@@ -57,7 +67,8 @@ $(->
   safe = safe_tags_replace(sourceCode)
   $("pre > code").html(safe)
   # set title
-  $("#page-title").text(title)
+  $("#page-title .anchor").text(title)
   $("#page-comment").html(comment)
-  $("#forkme-banner").attr "href", githubLink
+  $("#forkme-banner, #page-title .anchor").attr "href", githubLink
+  $("#download").attr "href", githubLink + downloadSuffix
   )

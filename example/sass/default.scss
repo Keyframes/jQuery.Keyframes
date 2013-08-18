@@ -35,10 +35,6 @@ footer, header, hgroup, menu, nav, section {
   display: block;
 }
 
-ol, ul {
-  list-style: none;
-}
-
 blockquote, q {
 }
 
@@ -82,24 +78,25 @@ h2 {
 }
 
 h3 {
-  font-size: 24px;
+  font-size: 2.5em;
 }
 
 h4 {
-  font-size: 21px;
+  font-size: 2.3em;
 }
 
 h5 {
-  font-size: 18px;
+  font-size: 2.1em;
 }
 
 h6 {
-  font-size: 16px;
+  font-size: 1.9em;
 }
 
 
 p {
-  margin: 10px 0 15px 0;
+  font-size: 1.35em;
+  margin: .5em 0 .2em 0;
 }
 
 footer p {
@@ -154,7 +151,7 @@ pre, code, #example {
   background-color: #fff;
 
   font-family: Monaco, "Bitstream Vera Sans Mono", "Lucida Console", Terminal, monospace;
-  font-size: 14px;
+  font-size: 16px;
 
   border-radius: 2px;
   -moz-border-radius: 2px;
@@ -199,7 +196,7 @@ ul, ol, dl {
 }
 
 ul li {
-  list-style: none;
+  list-style-position:inside;
   padding-left: 20px;
 }
 
@@ -320,14 +317,13 @@ Full-Width Styles
   text-shadow: #111 0px 0px 10px;
 }
 
-#downloads {
-  position: absolute;
-  width: 210px;
-  z-index: 10;
-  bottom: -40px;
-  right: 0;
-  height: 70px;
-  background: url('../images/icon_download.png') no-repeat 0% 90%;
+#download {
+  font-size: 70%;
+  font-style: italic;
+  color: rgb(34, 34, 34);
+  &:hover{
+    color: #007edf;
+  }
 }
 
 .zip-download-link {

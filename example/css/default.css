@@ -30,9 +30,6 @@ article, aside, details, figcaption, figure,
 footer, header, hgroup, menu, nav, section {
   display: block; }
 
-ol, ul {
-  list-style: none; }
-
 table {
   border-collapse: collapse;
   border-spacing: 0; }
@@ -71,19 +68,20 @@ h2 {
   background: url("../images/bg_hr.png") repeat-x bottom; }
 
 h3 {
-  font-size: 24px; }
+  font-size: 2.5em; }
 
 h4 {
-  font-size: 21px; }
+  font-size: 2.3em; }
 
 h5 {
-  font-size: 18px; }
+  font-size: 2.1em; }
 
 h6 {
-  font-size: 16px; }
+  font-size: 1.9em; }
 
 p {
-  margin: 10px 0 15px 0; }
+  font-size: 1.35em;
+  margin: .5em 0 .2em 0; }
 
 footer p {
   color: #f2f2f2; }
@@ -135,7 +133,7 @@ pre, code, #example {
   color: #222;
   background-color: #fff;
   font-family: Monaco, "Bitstream Vera Sans Mono", "Lucida Console", Terminal, monospace;
-  font-size: 14px;
+  font-size: 16px;
   border-radius: 2px;
   -moz-border-radius: 2px;
   -webkit-border-radius: 2px; }
@@ -169,7 +167,7 @@ ul, ol, dl {
   margin-bottom: 15px; }
 
 ul li {
-  list-style: none;
+  list-style-position: inside;
   padding-left: 20px; }
 
 ol li {
@@ -270,14 +268,12 @@ Full-Width Styles
   background: none;
   text-shadow: #111 0px 0px 10px; }
 
-#downloads {
-  position: absolute;
-  width: 210px;
-  z-index: 10;
-  bottom: -40px;
-  right: 0;
-  height: 70px;
-  background: url("../images/icon_download.png") no-repeat 0% 90%; }
+#download {
+  font-size: 70%;
+  font-style: italic;
+  color: #222222; }
+  #download:hover {
+    color: #007edf; }
 
 .zip-download-link {
   display: block;
