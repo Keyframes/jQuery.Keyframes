@@ -1,14 +1,11 @@
-keyframes.js
-===========
-
-Want a pure javascript version with more features? Check out https://github.com/krazyjakee/keyframes.js
-
 jQuery-Keyframes
 ===========
 
 See it in action: http://jsfiddle.net/GcJP8/3/
 
-jQuery-Keyframes generates and plays CSS3 keyframes quickly and easily allowing you to concentrate on the content of your project whilst cutting down code.
+jQuery.Keyframes is forked from @krazyjakee's [jQuery-Keyframes](https://github.com/krazyjakee/jQuery-Keyframes/)
+
+ generates and plays CSS3 keyframes quickly and easily allowing you to concentrate on the content of your project whilst cutting down code.
 
 Example Usage
 -------------
@@ -43,9 +40,9 @@ $.keyframe.add([{
 	"to": $.keyframe.browserCode()+"transform:rotate(360deg)",
 	},
 	{
-	name: "rotation",
+	name: "half-rotation",
 	"from": $.keyframe.browserCode()+"transform:rotate(0deg)",
-	"to": $.keyframe.browserCode()+"transform:rotate(360deg)",
+	"to": $.keyframe.browserCode()+"transform:rotate(180deg)",
 	}
 ]);
 
@@ -53,9 +50,9 @@ $.keyframe.add([{
 // Playing an animation
 $(selector).playKeyframe({
 		name: 'trapdoor-sequence', // name of the keyframe you want to bind to the selected element
-		duration: 1000, // [optional, default: 0] how long you want it to last in milliseconds
+		duration: 1000, // [optional, default: 0, in ms] how long you want it to last in milliseconds
 		timingFunction: 'linear', // [optional, default: ease] specifies the speed curve of the animation
-		delay: 0, //[optional, default: 0]  how long you want to wait before the animation starts in milliseconds, default value is 0
+		delay: 0, //[optional, default: 0, in ms]  how long you want to wait before the animation starts in milliseconds, default value is 0
 		repeat: 'infinite', //[optional, default:1]  how many times you want the animation to repeat, default value is 1
 		direction: 'normal', //[optional, default: 'normal']  which direction you want the frames to flow, default value is normal
 		fillMode: 'forwards' //[optional, default: 'forward']  how to apply the styles outside the animation time, default value is forwards
