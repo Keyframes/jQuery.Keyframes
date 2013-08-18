@@ -17,6 +17,9 @@ Example Usage
 // Get browser style prefix
 $.keyframe.browserCode();
 
+// Detecting CSS animation support
+$.keyframe.isSupported()
+
 // Adding a new animation sequence (keyframe)
 $.fn.addKeyframe([{
 	name: "trapdoor-sequence",
@@ -47,9 +50,6 @@ $.keyframe.add([{
 ]);
 
 
-
-
-
 // Playing an animation
 $(selector).playKeyframe({
 		name: 'trapdoor-sequence', // name of the keyframe you want to bind to the selected element
@@ -59,7 +59,7 @@ $(selector).playKeyframe({
 		repeat: 'infinite', //[optional, default:1]  how many times you want the animation to repeat, default value is 1
 		direction: 'normal', //[optional, default: 'normal']  which direction you want the frames to flow, default value is normal
 		fillMode: 'forwards' //[optional, default: 'forward']  how to apply the styles outside the animation time, default value is forwards
-	      complete: function(){} //[optional]  Function fired after the animation is complete. If repeat is infinite, the function will be fired every time the animation is restarted.
+		complete: function(){} //[optional]  Function fired after the animation is complete. If repeat is infinite, the function will be fired every time the animation is restarted.
 	},
 );
 	

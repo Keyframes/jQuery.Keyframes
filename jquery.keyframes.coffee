@@ -13,21 +13,33 @@ $.keyframe =
       "-moz-"
     else
       ""
-
-  generate: ->
-    # reset 
-    $("#keyframes-style").html ""
+  isSupported:->
+    element = document.getElementsByTagName('body')[0]
+    animationstring = "animation"
+    keyframeprefix = ""
+    pfx = @browserCode()
+    animationSupport = false
+    if element.style.animationName
+      animationSupport = true
+    else
+      pfx = pfx.slice 1,-1
+      if element.style[pfx + "AnimationName"] isnt `undefined`
+        animationSupport = true
+    
+    return animationSupport
+    
+  generate: (frameName)->
+    $keyframeStyle = $("<style>").attr( class: "keyframe-style", id: frameName, type:"text/css" ).appendTo("head")
     browserType = @browserCode()
-    for frameName of $.frameCollection
-      css = "@" + browserType + "keyframes " + frameName + "{"
-      for frameData of $.frameCollection[frameName].data
-        unless frameData is "name"
-          css += frameData + "{"
-          fd = $.frameCollection[frameName].data
-          css += fd[frameData] + "}"
-      css += "}\n"
-      $("#keyframes-style").append css
-    $("#keyframes-style").append " .boostKeyframe{transform:scale3d(1,1,1);}"
+    css = "@" + browserType + "keyframes " + frameName + "{"
+    for frameData of $.frameCollection[frameName].data
+      unless frameData is "name"
+        css += frameData + "{"
+        fd = $.frameCollection[frameName].data
+        css += fd[frameData] + "}"
+    css += "}\n"
+    $keyframeStyle.append css
+    
   
   add : (frameData) ->
     if typeof frameData is Array
@@ -35,17 +47,16 @@ $.keyframe =
         kfname = data.name
         data.name = ""
         $.frameCollection[kfname] = data: data
+        $.keyframe.generate kfname
     else
       kfname = frameData.name
       frameData.name = ""
       $.frameCollection[kfname] = data: frameData
-  
-    $.keyframe.generate()
+      $.keyframe.generate kfname
 
 $.fn.resetKeyframe = (callback) ->
   $(this).css $.keyframe.browserCode() + "animation-play-state", "running"
-  animationkey = $.keyframe.browserCode() + "animation"
-  $(this).css animationkey, "none"
+  $(this).css $.keyframe.browserCode() + "animation", "none"
   $(this).data "keyframe", false
   clearInterval $(this).data("keyframeTimer")
   clearTimeout $(this).data("keyframeTimer")
@@ -61,51 +72,50 @@ $.fn.resumeKeyframe = ->
 
 
 
-$.fn.playKeyframe = (frameOptions) ->
-  defaultsOptions =
-      duration: 10000
-      timingFunction: "ease"
-      delay: 0
-      repeat: 1
-      direction: "normal"
-      fillMode: "forwards"
-
-  frameOptions = $.extend({}, defaultsOptions, frameOptions)
-  ###
-    animation-name: myfirst;
-    animation-duration: 5s;
-    animation-timing-function: linear;
-    animation-delay: 2s;
-    animation-iteration-count: infinite;
-    animation-direction: alternate;
-    animation-play-state: running;
-  ###
-  name = frameOptions.name
-  duration = frameOptions.duration
-  delay = frameOptions.delay
-  repeat = frameOptions.repeat
-  frameOptions.duration = frameOptions.duration + "ms" if typeof frameOptions.duration isnt "string"
-  frameOptions.delay = frameOptions.delay + "ms" if typeof frameOptions.duration isnt "string"
-  animationcss = "#{name} #{frameOptions.duration} #{frameOptions.timingFunction} #{frameOptions.delay} #{repeat} #{frameOptions.direction} #{frameOptions.fillMode}"
-  callback = if frameOptions.complete then frameOptions.callback else undefined
+$.fn.extend 
+  playKeyframe : (frameOptions) ->
+    defaultsOptions =
+        duration: 0
+        timingFunction: "ease"
+        delay: 0
+        repeat: 1
+        direction: "normal"
+        fillMode: "forwards"
   
-  animationcss = animationcss.trim()
-  animationkey = $.keyframe.browserCode() + "animation"
-  ###
-    unless repeat is "infinite"
-      $(this).data "keyframeTimer", setTimeout(callback, (duration + delay) * repeat)  if callback?
-      setTimeout (->
-        $(_this).data "keyframe", false
-      ), (duration + delay) * repeat
-    else
-      if callback?
-        $(_this).data "keyframeTimer", setTimeout(->
-          callback()
-          $(_this).data "keyframeTimer", setInterval(callback, duration)
-        , duration + delay)
-  ###
-  $(this).css $.keyframe.browserCode() + "animation-play-state", "running"
-  $(this).data "keyframe", name
-  $(this).css animationkey, animationcss
+    frameOptions = $.extend defaultsOptions, frameOptions
+    
+    name = frameOptions.name
+    duration = frameOptions.duration
+    delay = frameOptions.delay
+    repeat = frameOptions.repeat
+    frameOptions.duration = frameOptions.duration + "ms" if typeof frameOptions.duration isnt "string"
+    frameOptions.delay = frameOptions.delay + "ms" if typeof frameOptions.duration isnt "string"
+    animationcss = "#{name} #{frameOptions.duration} #{frameOptions.timingFunction} #{frameOptions.delay} #{repeat} #{frameOptions.direction} #{frameOptions.fillMode}"
+    callback = if frameOptions.complete then frameOptions.complete else null
+    
+    animationcss = animationcss.trim()
+    animationkey = $.keyframe.browserCode() + "animation"
+    
+    return @each ()->
+      $(this).addClass "boostKeyframe"
+      $(this).css $.keyframe.browserCode() + "animation-play-state", "running"
+      $(this).data "keyframe", name
+      $(this).css animationkey, animationcss
+      
+      
+      # If repeat is infinite, the callback function will be fired every time the animation is restarted.
+      if repeat is "infinite"
+        if callback?
+          $(this).data "keyframeTimer", setTimeout(=>
+            do callback
+            $(this).data "keyframeTimer", setInterval(callback, duration)
+          , duration + delay)
+      else
+       if callback
+          $(this).data "keyframeTimer", setTimeout(callback, (duration + delay) * repeat)
+            
+        setTimeout (=>
+          $(this).data "keyframe", false
+        ), (duration + delay) * repeat
 
-$("<style>").attr( id:"keyframes-style",type:"text/css" ).appendTo("head")
+$("<style>").attr( class: "keyframe-style", id:"boost-keyframe", type:"text/css" ).appendTo("head").append " .boostKeyframe{#{browserType}transform:scale3d(1,1,1);}"

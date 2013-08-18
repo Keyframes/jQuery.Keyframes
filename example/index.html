@@ -1,33 +1,89 @@
 <!DOCTYPE html>
 <html>
-<head>
-	<title>jQuery-Keyframes Example</title>
-	<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
-	<script type="text/javascript" src="../jquery.keyframes.js"></script>
-	
-	<script type="text/javascript">
-		
-		$(function(){
-			$.keyframe.add({
-				name: "rotation",
-				"from": $.keyframe.browserCode()+"transform:rotate(0deg)",
-    				"to": $.keyframe.browserCode()+"transform:rotate(360deg)",
-			});	
-		});
-		
-	</script>
-	
-	<style>
-		.ball-container{
-			width:100px;
-			height: 100px;
-			background: blue;
-		}
-	</style>
-</head>
-<body>	
-		<div class="ball-container">
-			
+
+  <head>
+    <meta charset='utf-8' />
+    <meta http-equiv="X-UA-Compatible" content="chrome=1" />
+    <meta name="description" content="Ianus.github.io : " />
+
+    <link rel="stylesheet" type="text/css" media="screen" href="css/default.css">
+   
+   <link rel="stylesheet" href="highlight.js/styles/xcode.css">
+   <link rel="stylesheet" href="font-awesome/css/font-awesome.min.css">
+   <script src="highlight.js/highlight.pack.js"></script>
+    <title>Ianus.github.io</title>
+    <style>
+    	#square{
+    		width: 100px;
+    		height: 100px;
+    		background: blue;
+    		margin: auto;
+    	}
+    </style>
+  </head>
+
+  <body>
+
+    <!-- HEADER -->
+    <div id="header-wrap" class="outer">
+        <header class="inner">
+          <a id="forkme-banner" href="https://github.com/Ianus">View on GitHub <i class="icon-github icon-2x"></i></a>
+
+          <h1 id="project-title">Ianus.github.io</h1>
+          <h2 id="project-tagline"></h2>
+
+        </header>
+    </div>
+
+    <!-- MAIN CONTENT -->
+    <div id="main-content-wrap" class="outer">
+      <section id="main-content" class="inner">
+      	<h3 id="page-title"><a class="anchor" href="#welcome-to-github-pages">
+      		<span class="octicon octicon-link"></span>
+      		</a>
+      	</h3>
+		<p id="page-comment"></p>
+
+		<pre><code></code></pre>
+		<h6>Demo</h6>
+		<div id="example">
+			<div id="counter"></div>
+			<div id="square"></div>
+			<script src="js/jquery-1.10.2.min.js"></script>
+			<script src="js/jquery.keyframes.js"></script>
+			<script>
+			    $.keyframe.add({
+			      name: "rotation",
+			      "from": $.keyframe.browserCode()+"transform:rotate(0deg)",
+			      "to": $.keyframe.browserCode()+"transform:rotate(360deg)",
+			    });
+			    var rotationCount = 0;
+			    $("#square").playKeyframe({
+			      name: "rotation",
+			      duration: 1000,
+			      repeat: "infinite",
+			      complete: function(){
+			        rotationCount++;
+			        $("#counter").text("Rotations completed: " + rotationCount);
+			      }
+			    });
+			</script>
 		</div>
-</body>
+	</section>
+	
+    </div>
+
+    <!-- FOOTER  -->
+    <div id="footer-wrap" class="outer">
+      <footer class="inner">
+        <p>Published with <a href="http://pages.github.com">GitHub Pages</a></p>
+      </footer>
+    </div>
+    
+    <script src="js/jquery-1.10.2.min.js"></script>
+    
+    <script src="js/source.js"></script>
+    <script>hljs.initHighlightingOnLoad();</script>
+    
+  </body>
 </html>
