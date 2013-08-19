@@ -73,6 +73,4 @@ $(selector).pauseKeyframe();
 // Resume keyframe animation
 $(selector).resumeKeyframe();
 
-// Get the current running keyframe animation name applied to an element. If false, no animation is running.
-var framename = $(selector).data('keyframe');
 ```
