@@ -54,7 +54,7 @@
 			<script src="js/jquery-1.10.2.min.js"></script>
 			<script src="js/jquery.keyframes.js"></script>
 			<script>
-			    $.keyframe.add({
+			    $.keyframe.define({
 			      name: "rotation",
 			      "from": $.keyframe.browserCode()+"transform:rotate(0deg)",
 			      "to": $.keyframe.browserCode()+"transform:rotate(360deg)",
@@ -81,9 +81,7 @@
         <p>Published with <a href="http://pages.github.com">GitHub Pages</a></p>
       </footer>
     </div>
-    
-    <script src="js/jquery-1.10.2.min.js"></script>
-    
+   
     <script src="js/source.js"></script>
     <script>hljs.initHighlightingOnLoad();</script>
     

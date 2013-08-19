@@ -34,10 +34,24 @@ $.keyframe =
       unless property is "name"
         css += "#{property}{#{frameData[property]}}"
     css += "}"
-    $createKeyframeStyleTag(id:frameName).append css
+    #if redefined
+    $frameStyle = $("style##{frameData.name}")
+    if $frameStyle.length > 0
+      $frameStyle.html css
+      # get all the element running the animation
+      $elems = $("*").filter ->
+        @style["#{$.keyframe.browserCode().slice(1,-1)}AnimationName"] is frameName
+      $elems.each ->
+        # get params"
+        $el = $(this)
+        options = $el.data "keyframeOptions"
+        $el.resetKeyframe ->
+          $el.playKeyframe options
+    else
+      $createKeyframeStyleTag(id:frameName).append css
     
   
-  add : (frameData) ->
+  define : (frameData) ->
     if typeof frameData is Array
       for frame in frameData
         @generate frame
@@ -52,7 +66,7 @@ playStateRunning = "running"
 $.fn.resetKeyframe = (callback) ->
   $el = $(this).css(browserType + animationPlayState, playStateRunning)
                .css(browserType + "animation", "none")
-               .data("keyframe", false)
+               
   clearInterval $el.data keyframeTimer
   clearTimeout $el.data keyframeTimer
   setTimeout callback, 1  if callback
@@ -78,13 +92,10 @@ $.fn.extend
   
     frameOptions = $.extend defaultsOptions, frameOptions
     
-    name = frameOptions.name
     duration = frameOptions.duration
     delay = frameOptions.delay
     repeat = frameOptions.repeat
-    frameOptions.duration = duration + "ms"
-    frameOptions.delay = delay + "ms"
-    animationcss = "#{name} #{frameOptions.duration} #{frameOptions.timingFunction} #{frameOptions.delay} #{repeat} #{frameOptions.direction} #{frameOptions.fillMode}"
+    animationcss = "#{frameOptions.name} #{duration}ms #{frameOptions.timingFunction} #{delay}ms #{repeat} #{frameOptions.direction} #{frameOptions.fillMode}"
     callback = frameOptions.complete
     animationkey = browserType + "animation"
     
@@ -92,11 +103,11 @@ $.fn.extend
       $el = $(this).addClass("boostKeyframe")
                    .css(browserType + animationPlayState, playStateRunning)
                    .css(animationkey, animationcss)
-                   .data("keyframe", name)
+                   .data("keyframeOptions", frameOptions)
       
       # If repeat is infinite, the callback function will be fired every time the animation is restarted.
       if repeat is "infinite"
-        if callback?
+        if callback
           $el.data keyframeTimer, setTimeout(=>
             do callback
             $el.data keyframeTimer, setInterval(callback, duration)
@@ -104,10 +115,5 @@ $.fn.extend
       else
        if callback
           $el.data keyframeTimer, setTimeout(callback, (duration + delay) * repeat)
-            
-        setTimeout (=>
-          $el.data "keyframe", false
-        ), (duration + delay) * repeat
-
 
 $createKeyframeStyleTag(id:"boost-keyframe").append " .boostKeyframe{#{browserType}transform:scale3d(1,1,1);}"

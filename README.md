@@ -30,17 +30,17 @@ $.fn.addKeyframe([{
 }]);
 
 // Adding browser a single frame style
-$.keyframe.add({
+$.keyframe.define({
 	name: "ball-roll",
-	"from": $.keyframe.browserCode()+"transform:rotate(0deg)",
-	"to": $.keyframe.browserCode()+"transform:rotate(360deg)",
+	from: $.keyframe.browserCode()+"transform:rotate(0deg)",
+	to: $.keyframe.browserCode()+"transform:rotate(360deg)",
 });
 
 // Adding browser specific frame styles
-$.keyframe.add([{
+$.keyframe.define([{
 	name: "ball-roll",
-	"from": $.keyframe.browserCode()+"transform:rotate(0deg)",
-	"to": $.keyframe.browserCode()+"transform:rotate(360deg)",
+	from: $.keyframe.browserCode()+"transform:rotate(0deg)",
+	to: $.keyframe.browserCode()+"transform:rotate(360deg)",
 	},
 	{
 	name: "half-rotation",

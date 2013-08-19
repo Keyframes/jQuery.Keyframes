@@ -32,10 +32,10 @@ sourceCode = """
   <script src="js/jquery.keyframes.js"></script>
   <script>
       // declare a new keyframe animation
-      $.keyframe.add({
+      $.keyframe.define({
         name: "rotation",
-        "from": $.keyframe.browserCode()+"transform:rotate(0deg)",
-        "to": $.keyframe.browserCode()+"transform:rotate(360deg)",
+        from: $.keyframe.browserCode()+"transform:rotate(0deg)",
+        to: $.keyframe.browserCode()+"transform:rotate(360deg)",
       });
       var rotationCount = 0;
       // Play the keyframe
