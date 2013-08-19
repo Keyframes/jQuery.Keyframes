@@ -8,7 +8,8 @@ jQuery.Keyframes like [jQuery-Keyframes](https://github.com/krazyjakee/jQuery-Ke
 jQuery.Keyframes introduces
 + some changes in the API 
 + $.keyframe.isSupported() to detect CSS animation support
-+ 20% smaller minified version (2.084 kb vs 2.453 kb)
++ 10% smaller minified version (2.256 kb vs 2.453 kb)
++ support for keyframe redefinition: if you redifine an existing keyframe, running animation will reflect those changes
 
 Example Usage
 -------------

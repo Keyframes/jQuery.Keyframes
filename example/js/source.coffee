@@ -6,7 +6,8 @@ comment = """
 <ul>
 <li>some changes in the API </li>
 <li>$.keyframe.isSupported() to detect CSS animation support</li>
-<li>20% smaller minified version (2.084 kb vs 2.453 kb)</li>
+<li>10% smaller minified version (2.256 kb vs 2.453 kb)</li>
+<li>support for keyframe redefinition: if you redifine an existing keyframe, running animation will reflect those changes</li>
 </ul>
 """
 githubLink = "https://github.com/Ianus/jQuery-Keyframes"
