@@ -41,7 +41,7 @@
       return animationSupport;
     },
     generate: function(frameData) {
-      var $elems, $frameStyle, css, frameName, property;
+      var $elems, css, frameName, property;
       frameName = frameData.name || "";
       css = "@" + (this.browserCode()) + "keyframes " + frameName + " {";
       for (property in frameData) {
@@ -50,9 +50,8 @@
         }
       }
       css += "}";
-      $frameStyle = $("style#" + frameData.name);
-      if ($frameStyle.length > 0) {
-        $frameStyle.html(css);
+      if ($("style#" + frameData.name).length > 0) {
+        $("style#" + frameData.name).html(css);
         $elems = $("*").filter(function() {
           return this.style["" + ($.keyframe.browserCode().slice(1, -1)) + "AnimationName"] === frameName;
         });
@@ -95,7 +94,7 @@
 
   $.fn.resetKeyframe = function(callback) {
     var $el;
-    $el = $(this).css(browserType + animationPlayState, playStateRunning).css(browserType + "animation", "none");
+    $el = $(this).css(browserType + animationPlayState, playStateRunning).css(browserType + "animation", "none").data("keyframe", false);
     clearInterval($el.data(keyframeTimer));
     clearTimeout($el.data(keyframeTimer));
     if (callback) {
@@ -116,7 +115,7 @@
 
   $.fn.extend({
     playKeyframe: function(frameOptions) {
-      var animationcss, animationkey, callback, defaultsOptions, delay, duration, repeat;
+      var animationcss, animationkey, callback, defaultsOptions, delay, duration, name, repeat;
       defaultsOptions = {
         duration: 0,
         timingFunction: "ease",
@@ -127,10 +126,11 @@
         complete: null
       };
       frameOptions = $.extend(defaultsOptions, frameOptions);
+      name = frameOptions.name;
       duration = frameOptions.duration;
       delay = frameOptions.delay;
       repeat = frameOptions.repeat;
-      animationcss = "" + frameOptions.name + " " + duration + "ms " + frameOptions.timingFunction + " " + delay + "ms " + repeat + " " + frameOptions.direction + " " + frameOptions.fillMode;
+      animationcss = "" + name + " " + duration + "ms " + frameOptions.timingFunction + " " + delay + "ms " + repeat + " " + frameOptions.direction + " " + frameOptions.fillMode;
       callback = frameOptions.complete;
       animationkey = browserType + "animation";
       return this.each(function() {
@@ -138,7 +138,7 @@
           _this = this;
         $el = $(this).addClass("boostKeyframe").css(browserType + animationPlayState, playStateRunning).css(animationkey, animationcss).data("keyframeOptions", frameOptions);
         if (repeat === "infinite") {
-          if (callback) {
+          if (callback != null) {
             return $el.data(keyframeTimer, setTimeout(function() {
               callback();
               return $el.data(keyframeTimer, setInterval(callback, duration));
@@ -146,8 +146,11 @@
           }
         } else {
           if (callback) {
-            return $el.data(keyframeTimer, setTimeout(callback, (duration + delay) * repeat));
+            $el.data(keyframeTimer, setTimeout(callback, (duration + delay) * repeat));
           }
+          return setTimeout((function() {
+            return $el.data("keyframe", false);
+          }), (duration + delay) * repeat);
         }
       });
     }
