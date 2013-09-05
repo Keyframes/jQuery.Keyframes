@@ -55,6 +55,9 @@ $(selector).playKeyframe({
 		complete: function(){} //[optional]  Function fired after the animation is complete. If repeat is infinite, the function will be fired every time the animation is restarted.
 	},
 );
+
+// Playing an animation (shorthand)
+$(selector).playKeyframe('trapdoor-sequence 1000 linear 0 infinite normal forwards', complete);
 	
 // Reset the animation
 $(selector).resetKeyframe(callback);
