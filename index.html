@@ -3,7 +3,7 @@
   <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="chrome=1">
-    <title>Jquery-keyframes by krazyjakee</title>
+    <title>Jquery.keyframes by krazyjakee</title>
 
     <link rel="stylesheet" href="stylesheets/styles.css">
     <link rel="stylesheet" href="stylesheets/pygment_trac.css">
@@ -15,37 +15,40 @@
   <body>
     <div class="wrapper">
       <header>
-        <h1>Jquery-keyframes</h1>
-        <p>jQuery-Keyframes generates and runs CSS3 keyframes quickly and easily allowing you to concentrate on the content of your project whilst cutting down code.</p>
+        <h1>Jquery.keyframes</h1>
+        <p>jQuery.Keyframes generates and runs CSS3 keyframes quickly and easily allowing you to concentrate on the content of your project whilst cutting down code.</p>
 
-        <p class="view"><a href="https://github.com/krazyjakee/jQuery-Keyframes">View the Project on GitHub <small>krazyjakee/jQuery-Keyframes</small></a></p>
+        <p class="view"><a href="https://github.com/krazyjakee/jQuery.Keyframes">View the Project on GitHub <small>krazyjakee/jQuery.Keyframes</small></a></p>
 
 
         <ul>
-          <li><a href="https://github.com/krazyjakee/jQuery-Keyframes/zipball/master">Download <strong>ZIP File</strong></a></li>
-          <li><a href="https://github.com/krazyjakee/jQuery-Keyframes/tarball/master">Download <strong>TAR Ball</strong></a></li>
-          <li><a href="https://github.com/krazyjakee/jQuery-Keyframes">View On <strong>GitHub</strong></a></li>
+          <li><a href="https://github.com/krazyjakee/jQuery.Keyframes/zipball/master">Download <strong>ZIP File</strong></a></li>
+          <li><a href="https://github.com/krazyjakee/jQuery.Keyframes/tarball/master">Download <strong>TAR Ball</strong></a></li>
+          <li><a href="https://github.com/krazyjakee/jQuery.Keyframes">View On <strong>GitHub</strong></a></li>
         </ul>
       </header>
       <section>
         <h1>
-<a name="keyframesjs" class="anchor" href="#keyframesjs"><span class="octicon octicon-link"></span></a>keyframes.js</h1>
+<a name="jquerykeyframes" class="anchor" href="#jquerykeyframes"><span class="octicon octicon-link"></span></a>jQuery.Keyframes</h1>
 
-<p>Want a pure javascript version with more features? Check out <a href="https://github.com/krazyjakee/keyframes.js">https://github.com/krazyjakee/keyframes.js</a></p>
+<p>jQuery.Keyframes generates and plays CSS3 keyframes quickly and easily allowing you to concentrate on the content of your project whilst cutting down code.</p>
 
-<h1>
-<a name="jquery-keyframes" class="anchor" href="#jquery-keyframes"><span class="octicon octicon-link"></span></a>jQuery-Keyframes</h1>
+<p>jQuery.Keyframes introduces</p>
 
-<p>See it in action: <a href="http://jsfiddle.net/GcJP8/3/">http://jsfiddle.net/GcJP8/3/</a></p>
-
-<p>jQuery-Keyframes generates and plays CSS3 keyframes quickly and easily allowing you to concentrate on the content of your project whilst cutting down code.</p>
-
-<h2>
+<ul>
+<li>some changes in the API </li>
+<li>$.keyframe.isSupported() to detect CSS animation support</li>
+<li>10% smaller minified version (2.256 kb vs 2.453 kb)</li>
+<li>support for keyframe redefinition: if you redifine an existing keyframe, running animation will reflect those changes</li>
+</ul><h2>
 <a name="example-usage" class="anchor" href="#example-usage"><span class="octicon octicon-link"></span></a>Example Usage</h2>
 
 <div class="highlight"><pre>
 <span class="c1">// Get browser style prefix</span>
 <span class="nx">$</span><span class="p">.</span><span class="nx">keyframe</span><span class="p">.</span><span class="nx">browserCode</span><span class="p">();</span>
+
+<span class="c1">// Detecting CSS animation support</span>
+<span class="nx">$</span><span class="p">.</span><span class="nx">keyframe</span><span class="p">.</span><span class="nx">isSupported</span><span class="p">();</span>
 
 <span class="c1">// Adding a new animation sequence (keyframe)</span>
 <span class="nx">$</span><span class="p">.</span><span class="nx">fn</span><span class="p">.</span><span class="nx">addKeyframe</span><span class="p">([{</span>
@@ -56,28 +59,39 @@
     <span class="s2">"100%"</span><span class="o">:</span> <span class="s2">"height:10px"</span>
 <span class="p">}]);</span>
 
-<span class="c1">// Adding browser specific frame styles</span>
-<span class="nx">$</span><span class="p">.</span><span class="nx">fn</span><span class="p">.</span><span class="nx">addKeyframe</span><span class="p">([{</span>
+<span class="c1">// Adding a single frame style</span>
+<span class="nx">$</span><span class="p">.</span><span class="nx">keyframe</span><span class="p">.</span><span class="nx">define</span><span class="p">({</span>
     <span class="nx">name</span><span class="o">:</span> <span class="s2">"ball-roll"</span><span class="p">,</span>
-    <span class="s2">"from"</span><span class="o">:</span> <span class="nx">$</span><span class="p">.</span><span class="nx">keyframe</span><span class="p">.</span><span class="nx">browserCode</span><span class="p">()</span><span class="o">+</span><span class="s2">"transform:rotate(0deg)"</span><span class="p">,</span>
-    <span class="s2">"to"</span><span class="o">:</span> <span class="nx">$</span><span class="p">.</span><span class="nx">keyframe</span><span class="p">.</span><span class="nx">browserCode</span><span class="p">()</span><span class="o">+</span><span class="s2">"transform:rotate(360deg)"</span><span class="p">,</span>
-<span class="p">}]);</span>
+    <span class="nx">from</span><span class="o">:</span> <span class="nx">$</span><span class="p">.</span><span class="nx">keyframe</span><span class="p">.</span><span class="nx">browserCode</span><span class="p">()</span><span class="o">+</span><span class="s2">"transform:rotate(0deg)"</span><span class="p">,</span>
+    <span class="nx">to</span><span class="o">:</span> <span class="nx">$</span><span class="p">.</span><span class="nx">keyframe</span><span class="p">.</span><span class="nx">browserCode</span><span class="p">()</span><span class="o">+</span><span class="s2">"transform:rotate(360deg)"</span><span class="p">,</span>
+<span class="p">});</span>
+
+<span class="c1">// Adding multiple frame styles</span>
+<span class="nx">$</span><span class="p">.</span><span class="nx">keyframe</span><span class="p">.</span><span class="nx">define</span><span class="p">([{</span>
+    <span class="nx">name</span><span class="o">:</span> <span class="s2">"ball-roll"</span><span class="p">,</span>
+    <span class="nx">from</span><span class="o">:</span> <span class="nx">$</span><span class="p">.</span><span class="nx">keyframe</span><span class="p">.</span><span class="nx">browserCode</span><span class="p">()</span><span class="o">+</span><span class="s2">"transform:rotate(0deg)"</span><span class="p">,</span>
+    <span class="nx">to</span><span class="o">:</span> <span class="nx">$</span><span class="p">.</span><span class="nx">keyframe</span><span class="p">.</span><span class="nx">browserCode</span><span class="p">()</span><span class="o">+</span><span class="s2">"transform:rotate(360deg)"</span><span class="p">,</span>
+    <span class="p">},</span>
+    <span class="p">{</span>
+    <span class="nx">name</span><span class="o">:</span> <span class="s2">"half-rotation"</span><span class="p">,</span>
+    <span class="nx">from</span><span class="o">:</span> <span class="nx">$</span><span class="p">.</span><span class="nx">keyframe</span><span class="p">.</span><span class="nx">browserCode</span><span class="p">()</span><span class="o">+</span><span class="s2">"transform:rotate(0deg)"</span><span class="p">,</span>
+    <span class="nx">to</span><span class="o">:</span> <span class="nx">$</span><span class="p">.</span><span class="nx">keyframe</span><span class="p">.</span><span class="nx">browserCode</span><span class="p">()</span><span class="o">+</span><span class="s2">"transform:rotate(180deg)"</span><span class="p">,</span>
+    <span class="p">}</span>
+<span class="p">]);</span>
+
 
 <span class="c1">// Playing an animation</span>
 <span class="nx">$</span><span class="p">(</span><span class="nx">selector</span><span class="p">).</span><span class="nx">playKeyframe</span><span class="p">({</span>
-        <span class="nx">name</span><span class="o">:</span> <span class="s1">'trapdoor-sequence'</span><span class="p">,</span> <span class="c1">// name of the keyframe you want to bind to the selected element, mandatory parameter</span>
-        <span class="nx">duration</span><span class="o">:</span> <span class="mi">1000</span><span class="p">,</span> <span class="c1">// how long you want it to last in milliseconds, mandatory parameter</span>
-        <span class="nx">timingFunction</span><span class="o">:</span> <span class="s1">'linear'</span><span class="p">,</span> <span class="c1">// specifies the speed curve of the animation, mandatory parameter</span>
-        <span class="nx">delay</span><span class="o">:</span> <span class="mi">0</span><span class="p">,</span> <span class="c1">// how long you want to wait before the animation starts in milliseconds, default value is 0</span>
-        <span class="nx">repeat</span><span class="o">:</span> <span class="s1">'infinite'</span><span class="p">,</span> <span class="c1">// how many times you want the animation to repeat, default value is 1</span>
-        <span class="nx">direction</span><span class="o">:</span> <span class="s1">'normal'</span><span class="p">,</span> <span class="c1">// which direction you want the frames to flow, default value is normal</span>
-        <span class="nx">fillMode</span><span class="o">:</span> <span class="s1">'forwards'</span> <span class="c1">// how to apply the styles outside the animation time, default value is forwards</span>
+        <span class="nx">name</span><span class="o">:</span> <span class="s1">'trapdoor-sequence'</span><span class="p">,</span> <span class="c1">// name of the keyframe you want to bind to the selected element</span>
+        <span class="nx">duration</span><span class="o">:</span> <span class="mi">1000</span><span class="p">,</span> <span class="c1">// [optional, default: 0, in ms] how long you want it to last in milliseconds</span>
+        <span class="nx">timingFunction</span><span class="o">:</span> <span class="s1">'linear'</span><span class="p">,</span> <span class="c1">// [optional, default: ease] specifies the speed curve of the animation</span>
+        <span class="nx">delay</span><span class="o">:</span> <span class="mi">0</span><span class="p">,</span> <span class="c1">//[optional, default: 0, in ms]  how long you want to wait before the animation starts in milliseconds, default value is 0</span>
+        <span class="nx">repeat</span><span class="o">:</span> <span class="s1">'infinite'</span><span class="p">,</span> <span class="c1">//[optional, default:1]  how many times you want the animation to repeat, default value is 1</span>
+        <span class="nx">direction</span><span class="o">:</span> <span class="s1">'normal'</span><span class="p">,</span> <span class="c1">//[optional, default: 'normal']  which direction you want the frames to flow, default value is normal</span>
+        <span class="nx">fillMode</span><span class="o">:</span> <span class="s1">'forwards'</span> <span class="c1">//[optional, default: 'forward']  how to apply the styles outside the animation time, default value is forwards</span>
+        <span class="nx">complete</span><span class="o">:</span> <span class="kd">function</span><span class="p">(){}</span> <span class="c1">//[optional]  Function fired after the animation is complete. If repeat is infinite, the function will be fired every time the animation is restarted.</span>
     <span class="p">},</span>
-    <span class="nx">callback</span> <span class="c1">// Function fired after the animation is complete. If repeat is infinite, the function will be fired every time the animation is restarted.</span>
 <span class="p">);</span>
-
-<span class="c1">// Playing the same animation but using the shorthand method</span>
-<span class="nx">$</span><span class="p">(</span><span class="nx">selector</span><span class="p">).</span><span class="nx">playKeyframe</span><span class="p">(</span><span class="s1">'trapdoor-sequence 1000 linear 0 infinite normal forwards'</span><span class="p">,</span><span class="nx">callback</span><span class="p">);</span>
 
 <span class="c1">// Reset the animation</span>
 <span class="nx">$</span><span class="p">(</span><span class="nx">selector</span><span class="p">).</span><span class="nx">resetKeyframe</span><span class="p">(</span><span class="nx">callback</span><span class="p">);</span>
@@ -88,8 +102,6 @@
 <span class="c1">// Resume keyframe animation</span>
 <span class="nx">$</span><span class="p">(</span><span class="nx">selector</span><span class="p">).</span><span class="nx">resumeKeyframe</span><span class="p">();</span>
 
-<span class="c1">// Get the current running keyframe animation name applied to an element. If false, no animation is running.</span>
-<span class="kd">var</span> <span class="nx">framename</span> <span class="o">=</span> <span class="nx">$</span><span class="p">(</span><span class="nx">selector</span><span class="p">).</span><span class="nx">data</span><span class="p">(</span><span class="s1">'keyframe'</span><span class="p">);</span>
 </pre></div>
       </section>
       <footer>
