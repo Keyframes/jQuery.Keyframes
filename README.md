@@ -1,9 +1,7 @@
-jQuery-Keyframes
+jQuery.Keyframes
 ===========
 
-jQuery.Keyframes is forked from [@krazyjakee](https://github.com/krazyjakee/)'s [jQuery-Keyframes](https://github.com/krazyjakee/jQuery-Keyframes/)
-
-jQuery.Keyframes like [jQuery-Keyframes](https://github.com/krazyjakee/jQuery-Keyframes/) generates and plays CSS3 keyframes quickly and easily allowing you to concentrate on the content of your project whilst cutting down code.
+jQuery.Keyframes generates and plays CSS3 keyframes quickly and easily allowing you to concentrate on the content of your project whilst cutting down code.
 
 jQuery.Keyframes introduces
 + some changes in the API 
@@ -22,7 +20,7 @@ $.keyframe.browserCode();
 $.keyframe.isSupported();
 
 // Adding a new animation sequence (keyframe)
-$.fn.addKeyframe([{
+$.keyframe.define([{
 	name: "trapdoor-sequence",
 	"0%": "height:70px",
 	"30%": "height:10px",

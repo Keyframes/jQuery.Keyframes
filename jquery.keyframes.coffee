@@ -52,7 +52,7 @@ $.keyframe =
     
   
   define : (frameData) ->
-    if typeof frameData is Array
+    if frameData.length
       for frame in frameData
         @generate frame
     else
@@ -81,14 +81,23 @@ $.fn.resumeKeyframe = ->
 
 $.fn.extend 
   playKeyframe : (frameOptions) ->
+
+    if typeof frameOptions is 'string'
+      frameOptSplit = frameOptions.trim().split(' ')
+      frameOptions =
+        name: frameOptSplit[0]
+        duration: parseInt(frameOptSplit[1])
+        delay: parseInt(frameOptSplit[3])
+        repeat: parseInt(frameOptSplit[4])
+
     defaultsOptions =
-        duration: 0
-        timingFunction: "ease"
-        delay: 0
-        repeat: 1
-        direction: "normal"
-        fillMode: "forwards"
-        complete: null
+      duration: 0
+      timingFunction: "ease"
+      delay: 0
+      repeat: 1
+      direction: "normal"
+      fillMode: "forwards"
+      complete: null
   
     frameOptions = $.extend defaultsOptions, frameOptions
     
