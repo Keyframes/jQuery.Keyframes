@@ -3,12 +3,6 @@ jQuery.Keyframes
 
 jQuery.Keyframes generates and plays CSS3 keyframes quickly and easily allowing you to concentrate on the content of your project whilst cutting down code.
 
-jQuery.Keyframes introduces
-+ some changes in the API 
-+ $.keyframe.isSupported() to detect CSS animation support
-+ 10% smaller minified version (2.256 kb vs 2.453 kb)
-+ support for keyframe redefinition: if you redifine an existing keyframe, running animation will reflect those changes
-
 Example Usage
 -------------
 ```javascript
