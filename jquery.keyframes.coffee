@@ -1,6 +1,6 @@
-$createKeyframeStyleTag = (params)->
+$createKeyframeStyleTag = (params) ->
   $("<style>").attr( class: "keyframe-style", id:params.id, type:"text/css" )
-              .appendTo("head")
+  	.appendTo("head")
 
 $.keyframe =
   browserCode: ->
@@ -57,70 +57,65 @@ $.keyframe =
       @generate frameData
 
 browserType = $.keyframe.browserCode()
-keyframeTimer = "keyframeTimer"
 animationPlayState = "animation-play-state"
 playStateRunning = "running"
 
 $.fn.resetKeyframe = (callback) ->
   $el = $(this).css(browserType + animationPlayState, playStateRunning)
-               .css(browserType + "animation", "none")
+    .css(browserType + "animation", "none")
                
-  clearInterval $el.data keyframeTimer
-  clearTimeout $el.data keyframeTimer
   setTimeout callback, 1  if callback
 
 $.fn.pauseKeyframe = ->
   $el = $(this).css browserType + animationPlayState, "paused"
-  clearInterval $el.data keyframeTimer
-  clearTimeout $el.data keyframeTimer
 
 $.fn.resumeKeyframe = ->
   $(this).css browserType + animationPlayState, playStateRunning
 
-$.fn.extend 
-  playKeyframe : (frameOptions) ->
+$.fn.playKeyframe = (frameOptions, callback) ->
+  if typeof frameOptions is 'string'
+    frameOptSplit = frameOptions.trim().split(' ')
+    frameOptions =
+      name: frameOptSplit[0]
+      duration: parseInt(frameOptSplit[1])
+      delay: parseInt(frameOptSplit[3])
+      repeat: parseInt(frameOptSplit[4])
+      complete: callback
 
-    if typeof frameOptions is 'string'
-      frameOptSplit = frameOptions.trim().split(' ')
-      frameOptions =
-        name: frameOptSplit[0]
-        duration: parseInt(frameOptSplit[1])
-        delay: parseInt(frameOptSplit[3])
-        repeat: parseInt(frameOptSplit[4])
+  defaultsOptions =
+    duration: 0
+    timingFunction: "ease"
+    delay: 0
+    repeat: 1
+    direction: "normal"
+    fillMode: "forwards"
+    complete: null
 
-    defaultsOptions =
-      duration: 0
-      timingFunction: "ease"
-      delay: 0
-      repeat: 1
-      direction: "normal"
-      fillMode: "forwards"
-      complete: null
-  
-    frameOptions = $.extend defaultsOptions, frameOptions
-    
-    duration = frameOptions.duration
-    delay = frameOptions.delay
-    repeat = frameOptions.repeat
-    animationcss = "#{frameOptions.name} #{duration}ms #{frameOptions.timingFunction} #{delay}ms #{repeat} #{frameOptions.direction} #{frameOptions.fillMode}"
-    callback = frameOptions.complete
-    animationkey = browserType + "animation"
-    
-    return @each ()->
-      $el = $(this).addClass("boostKeyframe")
-                   .css(browserType + animationPlayState, playStateRunning)
-                   .css(animationkey, animationcss)
-                   .data("keyframeOptions", frameOptions)
-      
-      # If repeat is infinite, the callback function will be fired every time the animation is restarted.
-      if repeat is "infinite"
-        if callback
-          $el.data keyframeTimer, setTimeout(=>
-            do callback
-            $el.data keyframeTimer, setInterval(callback, duration)
-          , duration + delay)
-      else
-       if callback
-          $el.data keyframeTimer, setTimeout(callback, (duration + delay) * repeat)
+  frameOptions = $.extend defaultsOptions, frameOptions
+
+  duration = frameOptions.duration
+  delay = frameOptions.delay
+  repeat = frameOptions.repeat
+  animationcss = "#{frameOptions.name} #{duration}ms #{frameOptions.timingFunction} #{delay}ms #{repeat} #{frameOptions.direction} #{frameOptions.fillMode}"
+  callback = frameOptions.complete
+  animationkey = browserType + "animation"
+
+  pfx = ["webkit", "moz", "MS", "o", ""]
+  _prefixEvent = (element, type, callback) ->
+  	p = 0
+  	while p < pfx.length
+  		type = type.toLowerCase() unless pfx[p]
+  		element.on pfx[p] + type, callback
+  		p++
+
+  return @each ->
+  	$el = $(@).addClass("boostKeyframe")
+    .css(browserType + animationPlayState, playStateRunning)
+    .css(animationkey, animationcss)
+    .data("keyframeOptions", frameOptions)
+
+  	if callback
+  		_prefixEvent $el, 'AnimationIteration', callback
+  		_prefixEvent $el, 'AnimationEnd', callback
 
 $createKeyframeStyleTag(id:"boost-keyframe").append " .boostKeyframe{#{browserType}transform:scale3d(1,1,1);}"
