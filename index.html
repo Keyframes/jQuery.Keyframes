@@ -33,14 +33,7 @@
 
 <p>jQuery.Keyframes generates and plays CSS3 keyframes quickly and easily allowing you to concentrate on the content of your project whilst cutting down code.</p>
 
-<p>jQuery.Keyframes introduces</p>
-
-<ul>
-<li>some changes in the API </li>
-<li>$.keyframe.isSupported() to detect CSS animation support</li>
-<li>10% smaller minified version (2.256 kb vs 2.453 kb)</li>
-<li>support for keyframe redefinition: if you redifine an existing keyframe, running animation will reflect those changes</li>
-</ul><h2>
+<h2>
 <a name="example-usage" class="anchor" href="#example-usage"><span class="octicon octicon-link"></span></a>Example Usage</h2>
 
 <div class="highlight"><pre>
@@ -51,7 +44,7 @@
 <span class="nx">$</span><span class="p">.</span><span class="nx">keyframe</span><span class="p">.</span><span class="nx">isSupported</span><span class="p">();</span>
 
 <span class="c1">// Adding a new animation sequence (keyframe)</span>
-<span class="nx">$</span><span class="p">.</span><span class="nx">fn</span><span class="p">.</span><span class="nx">addKeyframe</span><span class="p">([{</span>
+<span class="nx">$</span><span class="p">.</span><span class="nx">keyframe</span><span class="p">.</span><span class="nx">define</span><span class="p">([{</span>
     <span class="nx">name</span><span class="o">:</span> <span class="s2">"trapdoor-sequence"</span><span class="p">,</span>
     <span class="s2">"0%"</span><span class="o">:</span> <span class="s2">"height:70px"</span><span class="p">,</span>
     <span class="s2">"30%"</span><span class="o">:</span> <span class="s2">"height:10px"</span><span class="p">,</span>
@@ -92,6 +85,9 @@
         <span class="nx">complete</span><span class="o">:</span> <span class="kd">function</span><span class="p">(){}</span> <span class="c1">//[optional]  Function fired after the animation is complete. If repeat is infinite, the function will be fired every time the animation is restarted.</span>
     <span class="p">},</span>
 <span class="p">);</span>
+
+<span class="c1">// Playing an animation (shorthand)</span>
+<span class="nx">$</span><span class="p">(</span><span class="nx">selector</span><span class="p">).</span><span class="nx">playKeyframe</span><span class="p">(</span><span class="s1">'trapdoor-sequence 1000 linear 0 infinite normal forwards'</span><span class="p">,</span> <span class="nx">complete</span><span class="p">);</span>
 
 <span class="c1">// Reset the animation</span>
 <span class="nx">$</span><span class="p">(</span><span class="nx">selector</span><span class="p">).</span><span class="nx">resetKeyframe</span><span class="p">(</span><span class="nx">callback</span><span class="p">);</span>
