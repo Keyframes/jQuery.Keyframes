@@ -11,8 +11,6 @@ $.keyframe =
       "-ms-"
     else unless ua.indexOf("WebKit") is -1
       "-webkit-"
-    else if navigator.product is "Gecko"
-      "-moz-"
     else
       ""
   isSupported:->

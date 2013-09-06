@@ -19,8 +19,6 @@ $.keyframe = {
       return "-ms-";
     } else if (ua.indexOf("WebKit") !== -1) {
       return "-webkit-";
-    } else if (navigator.product === "Gecko") {
-      return "-moz-";
     } else {
       return "";
     }
