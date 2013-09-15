@@ -105,19 +105,6 @@
     function increment() {
         $('#cb').html(parseInt($('#cb').html()) + 1);
     }
-
-    setInterval(function() {
-        if ($('.ball').data('keyframeOptions')) {
-            $('.ball').html(': )');
-
-            // Get keyframe name that is applied to the element.
-            $('#ba').html($('.ball').data('keyframe'));
-
-        } else {
-            $('.ball').html(': (');
-            $('#ba').html('None');
-        }
-    }, 100);
     </script>
 
     <style>
@@ -145,7 +132,7 @@
 
 <body>
     <div class="ball-container">
-        <div class="ball">: (</div>
+        <div class="ball">: )</div>
         <br />
         <input type="button" onclick="play('normal')" value="Ease Roll" />
         <input type="button" onclick="play('linear')" value="Linear Roll" />
@@ -158,7 +145,6 @@
         <input type="button" onclick="resume()" value="Resume" />
         <br />
         <br />Callback count: <b id="cb">0</b>
-        <br />Ball Animation: <b id="ba"></b>
         <br />
     </div>
 </body>

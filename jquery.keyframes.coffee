@@ -13,7 +13,8 @@ $.keyframe =
       "-webkit-"
     else
       ""
-  isSupported:->
+
+  isSupported: ->
     element = $('body').get 0
     animationSupport = false
     if element.style.animationName
@@ -32,16 +33,16 @@ $.keyframe =
       unless property is "name"
         css += "#{property}{#{frameData[property]}}"
     css += "}"
-    #if redefined
+
     $frameStyle = $("style##{frameData.name}")
     if $frameStyle.length > 0
       $frameStyle.html css
-      # get all the element running the animation
+
       $elems = $("*").filter ->
         @style["#{$.keyframe.browserCode().slice(1,-1)}AnimationName"] is frameName
       $elems.each ->
-        # get params"
-        $el = $(this)
+      
+        $el = $(@)
         options = $el.data "keyframeOptions"
         $el.resetKeyframe ->
           $el.playKeyframe options
@@ -49,7 +50,7 @@ $.keyframe =
       $createKeyframeStyleTag(id:frameName).append css
     
   
-  define : (frameData) ->
+  define: (frameData) ->
     if frameData.length
       for frame in frameData
         @generate frame
@@ -61,16 +62,16 @@ animationPlayState = "animation-play-state"
 playStateRunning = "running"
 
 $.fn.resetKeyframe = (callback) ->
-  $el = $(this).css(browserType + animationPlayState, playStateRunning)
+  $el = $(@).css(browserType + animationPlayState, playStateRunning)
     .css(browserType + "animation", "none")
                
-  setTimeout callback, 1  if callback
+  setTimeout callback, 1 if callback
 
 $.fn.pauseKeyframe = ->
-  $el = $(this).css browserType + animationPlayState, "paused"
+  $el = $(@).css browserType + animationPlayState, "paused"
 
 $.fn.resumeKeyframe = ->
-  $(this).css browserType + animationPlayState, playStateRunning
+  $(@).css browserType + animationPlayState, playStateRunning
 
 $.fn.playKeyframe = (frameOptions, callback) ->
   if typeof frameOptions is 'string'
@@ -104,9 +105,10 @@ $.fn.playKeyframe = (frameOptions, callback) ->
   _prefixEvent = (element, type, callback) ->
   	p = 0
   	while p < pfx.length
-  		type = type.toLowerCase() unless pfx[p]
-  		element.on pfx[p] + type, callback
-  		p++
+      type = type.toLowerCase() unless pfx[p]
+      evt = pfx[p] + type
+      element.off(evt).on(evt, callback)
+      p++
 
   return @each ->
   	$el = $(@).addClass("boostKeyframe")
