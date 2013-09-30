@@ -33,17 +33,19 @@ html, body {
 /* line 21, ../style.sass */
 .birds {
   width: 100px;
+  display: none;
 }
 
-/* line 23, ../style.sass */
+/* line 24, ../style.sass */
 .cloud {
-  width: 100px;
+  width: 400px;
 }
 
-/* line 26, ../style.sass */
+/* line 27, ../style.sass */
 .leaf {
   width: 14px;
   height: 14px;
   background-image: url(../img/leaf.png);
   background-size: cover;
+  display: none;
 }

@@ -79,8 +79,9 @@ $.fn.playKeyframe = (frameOptions, callback) ->
     frameOptions =
       name: frameOptSplit[0]
       duration: parseInt(frameOptSplit[1])
+      timingFunction: frameOptSplit[2]
       delay: parseInt(frameOptSplit[3])
-      repeat: parseInt(frameOptSplit[4])
+      repeat: frameOptSplit[4]
       complete: callback
 
   defaultsOptions =
