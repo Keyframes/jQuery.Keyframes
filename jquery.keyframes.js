@@ -164,5 +164,5 @@ $createKeyframeStyleTag({
 }).append(" .boostKeyframe{" + browserType + "transform:scale3d(1,1,1);}");
 
 /*
-//@ sourceMappingURL=jquery.keyframes.map
+//# sourceMappingURL=jquery.keyframes.map
 */
