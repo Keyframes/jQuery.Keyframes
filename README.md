@@ -8,7 +8,7 @@ Example Usage
 ```javascript
 
 // Get browser style prefix
-$.keyframe.browserCode();
+$.keyframe.vendorPrefix();
 
 // Detecting CSS animation support
 $.keyframe.isSupported();
