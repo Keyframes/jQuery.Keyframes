@@ -3,7 +3,7 @@ $createKeyframeStyleTag = (params) ->
   	.appendTo("head")
 
 $.keyframe =
-  browserCode: ->
+  vendorPrefix: ->
     ua = navigator.userAgent
     unless ua.indexOf("Opera") is -1
       "-o-"
@@ -20,7 +20,7 @@ $.keyframe =
     if element.style.animationName
       animationSupport = true
     else
-      pfx = @browserCode().slice 1,-1
+      pfx = @vendorPrefix().slice 1,-1
       if element.style[pfx + "AnimationName"]
         animationSupport = true
     
@@ -28,7 +28,7 @@ $.keyframe =
     
   generate: (frameData)->
     frameName = frameData.name or ""
-    css = "@#{@browserCode()}keyframes #{frameName} {"
+    css = "@#{@vendorPrefix()}keyframes #{frameName} {"
     for property of frameData
       unless property is "name"
         css += "#{property}{#{frameData[property]}}"
@@ -39,7 +39,7 @@ $.keyframe =
       $frameStyle.html css
 
       $elems = $("*").filter ->
-        @style["#{$.keyframe.browserCode().slice(1,-1)}AnimationName"] is frameName
+        @style["#{$.keyframe.vendorPrefix().slice(1,-1)}AnimationName"] is frameName
       $elems.each ->
       
         $el = $(@)
@@ -57,21 +57,21 @@ $.keyframe =
     else
       @generate frameData
 
-browserType = $.keyframe.browserCode()
+vendorPrefix = $.keyframe.vendorPrefix()
 animationPlayState = "animation-play-state"
 playStateRunning = "running"
 
 $.fn.resetKeyframe = (callback) ->
-  $el = $(@).css(browserType + animationPlayState, playStateRunning)
-    .css(browserType + "animation", "none")
+  $el = $(@).css(vendorPrefix + animationPlayState, playStateRunning)
+    .css(vendorPrefix + "animation", "none")
                
   setTimeout callback, 1 if callback
 
 $.fn.pauseKeyframe = ->
-  $el = $(@).css browserType + animationPlayState, "paused"
+  $el = $(@).css vendorPrefix + animationPlayState, "paused"
 
 $.fn.resumeKeyframe = ->
-  $(@).css browserType + animationPlayState, playStateRunning
+  $(@).css vendorPrefix + animationPlayState, playStateRunning
 
 $.fn.playKeyframe = (frameOptions, callback) ->
   if typeof frameOptions is 'string'
@@ -100,7 +100,7 @@ $.fn.playKeyframe = (frameOptions, callback) ->
   repeat = frameOptions.repeat
   animationcss = "#{frameOptions.name} #{duration}ms #{frameOptions.timingFunction} #{delay}ms #{repeat} #{frameOptions.direction} #{frameOptions.fillMode}"
   callback = frameOptions.complete
-  animationkey = browserType + "animation"
+  animationkey = vendorPrefix + "animation"
 
   pfx = ["webkit", "moz", "MS", "o", ""]
   _prefixEvent = (element, type, callback) ->
@@ -113,7 +113,7 @@ $.fn.playKeyframe = (frameOptions, callback) ->
 
   return @each ->
   	$el = $(@).addClass("boostKeyframe")
-    .css(browserType + animationPlayState, playStateRunning)
+    .css(vendorPrefix + animationPlayState, playStateRunning)
     .css(animationkey, animationcss)
     .data("keyframeOptions", frameOptions)
 
@@ -121,4 +121,4 @@ $.fn.playKeyframe = (frameOptions, callback) ->
   		_prefixEvent $el, 'AnimationIteration', callback
   		_prefixEvent $el, 'AnimationEnd', callback
 
-$createKeyframeStyleTag(id:"boost-keyframe").append " .boostKeyframe{#{browserType}transform:scale3d(1,1,1);}"
+$createKeyframeStyleTag(id:"boost-keyframe").append " .boostKeyframe{#{vendorPrefix}transform:scale3d(1,1,1);}"

@@ -1,4 +1,4 @@
-bcode = $.keyframe.browserCode()
+bcode = $.keyframe.vendorPrefix()
 
 $.keyframe.define [
   name: "clouds"
