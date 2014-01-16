@@ -13,13 +13,13 @@ Requirements
 In order for jQuery.Keyframes to work the jQuery library needs to be linked either through CDN:
 
 ```html
-<script src="http://code.jquery.com/jquery-<version>.min.js"></script>
+<script src="http://code.jquery.com/jquery-<version>[.min].js"></script>
 ```
 
 or local copy:
 
 ```html
-<script src="/path/to/jquery-<version>.min.js"></script>
+<script src="/path/to/jquery-<version>[.min].js"></script>
 ```
 
 Installation
@@ -103,7 +103,10 @@ $(selector).playKeyframe({
 Playing an animation (shorthand)
 
 ```javascript
-$(selector).playKeyframe('trapdoor-sequence 1000 linear 0 infinite normal forwards', complete);
+$(selector).playKeyframe(
+    'trapdoor-sequence 1000 linear 0 infinite normal forwards',
+    complete
+);
 ```	
 
 Reset the animation
