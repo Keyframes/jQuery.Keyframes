@@ -91,7 +91,7 @@ $.fn.playKeyframe = (frameOptions, callback) ->
     repeat: 1
     direction: "normal"
     fillMode: "forwards"
-    complete: null
+    complete: callback
 
   frameOptions = $.extend defaultsOptions, frameOptions
 
