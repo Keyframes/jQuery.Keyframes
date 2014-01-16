@@ -31,10 +31,13 @@
 		animationSupport = true;
 	    } else {
 		pfx = this.vendorPrefix().slice(1, -1);
-		if (element.style[pfx + "AnimationName"]) {
+		var property = pfx + "AnimationName";
+
+		if (property in element.style) {
 		    animationSupport = true;
 		}
 	    }
+
 	    return animationSupport;
 	},
 	generate: function(frameData) {
