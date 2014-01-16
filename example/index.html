@@ -10,7 +10,7 @@
     $(window).load(function() {
 
         // Get the css browser code (ie: -moz-)
-        var bcode = $.keyframe.browserCode();
+        var bcode = $.keyframe.vendorPrefix();
 
         // Setup the initial transform style.
         $('.ball').css(bcode + 'transform', 'rotate(90deg)');
