@@ -10,7 +10,7 @@
     };
 
     $.keyframe = {
-	vendorPrefix: function() {
+	getVendorPrefix: function() {
 	    var ua;
 	    ua = navigator.userAgent;
 	    if (ua.indexOf("Opera") !== -1) {
@@ -25,8 +25,10 @@
 	},
 	isSupported: function() {
 	    var animationSupport, element, pfx;
+
 	    element = $('body').get(0);
 	    animationSupport = false;
+
 	    if (element.style.animationName) {
 		animationSupport = true;
 	    } else {
@@ -43,19 +45,31 @@
 	generate: function(frameData) {
 	    var $elems, $frameStyle, css, frameName, property;
 	    frameName = frameData.name || "";
-	    css = "@" + (this.vendorPrefix()) + "keyframes " + frameName + " {";
-	    for (property in frameData) {
-		if (property !== "name") {
-		    css += "" + property + "{" + frameData[property] + "}";
+	    css = "@" + (this.getVendorPrefix()) + "keyframes " + frameName + " {";
+
+	    for (key in frameData) {
+		if (key !== "name") {
+		    css += key + " {";
+
+		    for (property in frameData[key]) {
+			css += property + ":" + frameData[key][property] + ";";
+		    }
+
+		    css += "}";
 		}
 	    }
+
 	    css += "}";
+
 	    $frameStyle = $("style#" + frameData.name);
+
 	    if ($frameStyle.length > 0) {
 		$frameStyle.html(css);
+
 		$elems = $("*").filter(function() {
 		    return this.style["" + ($.keyframe.vendorPrefix().slice(1, -1)) + "AnimationName"] === frameName;
 		});
+
 		return $elems.each(function() {
 		    var $el, options;
 		    $el = $(this);
@@ -72,12 +86,15 @@
 	},
 	define: function(frameData) {
 	    var frame, _i, _len, _results;
+
 	    if (frameData.length) {
 		_results = [];
+
 		for (_i = 0, _len = frameData.length; _i < _len; _i++) {
 		    frame = frameData[_i];
 		    _results.push(this.generate(frame));
 		}
+
 		return _results;
 	    } else {
 		return this.generate(frameData);
@@ -85,13 +102,14 @@
 	}
     };
 
-    vendorPrefix = $.keyframe.vendorPrefix();
+    vendorPrefix = $.keyframe.getVendorPrefix();
     animationPlayState = "animation-play-state";
     playStateRunning = "running";
 
     $.fn.resetKeyframe = function(callback) {
 	var $el;
 	$el = $(this).css(vendorPrefix + animationPlayState, playStateRunning).css(vendorPrefix + "animation", "none");
+
 	if (callback) {
 	    return setTimeout(callback, 1);
 	}
@@ -108,6 +126,7 @@
 
     $.fn.playKeyframe = function(frameOptions, callback) {
 	var animationcss, animationkey, defaultsOptions, delay, duration, frameOptSplit, pfx, repeat, _prefixEvent;
+
 	if (typeof frameOptions === 'string') {
 	    frameOptSplit = frameOptions.trim().split(' ');
 	    frameOptions = {
@@ -119,6 +138,7 @@
 		complete: callback
 	    };
 	}
+
 	defaultsOptions = {
 	    duration: 0,
 	    timingFunction: "ease",
@@ -138,6 +158,7 @@
 	callback = frameOptions.complete;
 	animationkey = vendorPrefix + "animation";
 	pfx = ["webkit", "moz", "MS", "o", ""];
+
 	_prefixEvent = function(element, type, callback) {
 	    var evt, p, _results;
 	    p = 0;
@@ -152,6 +173,7 @@
 	    }
 	    return _results;
 	};
+
 	return this.each(function() {
 	    var $el;
 	    $el = $(this).addClass("boostKeyframe").css(vendorPrefix + animationPlayState, playStateRunning).css(animationkey, animationcss).data("keyframeOptions", frameOptions);
