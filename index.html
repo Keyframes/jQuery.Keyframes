@@ -4,30 +4,40 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="chrome=1">
     <title>Jquery.keyframes by krazyjakee</title>
-
     <link rel="stylesheet" href="stylesheets/styles.css">
     <link rel="stylesheet" href="stylesheets/pygment_trac.css">
-    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
+    <script src="javascripts/respond.js"></script>
     <!--[if lt IE 9]>
-    <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
     <![endif]-->
+    <!--[if lt IE 8]>
+    <link rel="stylesheet" href="stylesheets/ie.css">
+    <![endif]-->
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+
   </head>
   <body>
+      <div id="header">
+        <nav>
+          <li class="fork"><a href="https://github.com/krazyjakee/jQuery.Keyframes">View On GitHub</a></li>
+          <li class="downloads"><a href="https://github.com/krazyjakee/jQuery.Keyframes/zipball/master">ZIP</a></li>
+          <li class="downloads"><a href="https://github.com/krazyjakee/jQuery.Keyframes/tarball/master">TAR</a></li>
+          <li class="title">DOWNLOADS</li>
+        </nav>
+      </div><!-- end header -->
+
     <div class="wrapper">
-      <header>
-        <h1>Jquery.keyframes</h1>
-        <p>jQuery.Keyframes generates and runs CSS3 keyframes quickly and easily allowing you to concentrate on the content of your project whilst cutting down code.</p>
 
-        <p class="view"><a href="https://github.com/krazyjakee/jQuery.Keyframes">View the Project on GitHub <small>krazyjakee/jQuery.Keyframes</small></a></p>
-
-
-        <ul>
-          <li><a href="https://github.com/krazyjakee/jQuery.Keyframes/zipball/master">Download <strong>ZIP File</strong></a></li>
-          <li><a href="https://github.com/krazyjakee/jQuery.Keyframes/tarball/master">Download <strong>TAR Ball</strong></a></li>
-          <li><a href="https://github.com/krazyjakee/jQuery.Keyframes">View On <strong>GitHub</strong></a></li>
-        </ul>
-      </header>
       <section>
+        <div id="title">
+          <h1>Jquery.keyframes</h1>
+          <p>jQuery.Keyframes generates and runs CSS3 keyframes quickly and easily allowing you to concentrate on the content of your project whilst cutting down code.</p>
+          <hr>
+          <span class="credits left">Project maintained by <a href="https://github.com/krazyjakee">krazyjakee</a></span>
+          <span class="credits right">Hosted on GitHub Pages &mdash; Theme by <a href="https://twitter.com/michigangraham">mattgraham</a></span>
+        </div>
+
         <h1>
 <a name="jquerykeyframes" class="anchor" href="#jquerykeyframes"><span class="octicon octicon-link"></span></a>jQuery.Keyframes</h1>
 
@@ -45,12 +55,12 @@ However, jQuery's animate() does not support multiple keyframes. jQuery.Keyframe
 
 <p>In order for jQuery.Keyframes to work the jQuery library needs to be linked either through CDN:</p>
 
-<div class="highlight highlight-html"><pre><span class="nt">&lt;script </span><span class="na">src=</span><span class="s">"http://code.jquery.com/jquery-&lt;version&gt;[.min].js"</span><span class="nt">&gt;&lt;/script&gt;</span>
+<div class="highlight highlight-html"><pre><span class="nt">&lt;script </span><span class="na">src=</span><span class="s">'http://code.jquery.com/jquery-&lt;version&gt;[.min].js'</span><span class="nt">&gt;&lt;/script&gt;</span>
 </pre></div>
 
 <p>or local copy:</p>
 
-<div class="highlight highlight-html"><pre><span class="nt">&lt;script </span><span class="na">src=</span><span class="s">"/path/to/jquery-&lt;version&gt;[.min].js"</span><span class="nt">&gt;&lt;/script&gt;</span>
+<div class="highlight highlight-html"><pre><span class="nt">&lt;script </span><span class="na">src=</span><span class="s">'/path/to/jquery-&lt;version&gt;[.min].js'</span><span class="nt">&gt;&lt;/script&gt;</span>
 </pre></div>
 
 <h2>
@@ -58,60 +68,113 @@ However, jQuery's animate() does not support multiple keyframes. jQuery.Keyframe
 
 <p>Include script in the <em>head</em> of your document using the following line:</p>
 
-<div class="highlight highlight-html"><pre><span class="nt">&lt;script </span><span class="na">src=</span><span class="s">"/path/to/jquery.keyframes[.min].js"</span><span class="nt">&gt;&lt;/script&gt;</span>
+<div class="highlight highlight-html"><pre><span class="nt">&lt;script </span><span class="na">src=</span><span class="s">'/path/to/jquery.keyframes[.min].js'</span><span class="nt">&gt;&lt;/script&gt;</span>
 </pre></div>
 
 <h2>
 <a name="usage" class="anchor" href="#usage"><span class="octicon octicon-link"></span></a>Usage</h2>
 
-<p>Get browser style prefix</p>
+<p><strong>Get browser style prefix</strong></p>
 
-<div class="highlight highlight-javascript"><pre><span class="kd">var</span> <span class="nx">browserCode</span> <span class="o">=</span> <span class="nx">$</span><span class="p">.</span><span class="nx">keyframe</span><span class="p">.</span><span class="nx">vendorPrefix</span><span class="p">();</span>
+<div class="highlight highlight-javascript"><pre><span class="kd">var</span> <span class="nx">vendorPrefix</span> <span class="o">=</span> <span class="nx">$</span><span class="p">.</span><span class="nx">keyframe</span><span class="p">.</span><span class="nx">getVendorPrefix</span><span class="p">();</span>
 </pre></div>
 
-<p>Detecting CSS animation support</p>
+<p><strong>Detecting CSS animation support</strong></p>
 
 <div class="highlight highlight-javascript"><pre><span class="kd">var</span> <span class="nx">supportedFlag</span> <span class="o">=</span> <span class="nx">$</span><span class="p">.</span><span class="nx">keyframe</span><span class="p">.</span><span class="nx">isSupported</span><span class="p">();</span>
 </pre></div>
 
-<p>Adding a new animation sequence (keyframe)</p>
+<p><strong>Adding a new animation sequence (keyframe)</strong></p>
 
 <div class="highlight highlight-javascript"><pre><span class="nx">$</span><span class="p">.</span><span class="nx">keyframe</span><span class="p">.</span><span class="nx">define</span><span class="p">([{</span>
-    <span class="nx">name</span><span class="o">:</span> <span class="s2">"trapdoor-sequence"</span><span class="p">,</span>
-    <span class="s2">"0%"</span><span class="o">:</span> <span class="s2">"height:70px"</span><span class="p">,</span>
-    <span class="s2">"30%"</span><span class="o">:</span> <span class="s2">"height:10px"</span><span class="p">,</span>
-    <span class="s2">"60%"</span><span class="o">:</span> <span class="s2">"height:30px"</span><span class="p">,</span>
-    <span class="s2">"100%"</span><span class="o">:</span> <span class="s2">"height:10px"</span>
+    <span class="nx">name</span><span class="o">:</span> <span class="s1">'trapdoor-sequence'</span><span class="p">,</span>
+    <span class="s1">'0%'</span><span class="o">:</span> <span class="p">{</span><span class="s1">'height'</span><span class="o">:</span> <span class="s1">'70px'</span><span class="p">},</span>
+    <span class="s1">'30%'</span><span class="o">:</span> <span class="p">{</span><span class="s1">'height'</span><span class="o">:</span> <span class="s1">'10px'</span><span class="p">},</span>
+    <span class="s1">'60%'</span><span class="o">:</span> <span class="p">{</span><span class="s1">'height'</span><span class="o">:</span> <span class="s1">'30px'</span><span class="p">},</span>
+    <span class="s1">'100%'</span><span class="o">:</span> <span class="p">{</span><span class="s1">'height'</span><span class="o">:</span> <span class="s1">'10px'</span><span class="p">}</span>
 <span class="p">}]);</span>
 </pre></div>
 
-<p>Adding a single frame style</p>
+<p><strong>Adding a single frame style</strong></p>
 
-<div class="highlight highlight-javascript"><pre><span class="kd">var</span> <span class="nx">bcode</span> <span class="o">=</span> <span class="nx">$</span><span class="p">.</span><span class="nx">keyframe</span><span class="p">.</span><span class="nx">vendorPrefix</span><span class="p">();</span>
-<span class="nx">$</span><span class="p">.</span><span class="nx">keyframe</span><span class="p">.</span><span class="nx">define</span><span class="p">({</span>
-    <span class="nx">name</span><span class="o">:</span> <span class="s2">"ball-roll"</span><span class="p">,</span>
-    <span class="nx">from</span><span class="o">:</span> <span class="nx">bcode</span> <span class="o">+</span> <span class="s2">"transform:rotate(0deg)"</span><span class="p">,</span>
-    <span class="nx">to</span><span class="o">:</span> <span class="nx">bcode</span> <span class="o">+</span> <span class="s2">"transform:rotate(360deg)"</span>
+<div class="highlight highlight-javascript"><pre><span class="nx">$</span><span class="p">.</span><span class="nx">keyframe</span><span class="p">.</span><span class="nx">define</span><span class="p">({</span>
+    <span class="nx">name</span><span class="o">:</span> <span class="s1">'ball-roll'</span><span class="p">,</span>
+    <span class="nx">from</span><span class="o">:</span> <span class="p">{</span>
+        <span class="nx">transform</span><span class="o">:</span> <span class="s1">'rotate(0deg)'</span>
+    <span class="p">},</span>
+    <span class="nx">to</span><span class="o">:</span> <span class="p">{</span>
+        <span class="nx">transform</span><span class="o">:</span> <span class="s1">'rotate(360deg)'</span>
+    <span class="p">}</span>
 <span class="p">});</span>
 </pre></div>
 
-<p>Adding multiple frame styles</p>
+<p><strong>Adding multiple frame styles</strong></p>
 
-<div class="highlight highlight-javascript"><pre><span class="kd">var</span> <span class="nx">bcode</span> <span class="o">=</span> <span class="nx">$</span><span class="p">.</span><span class="nx">keyframe</span><span class="p">.</span><span class="nx">vendorPrefix</span><span class="p">();</span>
+<div class="highlight highlight-javascript"><pre><span class="kd">var</span> <span class="nx">pfx</span> <span class="o">=</span> <span class="nx">$</span><span class="p">.</span><span class="nx">keyframe</span><span class="p">.</span><span class="nx">getVendorPrefix</span><span class="p">();</span>
+
+<span class="c1">//Note the variable notation to be able to add vendor specific prefix</span>
+<span class="kd">var</span> <span class="nx">transform</span> <span class="o">=</span> <span class="nx">pfx</span> <span class="o">+</span> <span class="s1">'transform'</span><span class="p">;</span> 
+
 <span class="nx">$</span><span class="p">.</span><span class="nx">keyframe</span><span class="p">.</span><span class="nx">define</span><span class="p">([{</span>
-    <span class="nx">name</span><span class="o">:</span> <span class="s2">"ball-roll"</span><span class="p">,</span>
-    <span class="nx">from</span><span class="o">:</span> <span class="nx">bcode</span> <span class="o">+</span> <span class="s2">"transform:rotate(0deg)"</span><span class="p">,</span>
-    <span class="nx">to</span><span class="o">:</span> <span class="nx">bcode</span> <span class="o">+</span> <span class="s2">"transform:rotate(360deg)"</span>
+    <span class="nx">name</span><span class="o">:</span> <span class="s1">'roll-clockwise'</span><span class="p">,</span>
+    <span class="s1">'0%'</span><span class="o">:</span> <span class="p">{</span>
+        <span class="s1">'margin-left'</span> <span class="o">:</span> <span class="s1">'0px'</span><span class="p">,</span>
+        <span class="s1">'background-color'</span> <span class="o">:</span> <span class="s1">'red'</span><span class="p">,</span>
+        <span class="nx">transform</span> <span class="o">:</span> <span class="s1">'rotate(0deg)'</span>
     <span class="p">},</span>
-    <span class="p">{</span>
-    <span class="nx">name</span><span class="o">:</span> <span class="s2">"half-rotation"</span><span class="p">,</span>
-    <span class="nx">from</span><span class="o">:</span> <span class="nx">bcode</span> <span class="o">+</span> <span class="s2">"transform:rotate(0deg)"</span><span class="p">,</span>
-    <span class="nx">to</span><span class="o">:</span> <span class="nx">bcode</span> <span class="o">+</span> <span class="s2">"transform:rotate(180deg)"</span>
+    <span class="s1">'100%'</span><span class="o">:</span> <span class="p">{</span>
+        <span class="s1">'margin-left'</span> <span class="o">:</span> <span class="s1">'600px'</span><span class="p">,</span>
+        <span class="nx">transform</span> <span class="o">:</span> <span class="s1">'rotate(360deg)'</span>
+    <span class="p">}</span>
+    <span class="p">},{</span>
+    <span class="nx">name</span><span class="o">:</span> <span class="s1">'roll-anti-clockwise'</span><span class="p">,</span>
+    <span class="s1">'0%'</span><span class="o">:</span> <span class="p">{</span>
+        <span class="s1">'margin-left'</span> <span class="o">:</span> <span class="s1">'0px'</span><span class="p">,</span>
+        <span class="s1">'background-color'</span> <span class="o">:</span> <span class="s1">'red'</span><span class="p">,</span>
+        <span class="nx">transform</span> <span class="o">:</span> <span class="s1">'rotate(0deg)'</span>
+    <span class="p">},</span>
+    <span class="s1">'100%'</span><span class="o">:</span> <span class="p">{</span>
+        <span class="s1">'margin-left'</span> <span class="o">:</span> <span class="s1">'600px'</span><span class="p">,</span>
+        <span class="nx">transform</span> <span class="o">:</span> <span class="s1">'rotate(-360deg)'</span>
+    <span class="p">}</span>
     <span class="p">}</span>
 <span class="p">]);</span>
 </pre></div>
 
-<p>Playing an animation</p>
+<p><strong>Adding styles and properties in array fashion</strong></p>
+
+<p><em>Gives resemblance to CSS styling definitions</em></p>
+
+<div class="highlight highlight-javascript"><pre><span class="kd">var</span> <span class="nx">pfx</span> <span class="o">=</span> <span class="nx">$</span><span class="p">.</span><span class="nx">keyframe</span><span class="p">.</span><span class="nx">getVendorPrefix</span><span class="p">();</span>
+
+<span class="c1">//Note the variable notation to be able to add vendor specific prefix</span>
+<span class="kd">var</span> <span class="nx">transform</span> <span class="o">=</span> <span class="nx">pfx</span> <span class="o">+</span> <span class="s1">'transform'</span><span class="p">;</span> 
+
+<span class="kd">var</span> <span class="nx">shake_start</span> <span class="o">=</span> <span class="p">{</span><span class="nx">transform</span><span class="o">:</span> <span class="s1">'translate(0px)'</span><span class="p">};</span>
+<span class="kd">var</span> <span class="nx">shake_odd1</span> <span class="o">=</span> <span class="p">{</span><span class="nx">transform</span><span class="o">:</span> <span class="s1">'translate(-10px, -10px)'</span><span class="p">};</span>
+<span class="kd">var</span> <span class="nx">shake_even1</span> <span class="o">=</span> <span class="p">{</span><span class="nx">transform</span><span class="o">:</span> <span class="s1">'translate(10px, 10px)'</span><span class="p">};</span>
+<span class="kd">var</span> <span class="nx">shake_odd2</span> <span class="o">=</span> <span class="p">{</span><span class="nx">transform</span><span class="o">:</span> <span class="s1">'translate(10px, -10px)'</span><span class="p">};</span>
+<span class="kd">var</span> <span class="nx">shake_even2</span> <span class="o">=</span> <span class="p">{</span><span class="nx">transform</span><span class="o">:</span> <span class="s1">'translate(-10px, 10px)'</span><span class="p">};</span>
+
+<span class="nx">$</span><span class="p">.</span><span class="nx">keyframe</span><span class="p">.</span><span class="nx">define</span><span class="p">([{</span>
+    <span class="nx">name</span><span class="o">:</span> <span class="s1">'crazy'</span><span class="p">,</span>
+    <span class="s1">'0%'</span><span class="o">:</span> <span class="nx">shake_start</span><span class="p">,</span>
+    <span class="s1">'10%'</span><span class="o">:</span> <span class="nx">shake_odd2</span><span class="p">,</span>
+    <span class="s1">'20%'</span><span class="o">:</span> <span class="nx">shake_even1</span><span class="p">,</span>
+    <span class="s1">'30%'</span><span class="o">:</span> <span class="nx">shake_odd2</span><span class="p">,</span>
+    <span class="s1">'40%'</span><span class="o">:</span> <span class="nx">shake_even2</span><span class="p">,</span>
+    <span class="s1">'50%'</span><span class="o">:</span> <span class="nx">shake_odd2</span><span class="p">,</span>
+    <span class="s1">'60%'</span><span class="o">:</span> <span class="nx">shake_even1</span><span class="p">,</span>
+    <span class="s1">'70%'</span><span class="o">:</span> <span class="nx">shake_odd1</span><span class="p">,</span>
+    <span class="s1">'80%'</span><span class="o">:</span> <span class="nx">shake_even2</span><span class="p">,</span>
+    <span class="s1">'90%'</span><span class="o">:</span> <span class="nx">shake_odd1</span>
+    <span class="p">}</span>
+<span class="p">]);</span>
+</pre></div>
+
+<p><em>Please note, you can add as many properties to the array as you want to</em></p>
+
+<p><strong>Playing an animation</strong></p>
 
 <div class="highlight highlight-javascript"><pre><span class="nx">$</span><span class="p">(</span><span class="nx">selector</span><span class="p">).</span><span class="nx">playKeyframe</span><span class="p">({</span>
     <span class="nx">name</span><span class="o">:</span> <span class="s1">'trapdoor-sequence'</span><span class="p">,</span> <span class="c1">// name of the keyframe you want to bind to the selected element</span>
@@ -125,7 +188,7 @@ However, jQuery's animate() does not support multiple keyframes. jQuery.Keyframe
 <span class="p">});</span>
 </pre></div>
 
-<p>Playing an animation (shorthand)</p>
+<p><strong>Playing an animation (shorthand)</strong></p>
 
 <div class="highlight highlight-javascript"><pre><span class="nx">$</span><span class="p">(</span><span class="nx">selector</span><span class="p">).</span><span class="nx">playKeyframe</span><span class="p">(</span>
     <span class="s1">'trapdoor-sequence 1000 linear 0 infinite normal forwards'</span><span class="p">,</span>
@@ -133,27 +196,34 @@ However, jQuery's animate() does not support multiple keyframes. jQuery.Keyframe
 <span class="p">);</span>
 </pre></div>
 
-<p>Reset the animation</p>
+<p><strong>Reset the animation</strong></p>
 
 <div class="highlight highlight-javascript"><pre><span class="nx">$</span><span class="p">(</span><span class="nx">selector</span><span class="p">).</span><span class="nx">resetKeyframe</span><span class="p">(</span><span class="nx">callback</span><span class="p">);</span>
 </pre></div>
 
-<p>Freeze keyframe animation and kill callbacks</p>
+<p><strong>Freeze keyframe animation and kill callbacks</strong></p>
 
 <div class="highlight highlight-javascript"><pre><span class="nx">$</span><span class="p">(</span><span class="nx">selector</span><span class="p">).</span><span class="nx">pauseKeyframe</span><span class="p">();</span>
 </pre></div>
 
-<p>Resume keyframe animation</p>
+<p><strong>Resume keyframe animation</strong></p>
 
 <div class="highlight highlight-javascript"><pre><span class="nx">$</span><span class="p">(</span><span class="nx">selector</span><span class="p">).</span><span class="nx">resumeKeyframe</span><span class="p">();</span>
 </pre></div>
       </section>
-      <footer>
-        <p>This project is maintained by <a href="https://github.com/krazyjakee">krazyjakee</a></p>
-        <p><small>Hosted on GitHub Pages &mdash; Theme by <a href="https://github.com/orderedlist">orderedlist</a></small></p>
-      </footer>
+
     </div>
-    <script src="javascripts/scale.fix.js"></script>
-    
+    <!--[if !IE]><script>fixScale(document);</script><![endif]-->
+              <script type="text/javascript">
+            var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");
+            document.write(unescape("%3Cscript src='" + gaJsHost + "google-analytics.com/ga.js' type='text/javascript'%3E%3C/script%3E"));
+          </script>
+          <script type="text/javascript">
+            try {
+              var pageTracker = _gat._getTracker("UA-47285338-1");
+            pageTracker._trackPageview();
+            } catch(err) {}
+          </script>
+
   </body>
 </html>
