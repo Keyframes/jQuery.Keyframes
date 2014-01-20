@@ -36,7 +36,7 @@
                 animationSupport = true;
             }
             else {
-                pfx = this.vendorPrefix().slice(1, - 1);
+                pfx = this.getVendorPrefix().slice(1, - 1);
                 var property = pfx + "AnimationName";
 
                 if (property in element.style) {
@@ -85,7 +85,7 @@
                 $frameStyle.html(css);
 
                 $elems = $("*").filter(function() {
-                    return this.style["" + ($.keyframe.vendorPrefix().slice(1, - 1)) + "AnimationName"] === frameName;
+                    return this.style["" + ($.keyframe.getVendorPrefix().slice(1, - 1)) + "AnimationName"] === frameName;
                 });
 
                 return $elems.each(function() {
