@@ -46,6 +46,19 @@
 
             return animationSupport;
         },
+	getProperty: function(property){
+	    var temp = property;
+	    
+	    switch(property){
+		case "transform" : temp = this.getVendorPrefix() + temp; break;
+		    
+		/**
+		 * We can add more support here
+		 */    
+	    }
+	    
+	    return temp;
+	},
         generate: function(frameData) {
             var $elems, $frameStyle, css, frameName, property;
             frameName = frameData.name || "";
@@ -56,11 +69,8 @@
                     css += key + " {";
 
                     for (property in frameData[key]) {
-                        var propertyNew = property;
-                        if (property == "transform") {
-                            propertyNew = this.getVendorPrefix() + property;
-                        }
-                        css += propertyNew + ":" + frameData[key][property] + ";";
+			var pfx_property = this.getProperty(property);
+                        css += pfx_property + ":" + frameData[key][property] + ";";
                     }
 
                     css += "}";

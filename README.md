@@ -36,6 +36,7 @@ Usage
 **Get browser style prefix**
 
 ```javascript
+//Note support for adding prefixes for you is in progress
 var vendorPrefix = $.keyframe.getVendorPrefix();
 ```
 
@@ -63,10 +64,10 @@ $.keyframe.define([{
 $.keyframe.define({
     name: 'ball-roll',
     from: {
-        transform: 'rotate(0deg)'
+        'transform': 'rotate(0deg)' //Note that 'transform' will be autoprefixed for you
     },
     to: {
-        transform: 'rotate(360deg)'
+        'transform': 'rotate(360deg)' //Note that 'transform' will be autoprefixed for you
     }
 });
 ```
@@ -74,32 +75,27 @@ $.keyframe.define({
 **Adding multiple frame styles**
 
 ```javascript
-var pfx = $.keyframe.getVendorPrefix();
-		
-//Note the variable notation to be able to add vendor specific prefix
-var transform = pfx + 'transform'; 
-
 $.keyframe.define([{
 	name: 'roll-clockwise',
 	'0%': {
 	    'margin-left' : '0px',
 	    'background-color' : 'red',
-	    transform : 'rotate(0deg)'
+	    'transform' : 'rotate(0deg)'
 	},
 	'100%': {
 	    'margin-left' : '600px',
-	    transform : 'rotate(360deg)'
+	    'transform' : 'rotate(360deg)'
 	}
     },{
 	name: 'roll-anti-clockwise',
 	'0%': {
 	    'margin-left' : '0px',
 	    'background-color' : 'red',
-	    transform : 'rotate(0deg)'
+	    'transform' : 'rotate(0deg)'
 	},
 	'100%': {
 	    'margin-left' : '600px',
-	    transform : 'rotate(-360deg)'
+	    'transform' : 'rotate(-360deg)'
 	}
     }
 ]);
@@ -110,16 +106,11 @@ $.keyframe.define([{
 *Gives resemblance to CSS styling definitions*
 
 ```javascript
-var pfx = $.keyframe.getVendorPrefix();
-
-//Note the variable notation to be able to add vendor specific prefix
-var transform = pfx + 'transform'; 
-
-var shake_start = {transform: 'translate(0px)'};
-var shake_odd1 = {transform: 'translate(-10px, -10px)'};
-var shake_even1 = {transform: 'translate(10px, 10px)'};
-var shake_odd2 = {transform: 'translate(10px, -10px)'};
-var shake_even2 = {transform: 'translate(-10px, 10px)'};
+var shake_start = {'transform': 'translate(0px)'};
+var shake_odd1 = {'transform': 'translate(-10px, -10px)'};
+var shake_even1 = {'transform': 'translate(10px, 10px)'};
+var shake_odd2 = {'transform': 'translate(10px, -10px)'};
+var shake_even2 = {'transform': 'translate(-10px, 10px)'};
 
 $.keyframe.define([{
 	name: 'crazy',
