@@ -3,7 +3,7 @@
   "version": "0.0.2",
   "homepage": "https://github.com/krazyjakee/jQuery.Keyframes",
   "license": "MIT",
-  "private": true,
+  "private": false,
   "ignore": [
     "**/.*",
     "node_modules",
