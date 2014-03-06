@@ -1,0 +1,15 @@
+{
+  "name": "jQueryKeyframes",
+  "version": "0.0.2",
+  "homepage": "https://github.com/krazyjakee/jQuery.Keyframes",
+  "license": "MIT",
+  "private": true,
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components"
+  ],
+  "dependencies": {
+    "jquery": "latest"
+  }
+}
