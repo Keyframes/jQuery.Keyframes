@@ -58,7 +58,7 @@
             return temp;
         },
         generate: function(frameData) {
-            var $elems, $frameStyle, css, frameName, property;
+            var $elems, $frameStyle, css, frameName, property, key;
             frameName = frameData.name || "";
             css = "@" + (this.getVendorPrefix()) + "keyframes " + frameName + " {";
 
