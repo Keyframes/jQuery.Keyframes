@@ -143,6 +143,8 @@
                 timingFunction: frameOptSplit[2],
                 delay: parseInt(frameOptSplit[3]),
                 repeat: frameOptSplit[4],
+                duration: frameOptSplit[5],
+                fillMode: frameOptSplit[6],
                 complete: callback
             }
         }
