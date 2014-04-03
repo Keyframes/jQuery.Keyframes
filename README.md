@@ -36,7 +36,7 @@ Usage
 **Get browser style prefix**
 
 ```javascript
-//Note support for adding prefixes for you is in progress
+// NOTE: currently "transform" prefix handling is done for you so do not use vendorPrefixes for "transform".
 var vendorPrefix = $.keyframe.getVendorPrefix();
 ```
 
