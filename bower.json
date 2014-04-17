@@ -1,7 +1,7 @@
 {
   "name": "jQueryKeyframes",
-  "version": "0.0.2",
-  "homepage": "https://github.com/krazyjakee/jQuery.Keyframes",
+  "version": "0.0.3",
+  "homepage": "https://github.com/jQueryKeyframes/jQuery.Keyframes",
   "license": "MIT",
   "private": false,
   "ignore": [
