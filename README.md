@@ -32,7 +32,7 @@ Include script in the *head* of your document using the following line:
 
 Vendor Prefixing
 ----------------
-[Prefix Free](http://leaverou.github.io/prefixfree/) is used on the generated css to automatically add vendor prefixes.
+[Prefix Free](http://leaverou.github.io/prefixfree/) is used on the generated css to automatically add vendor prefixes. This means you should avoid adding any vendor prefixes to your defined css.
 For convenience, it is bundled into the minified version.
 
 Usage
