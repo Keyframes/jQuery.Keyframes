@@ -30,15 +30,13 @@ Include script in the *head* of your document using the following line:
 <script src='/path/to/jquery.keyframes[.min].js'></script>
 ```
 
+Vendor Prefixing
+----------------
+[Prefix Free](http://leaverou.github.io/prefixfree/) is used on the generated css to automatically add vendor prefixes.
+For convenience, it is bundled into the minified version.
+
 Usage
 -------------
-
-**Get browser style prefix**
-
-```javascript
-// NOTE: currently "transform" prefix handling is done for you so do not use vendorPrefixes for "transform".
-var vendorPrefix = $.keyframe.getVendorPrefix();
-```
 
 **Detecting CSS animation support**
 
