@@ -44,40 +44,24 @@
 
             return animationSupport;
         },
-        getProperty: function(property) {
-            var temp = property;
-
-            switch (property) {
-                case "transform":
-                    temp = this.getVendorPrefix() + temp;
-                    break;
-
-                    /**
-                     * We can add more support here
-                     */
-            }
-
-            return temp;
-        },
         generate: function(frameData) {
             var $elems, $frameStyle, css, frameName, property, key;
             frameName = frameData.name || "";
-            css = "@" + (this.getVendorPrefix()) + "keyframes " + frameName + " {";
+            css = "@" + $.keyframe.getVendorPrefix() + "keyframes " + frameName + " {";
 
             for (key in frameData) {
                 if (key !== "name") {
                     css += key + " {";
 
                     for (property in frameData[key]) {
-                        var pfx_property = this.getProperty(property);
-                        css += pfx_property + ":" + frameData[key][property] + ";";
+                        css += property + ":" + frameData[key][property] + ";";
                     }
 
                     css += "}";
                 }
             }
 
-            css += "}";
+            css = PrefixFree.prefixCSS(css + "}");
 
             $frameStyle = $("style#" + frameData.name);
 
