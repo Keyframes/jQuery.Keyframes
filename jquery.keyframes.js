@@ -19,8 +19,6 @@
                 return "-ms-";
             } else if (ua.indexOf("WebKit") !== -1) {
                 return "-webkit-";
-            } else if (ua.indexOf("Gecko") !== -1) {
-                return "-moz-";
             } else {
                 return "";
             }
