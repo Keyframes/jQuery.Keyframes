@@ -169,3 +169,8 @@ $(selector).pauseKeyframe();
 ```javascript
 $(selector).resumeKeyframe();
 ```
+
+Who is using jQuery.Keyframes?
+------------------------------
+
+Metrize Premium HTML5 Template: https://www.youtube.com/watch?v=f-BK_QYSzVE
