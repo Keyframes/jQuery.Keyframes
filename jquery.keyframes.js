@@ -173,6 +173,7 @@
                 _prefixEvent($el, 'AnimationEnd', callback);
             }
         });
+        return this;
     };
 
     $createKeyframeStyleTag({
