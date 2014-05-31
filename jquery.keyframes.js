@@ -43,9 +43,10 @@
             return animationSupport;
         },
         generate: function(frameData) {
-            var $elems, $frameStyle, css, frameName, property, key;
+            var $elems, $frameStyle, css, frameName, property, key,
+                prefix = $.keyframe.getVendorPrefix();
             frameName = frameData.name || "";
-            css = "@" + $.keyframe.getVendorPrefix() + "keyframes " + frameName + " {";
+            css = "@" + prefix + "keyframes " + frameName + " {";
 
             for (key in frameData) {
                 if (key !== "name") {
@@ -61,13 +62,16 @@
 
             css = PrefixFree.prefixCSS(css + "}");
 
+            css += css.replace($.keyframe.getVendorPrefix(), '');
+
             $frameStyle = $("style#" + frameData.name);
 
             if ($frameStyle.length > 0) {
                 $frameStyle.html(css);
 
                 $elems = $("*").filter(function() {
-                    this.style["" + ($.keyframe.getVendorPrefix().slice(1, -1)) + "AnimationName"] === frameName;
+                    return this.style["" + (prefix.slice(1, -1)) + "AnimationName"] === frameName ||
+                        this.style["AnimationName"] === frameName;
                 });
 
                 $elems.each(function() {
@@ -101,7 +105,13 @@
     playStateRunning = "running";
 
     $.fn.resetKeyframe = function(callback) {
-        var $el = $(this).css(vendorPrefix + animationPlayState, playStateRunning).css(vendorPrefix + "animation", "none");
+        var $el = $(this),
+            css = {};
+
+        css[animationPlayState] = css[vendorPrefix + animationPlayState] = playStateRunning;
+        css["animation"] = css[vendorPrefix + "animation"] = "none";
+
+        $el.css(css);
 
         if (callback) {
             setTimeout(callback, 1);
@@ -109,11 +119,17 @@
     };
 
     $.fn.pauseKeyframe = function() {
-        var $el = $(this).css(vendorPrefix + animationPlayState, "paused");
+        var $el= $(this),
+            css = {};
+        css[animationPlayState] = css[vendorPrefix + animationPlayState] = "paused";
+        $el.css(css);
     };
 
     $.fn.resumeKeyframe = function() {
-        return $(this).css(vendorPrefix + animationPlayState, playStateRunning);
+        var $el= $(this),
+            css = {};
+        css[animationPlayState] = css[vendorPrefix + animationPlayState] = playStateRunning;
+        return $el.css(css);
     };
 
     $.fn.playKeyframe = function(frameOptions, callback) {
@@ -148,7 +164,7 @@
         repeat = frameOptions.repeat;
         animationcss = "" + frameOptions.name + " " + duration + "ms " + frameOptions.timingFunction + " " + delay + "ms " + repeat + " " + frameOptions.direction + " " + frameOptions.fillMode;
         callback = frameOptions.complete;
-        animationkey = vendorPrefix + "animation";
+        animationkey = "animation";
         pfx = ["webkit", "moz", "MS", "o", ""];
 
         var _prefixEvent = function(element, type, callback) {
@@ -167,7 +183,13 @@
         };
 
         this.each(function() {
-            var $el = $(this).addClass("boostKeyframe").css(vendorPrefix + animationPlayState, playStateRunning).css(animationkey, animationcss).data("keyframeOptions", frameOptions);
+            var $el = $(this).addClass("boostKeyframe").data("keyframeOptions", frameOptions),
+                css = {};
+
+            css[animationPlayState] = css[vendorPrefix + animationPlayState] = playStateRunning;
+            css[animationkey] = css[vendorPrefix + animationkey] = animationcss;
+
+            $el.css(css);
             if (callback) {
                 _prefixEvent($el, 'AnimationIteration', callback);
                 _prefixEvent($el, 'AnimationEnd', callback);
