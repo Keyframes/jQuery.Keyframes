@@ -22,8 +22,6 @@
         }
     }
 
-    console.log('test');
-
 
     $createKeyframeStyleTag = function(params) {
         return $("<style>").attr({
