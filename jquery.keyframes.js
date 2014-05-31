@@ -63,7 +63,9 @@
 
             css = PrefixFree.prefixCSS(css + "}");
 
-            css += css.replace(prefix, '');
+            if (prefix.length) {
+                css += css.replace(prefix, '');
+            }
 
             $frameStyle = $("style#" + frameData.name);
 
