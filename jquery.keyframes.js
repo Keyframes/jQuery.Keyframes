@@ -45,6 +45,7 @@
         generate: function(frameData) {
             var $elems, $frameStyle, css, frameName, property, key,
                 prefix = $.keyframe.getVendorPrefix();
+
             frameName = frameData.name || "";
             css = "@" + prefix + "keyframes " + frameName + " {";
 
@@ -62,7 +63,7 @@
 
             css = PrefixFree.prefixCSS(css + "}");
 
-            css += css.replace($.keyframe.getVendorPrefix(), '');
+            css += css.replace(prefix, '');
 
             $frameStyle = $("style#" + frameData.name);
 
