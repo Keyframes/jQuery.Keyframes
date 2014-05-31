@@ -1,6 +1,5 @@
 (function() {
     var $createKeyframeStyleTag, animationPlayState, playStateRunning,
-
         elm = $('body').get(0),
         animationSupport = false,
         animationString = 'animation',
