@@ -1,5 +1,26 @@
 (function() {
-    var $createKeyframeStyleTag, animationPlayState, playStateRunning, vendorPrefix;
+    var $createKeyframeStyleTag, animationPlayState, playStateRunning,
+
+        elm = $('body').get(0),
+        animationSupport = false,
+        animationString = 'animation',
+        vendorPrefix = '',
+        domPrefixes = 'Webkit Moz O ms Khtml'.split(' '),
+        prefix  = '';
+
+    if( elm.style.animationName !== undefined ) { animationSupport = true; }
+
+    if( animationSupport === false ) {
+        for( var i = 0; i < domPrefixes.length; i++ ) {
+            if( elm.style[ domPrefixes[i] + 'AnimationName' ] !== undefined ) {
+                prefix = domPrefixes[ i ];
+                animationString = prefix + 'Animation';
+                vendorPrefix = '-' + prefix.toLowerCase() + '-';
+                animationSupport = true;
+                break;
+            }
+        }
+    }
 
     $createKeyframeStyleTag = function(params) {
         return $("<style>").attr({
@@ -11,43 +32,15 @@
 
     $.keyframe = {
         getVendorPrefix: function() {
-            var ua;
-            ua = navigator.userAgent;
-            if (ua.indexOf("Opera") !== -1) {
-                return "-o-";
-            } else if (ua.indexOf("MSIE") !== -1) {
-                return "-ms-";
-            } else if (ua.indexOf("WebKit") !== -1) {
-                return "-webkit-";
-            } else {
-                return "";
-            }
+            return vendorPrefix;
         },
         isSupported: function() {
-            var animationSupport, element, pfx;
-
-            element = $('body').get(0);
-            animationSupport = false;
-
-            if (element.style.animationName) {
-                animationSupport = true;
-            } else {
-                pfx = this.getVendorPrefix().slice(1, -1);
-                var property = pfx + "AnimationName";
-
-                if (property in element.style) {
-                    animationSupport = true;
-                }
-            }
-
             return animationSupport;
         },
         generate: function(frameData) {
-            var $elems, $frameStyle, css, frameName, property, key,
-                prefix = $.keyframe.getVendorPrefix();
-
+            var $elems, $frameStyle, css, frameName, property, key;
             frameName = frameData.name || "";
-            css = "@" + prefix + "keyframes " + frameName + " {";
+            css = "@" + vendorPrefix + "keyframes " + frameName + " {";
 
             for (key in frameData) {
                 if (key !== "name") {
@@ -63,18 +56,13 @@
 
             css = PrefixFree.prefixCSS(css + "}");
 
-            if (prefix.length) {
-                css += css.replace(prefix, '');
-            }
-
             $frameStyle = $("style#" + frameData.name);
 
             if ($frameStyle.length > 0) {
                 $frameStyle.html(css);
 
                 $elems = $("*").filter(function() {
-                    return this.style["" + (prefix.slice(1, -1)) + "AnimationName"] === frameName ||
-                        this.style["AnimationName"] === frameName;
+                    this.style["" + animationString + "Name"] === frameName;
                 });
 
                 $elems.each(function() {
@@ -103,18 +91,11 @@
         }
     };
 
-    vendorPrefix = $.keyframe.getVendorPrefix();
     animationPlayState = "animation-play-state";
     playStateRunning = "running";
 
     $.fn.resetKeyframe = function(callback) {
-        var $el = $(this),
-            css = {};
-
-        css[animationPlayState] = css[vendorPrefix + animationPlayState] = playStateRunning;
-        css["animation"] = css[vendorPrefix + "animation"] = "none";
-
-        $el.css(css);
+        var $el = $(this).css(vendorPrefix + animationPlayState, playStateRunning).css(vendorPrefix + "animation", "none");
 
         if (callback) {
             setTimeout(callback, 1);
@@ -122,17 +103,11 @@
     };
 
     $.fn.pauseKeyframe = function() {
-        var $el= $(this),
-            css = {};
-        css[animationPlayState] = css[vendorPrefix + animationPlayState] = "paused";
-        $el.css(css);
+        var $el = $(this).css(vendorPrefix + animationPlayState, "paused");
     };
 
     $.fn.resumeKeyframe = function() {
-        var $el= $(this),
-            css = {};
-        css[animationPlayState] = css[vendorPrefix + animationPlayState] = playStateRunning;
-        return $el.css(css);
+        return $(this).css(vendorPrefix + animationPlayState, playStateRunning);
     };
 
     $.fn.playKeyframe = function(frameOptions, callback) {
@@ -167,7 +142,7 @@
         repeat = frameOptions.repeat;
         animationcss = "" + frameOptions.name + " " + duration + "ms " + frameOptions.timingFunction + " " + delay + "ms " + repeat + " " + frameOptions.direction + " " + frameOptions.fillMode;
         callback = frameOptions.complete;
-        animationkey = "animation";
+        animationkey = vendorPrefix + "animation";
         pfx = ["webkit", "moz", "MS", "o", ""];
 
         var _prefixEvent = function(element, type, callback) {
@@ -186,13 +161,8 @@
         };
 
         this.each(function() {
-            var $el = $(this).addClass("boostKeyframe").data("keyframeOptions", frameOptions),
-                css = {};
+            var $el = $(this).addClass("boostKeyframe").css(vendorPrefix + animationPlayState, playStateRunning).css(animationkey, animationcss).data("keyframeOptions", frameOptions);
 
-            css[animationPlayState] = css[vendorPrefix + animationPlayState] = playStateRunning;
-            css[animationkey] = css[vendorPrefix + animationkey] = animationcss;
-
-            $el.css(css);
             if (callback) {
                 _prefixEvent($el, 'AnimationIteration', callback);
                 _prefixEvent($el, 'AnimationEnd', callback);
