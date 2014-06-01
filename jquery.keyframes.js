@@ -1,25 +1,26 @@
 (function() {
     var $createKeyframeStyleTag, animationPlayState, playStateRunning,
-        elm = $('body').get(0),
         animationSupport = false,
         animationString = 'animation',
-        vendorPrefix = '',
-        domPrefixes = 'Webkit Moz O ms Khtml'.split(' '),
-        prefix  = '';
+        vendorPrefix = prefix = '',
+        domPrefixes = ['Webkit', 'Moz', 'O', 'ms', 'Khtml'];
 
-    if( elm.style.animationName !== undefined ) { animationSupport = true; }
+    $(window).load(function(){
+        var body = document.body;
+        if( body.style.animationName !== undefined ) { animationSupport = true; }
 
-    if( animationSupport === false ) {
-        for( var i = 0; i < domPrefixes.length; i++ ) {
-            if( elm.style[ domPrefixes[i] + 'AnimationName' ] !== undefined ) {
-                prefix = domPrefixes[ i ];
-                animationString = prefix + 'Animation';
-                vendorPrefix = '-' + prefix.toLowerCase() + '-';
-                animationSupport = true;
-                break;
+        if( animationSupport === false ) {
+            for( var i = 0; i < domPrefixes.length; i++ ) {
+                if( body.style[ domPrefixes[i] + 'AnimationName' ] !== undefined ) {
+                    prefix = domPrefixes[ i ];
+                    animationString = prefix + 'Animation';
+                    vendorPrefix = '-' + prefix.toLowerCase() + '-';
+                    animationSupport = true;
+                    break;
+                }
             }
         }
-    }
+    });
 
 
     $createKeyframeStyleTag = function(params) {
