@@ -24,11 +24,13 @@ or local copy:
 
 Installation
 ------------
-Include script in the *head* of your document using the following line:
+Include script in your document using the following line:
 
 ```html
 <script src='/path/to/jquery.keyframes[.min].js'></script>
 ```
+
+Be sure to define and play animations after the page has loaded using jquerys $(window).load
 
 Vendor Prefixing
 ----------------
