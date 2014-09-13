@@ -54,10 +54,10 @@
           // roll with easing
           $('.ball').playKeyframe({
             name: 'ball-roll',
-            duration: 3000,
+            duration: "3s",
             timingFunction: 'ease',
             delay: 0,
-            repeat: 'infinite',
+            iterationCount: 'infinite',
             direction: 'normal',
             fillMode: 'forwards'
           }, increment);
@@ -66,7 +66,7 @@
         case 'spin':
 
           // run spin keyframes using the shorthand method.
-          $('.ball').playKeyframe('ball-spin 500 linear 0 3 normal forwards', increment);
+          $('.ball').playKeyframe('ball-spin 500ms linear 0 3 normal forwards', increment);
 
           break;
         case 'linear':
@@ -74,9 +74,9 @@
           // roll with linear timing
           $('.ball').playKeyframe({
             name: 'ball-roll',
-            duration: 3000,
+            duration: "3s",
             timingFunction: 'linear',
-            repeat: 'infinite'
+            iterationCount: 'infinite'
           }, increment);
 
           break;
@@ -85,10 +85,10 @@
           // set a 2 second delay before starting
           $('.ball').playKeyframe({
             name: 'ball-roll',
-            duration: 3000,
+            duration: "3s",
             timingFunction: 'linear',
-            delay: 2000,
-            repeat: 'infinite'
+            delay: "3s",
+            iterationCount: 'infinite'
           }, increment);
 
           break;
@@ -97,11 +97,22 @@
           // only play the animation once
           $('.ball').playKeyframe({
             name: 'ball-roll',
-            duration: 3000,
+            duration: "3s",
             timingFunction: 'ease'
           }, increment);
 
           break;
+        case 'multi':
+          // play multiple animations
+          $('.ball').playKeyframe([
+            'ball-spin 500ms linear 0 6',
+            {
+              name: 'ball-roll',
+              duration: "3s",
+              timingFunction: 'ease',
+              iterationCount: 1
+            }
+          ], increment);
       }
     })
 
@@ -159,10 +170,11 @@
     <input type="button" onclick="play('delay')" value="2 Second Delay" />
     <input type="button" onclick="play('once')" value="Roll Once" />
     <input type="button" onclick="play('spin')" value="Spin" />
-    <input type="button" onclick="play()" value="Reset" />
+    <input type="button" onclick="play('multi')" value="Multiple Animations" />
     <br />
     <input type="button" onclick="pause()" value="Pause" />
     <input type="button" onclick="resume()" value="Resume" />
+    <input type="button" onclick="play()" value="Reset" />
     <br />
     <br />Callback count: <b id="cb">0</b>
     <br />

@@ -109,34 +109,37 @@
 
     $.fn.playKeyframe = function(frameOptions, callback) {
 
-        if (typeof frameOptions === 'string') {
-            var frameOptSplit = frameOptions.trim().split(' ');
-            frameOptions = {
-                name: frameOptSplit[0],
-                duration: parseInt(frameOptSplit[1]),
-                timingFunction: frameOptSplit[2],
-                delay: parseInt(frameOptSplit[3]),
-                repeat: frameOptSplit[4],
-                direction: frameOptSplit[5],
-                fillMode: frameOptSplit[6],
-                complete: callback
+        var animObjToStr = function(obj){
+            obj = $.extend({
+                duration: 0,
+                timingFunction: "ease",
+                delay: 0,
+                iterationCount: 1,
+                direction: "normal",
+                fillMode: "forwards"
+            }, obj);
+            return [obj.name, obj.duration, obj.timingFunction, obj.delay, obj.iterationCount, obj.direction, obj.fillMode].join(" ");
+        };
+
+        var animationcss = "";
+
+        if($.isArray(frameOptions)){
+            var frameOptionsStrings = [];
+            console.log(frameOptions.length);
+            for(var i = 0; i < frameOptions.length; i++){
+                if (typeof frameOptions[i] === 'string') {
+                    frameOptionsStrings.push(frameOptions[i]);
+                }else{
+                    frameOptionsStrings.push(animObjToStr(frameOptions[i]));
+                }
             }
+            animationcss = frameOptionsStrings.join(", ");
+        }else if (typeof frameOptions === 'string') {
+            animationcss = frameOptions;
+        }else{
+            animationcss = animObjToStr(frameOptions);
         }
 
-        frameOptions = $.extend({
-            duration: 0,
-            timingFunction: "ease",
-            delay: 0,
-            repeat: 1,
-            direction: "normal",
-            fillMode: "forwards",
-            complete: callback
-        }, frameOptions);
-
-        var duration = frameOptions.duration;
-        var delay = frameOptions.delay;
-        var repeat = frameOptions.repeat;
-        var animationcss = "" + frameOptions.name + " " + duration + "ms " + frameOptions.timingFunction + " " + delay + "ms " + repeat + " " + frameOptions.direction + " " + frameOptions.fillMode;
         var animationkey = vendorPrefix + "animation";
         var pfx = ["webkit", "moz", "MS", "o", ""];
 
