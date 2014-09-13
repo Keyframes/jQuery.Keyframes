@@ -1,6 +1,5 @@
 (function() {
-    var $createKeyframeStyleTag, animationPlayState, playStateRunning,
-        animationSupport = false,
+    var animationSupport = false,
         animationString = 'animation',
         vendorPrefix = prefix = '',
         domPrefixes = ['Webkit', 'Moz', 'O', 'ms', 'Khtml'];
@@ -23,10 +22,10 @@
     });
 
 
-    $createKeyframeStyleTag = function(params) {
+    var $createKeyframeStyleTag = function(id) {
         return $("<style>").attr({
             class: "keyframe-style",
-            id: params.id,
+            id: id,
             type: "text/css"
         }).appendTo("head");
     };
@@ -39,15 +38,14 @@
             return animationSupport;
         },
         generate: function(frameData) {
-            var $elems, $frameStyle, css, frameName, property, key;
-            frameName = frameData.name || "";
-            css = "@" + vendorPrefix + "keyframes " + frameName + " {";
+            var frameName = frameData.name || "";
+            var css = "@" + vendorPrefix + "keyframes " + frameName + " {";
 
-            for (key in frameData) {
+            for (var key in frameData) {
                 if (key !== "name") {
                     css += key + " {";
 
-                    for (property in frameData[key]) {
+                    for (var property in frameData[key]) {
                         css += property + ":" + frameData[key][property] + ";";
                     }
 
@@ -57,13 +55,13 @@
 
             css = PrefixFree.prefixCSS(css + "}");
 
-            $frameStyle = $("style#" + frameData.name);
+            var $frameStyle = $("style#" + frameData.name);
 
             if ($frameStyle.length > 0) {
                 $frameStyle.html(css);
 
-                $elems = $("*").filter(function() {
-                    this.style["" + animationString + "Name"] === frameName;
+                var $elems = $("*").filter(function() {
+                    this.style[animationString + "Name"] === frameName;
                 });
 
                 $elems.each(function() {
@@ -75,9 +73,7 @@
                     });
                 });
             } else {
-                $createKeyframeStyleTag({
-                    id: frameName
-                }).append(css);
+                $createKeyframeStyleTag(frameName).append(css);
             }
         },
         define: function(frameData) {
@@ -87,13 +83,13 @@
                     this.generate(frame);
                 }
             } else {
-                return this.generate(frameData);
+                this.generate(frameData);
             }
         }
     };
 
-    animationPlayState = "animation-play-state";
-    playStateRunning = "running";
+    var animationPlayState = "animation-play-state";
+    var playStateRunning = "running";
 
     $.fn.resetKeyframe = function(callback) {
         var $el = $(this).css(vendorPrefix + animationPlayState, playStateRunning).css(vendorPrefix + "animation", "none");
@@ -104,15 +100,14 @@
     };
 
     $.fn.pauseKeyframe = function() {
-        var $el = $(this).css(vendorPrefix + animationPlayState, "paused");
+        $(this).css(vendorPrefix + animationPlayState, "paused");
     };
 
     $.fn.resumeKeyframe = function() {
-        return $(this).css(vendorPrefix + animationPlayState, playStateRunning);
+        $(this).css(vendorPrefix + animationPlayState, playStateRunning);
     };
 
     $.fn.playKeyframe = function(frameOptions, callback) {
-        var animationcss, animationkey, delay, duration, pfx, repeat;
 
         if (typeof frameOptions === 'string') {
             var frameOptSplit = frameOptions.trim().split(' ');
@@ -138,27 +133,21 @@
             complete: callback
         }, frameOptions);
 
-        duration = frameOptions.duration;
-        delay = frameOptions.delay;
-        repeat = frameOptions.repeat;
-        animationcss = "" + frameOptions.name + " " + duration + "ms " + frameOptions.timingFunction + " " + delay + "ms " + repeat + " " + frameOptions.direction + " " + frameOptions.fillMode;
-        callback = frameOptions.complete;
-        animationkey = vendorPrefix + "animation";
-        pfx = ["webkit", "moz", "MS", "o", ""];
+        var duration = frameOptions.duration;
+        var delay = frameOptions.delay;
+        var repeat = frameOptions.repeat;
+        var animationcss = "" + frameOptions.name + " " + duration + "ms " + frameOptions.timingFunction + " " + delay + "ms " + repeat + " " + frameOptions.direction + " " + frameOptions.fillMode;
+        var animationkey = vendorPrefix + "animation";
+        var pfx = ["webkit", "moz", "MS", "o", ""];
 
         var _prefixEvent = function(element, type, callback) {
-            var evt, p, _results;
-            p = 0;
-            _results = [];
-            while (p < pfx.length) {
-                if (!pfx[p]) {
+            for(var i = 0; i < pfx.length; i++){
+                if (!pfx[i]) {
                     type = type.toLowerCase();
                 }
-                evt = pfx[p] + type;
+                var evt = pfx[i] + type;
                 element.off(evt).on(evt, callback);
-                _results.push(p++);
             }
-            _results;
         };
 
         this.each(function() {
@@ -172,8 +161,6 @@
         return this;
     };
 
-    $createKeyframeStyleTag({
-        id: "boost-keyframe"
-    }).append(" .boostKeyframe{" + vendorPrefix + "transform:scale3d(1,1,1);}");
+    $createKeyframeStyleTag("boost-keyframe").append(" .boostKeyframe{" + vendorPrefix + "transform:scale3d(1,1,1);}");
 
 }).call(this);
