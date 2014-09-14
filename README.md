@@ -1,6 +1,6 @@
 jQuery.Keyframes
 ===========
-jQuery.Keyframes generates and plays CSS3 keyframes quickly and easily allowing you to concentrate on the content of your project whilst cutting down code.
+jQuery-Keyframes allows dynamic generation of CSS3 keyframes with callback events and other niceness.
 
 Overview
 --------
