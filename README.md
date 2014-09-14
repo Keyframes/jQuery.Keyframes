@@ -137,7 +137,7 @@ The css3 animation methods available are better documented here: http://www.w3sc
 ```javascript
 $(selector).playKeyframe({
     name: 'trapdoor-sequence', // name of the keyframe you want to bind to the selected element
-    duration: 1000, // [optional, default: 0, in ms] how long you want it to last in milliseconds
+    duration: '1s', // [optional, default: 0, in ms] how long you want it to last in milliseconds
     timingFunction: 'linear', // [optional, default: ease] specifies the speed curve of the animation
     delay: 0, //[optional, default: 0]  how long you want to wait before the animation starts
     iterationCount: 'infinite', //[optional, default:1]  how many times you want the animation to repeat
