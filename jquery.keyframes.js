@@ -125,7 +125,6 @@
 
         if($.isArray(frameOptions)){
             var frameOptionsStrings = [];
-            console.log(frameOptions.length);
             for(var i = 0; i < frameOptions.length; i++){
                 if (typeof frameOptions[i] === 'string') {
                     frameOptionsStrings.push(frameOptions[i]);
