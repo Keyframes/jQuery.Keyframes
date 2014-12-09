@@ -5,12 +5,12 @@
         domPrefixes = ['Webkit', 'Moz', 'O', 'ms', 'Khtml'];
 
     $(window).load(function(){
-        var body = document.body;
-        if( body.style.animationName !== undefined ) { animationSupport = true; }
+        var style = document.body.style;
+        if( style.animationName !== undefined ) { animationSupport = true; }
 
         if( animationSupport === false ) {
             for( var i = 0; i < domPrefixes.length; i++ ) {
-                if( body.style[ domPrefixes[i] + 'AnimationName' ] !== undefined ) {
+                if( style[ domPrefixes[i] + 'AnimationName' ] !== undefined ) {
                     prefix = domPrefixes[ i ];
                     animationString = prefix + 'Animation';
                     vendorPrefix = '-' + prefix.toLowerCase() + '-';
@@ -111,9 +111,9 @@
 
         var animObjToStr = function(obj){
             obj = $.extend({
-                duration: 0,
+                duration: '0s',
                 timingFunction: "ease",
-                delay: 0,
+                delay: '0s',
                 iterationCount: 1,
                 direction: "normal",
                 fillMode: "forwards"
@@ -152,8 +152,8 @@
             }
         };
 
-        this.each(function() {
-            var $el = $(this).addClass("boostKeyframe").css(vendorPrefix + animationPlayState, playStateRunning).css(animationkey, animationcss).data("keyframeOptions", frameOptions);
+        this.each(function(index, elem) {
+            var $el = $(elem).addClass("boostKeyframe").css(vendorPrefix + animationPlayState, playStateRunning).css(animationkey, animationcss).data("keyframeOptions", frameOptions);
 
             if (callback) {
                 _prefixEvent($el, 'AnimationIteration', callback);
