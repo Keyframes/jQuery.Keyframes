@@ -62,16 +62,15 @@
             var $frameStyle = $("style#" + frameData.name);
 
             if ($frameStyle.length > 0) {
-                $frameStyle.html(css);
+                $frameStyle.append(css);
 
                 var $elems = $("*").filter(function() {
                     this.style[animationString + "Name"] === frameName;
                 });
 
                 $elems.each(function() {
-                    var $el, options;
-                    $el = $(this);
-                    options = $el.data("keyframeOptions");
+                    var $el = $(this);
+                    var options = $el.data("keyframeOptions");
                     $el.resetKeyframe(function() {
                         $el.playKeyframe(options);
                     });
