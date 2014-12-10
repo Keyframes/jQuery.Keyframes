@@ -42,7 +42,7 @@
             var css = "@" + vendorPrefix + "keyframes " + frameName + " {";
 
             for (var key in frameData) {
-                if (key !== "name") {
+                if (key !== "name" && key !== "media") {
                     css += key + " {";
 
                     for (var property in frameData[key]) {
