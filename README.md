@@ -130,6 +130,21 @@ $.keyframe.define([{
 
 *Please note, you can add as many properties to the array as you want to*
 
+**Responsive animations**
+```javascript
+$.keyframe.define([{
+    name: 'roll-clockwise',
+    media: 'screen and (max-width: 700px)',
+    from: {
+        'margin-left' : '0px'
+    },
+    to: {
+        'margin-left' : '600px'
+    }
+    }
+]);
+```
+
 **Playing an animation**
 
 The css3 animation methods available are better documented here: http://www.w3schools.com/css/css3_animations.asp
