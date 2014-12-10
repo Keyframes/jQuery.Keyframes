@@ -55,6 +55,10 @@
 
             css = PrefixFree.prefixCSS(css + "}");
 
+            if(frameData.media){
+                css = "@media " + frameData.media + "{" + css + "}";
+            }
+
             var $frameStyle = $("style#" + frameData.name);
 
             if ($frameStyle.length > 0) {
@@ -152,8 +156,8 @@
             }
         };
 
-        this.each(function(index, elem) {
-            var $el = $(elem).addClass("boostKeyframe").css(vendorPrefix + animationPlayState, playStateRunning).css(animationkey, animationcss).data("keyframeOptions", frameOptions);
+        this.each(function() {
+            var $el = $(this).addClass("boostKeyframe").css(vendorPrefix + animationPlayState, playStateRunning).css(animationkey, animationcss).data("keyframeOptions", frameOptions);
 
             if (callback) {
                 _prefixEvent($el, 'AnimationIteration', callback);
