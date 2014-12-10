@@ -7,7 +7,8 @@
   "ignore": [
     "**/.*",
     "node_modules",
-    "bower_components"
+    "bower_components",
+    "package.json"
   ],
   "dependencies": {
     "jquery": "latest",
