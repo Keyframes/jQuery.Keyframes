@@ -76,7 +76,7 @@
                     });
                 });
             } else {
-                $createKeyframeStyleTag(frameName).append(css);
+                $createKeyframeStyleTag(frameName, css);
             }
         },
         define: function(frameData) {
@@ -166,6 +166,6 @@
         return this;
     };
 
-    $createKeyframeStyleTag("boost-keyframe").append(" .boostKeyframe{" + vendorPrefix + "transform:scale3d(1,1,1);}");
+    $createKeyframeStyleTag("boost-keyframe", " .boostKeyframe{" + vendorPrefix + "transform:scale3d(1,1,1);}");
 
 }).call(this);
