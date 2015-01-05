@@ -24,7 +24,7 @@
 
     var $createKeyframeStyleTag = function(id) {
         return $("<style>").attr({
-            'class': "keyframe-style",
+            "class": "keyframe-style",
             id: id,
             type: "text/css"
         }).appendTo("head");
