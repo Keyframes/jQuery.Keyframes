@@ -22,8 +22,8 @@
     });
 
 
-    var $createKeyframeStyleTag = function(id) {
-        return $("<style>").attr({
+    var $createKeyframeStyleTag = function(id, css) {
+        return $("<style>" + css + "</style>").attr({
             "class": "keyframe-style",
             id: id,
             type: "text/css"
