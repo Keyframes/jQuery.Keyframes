@@ -24,7 +24,7 @@
 
     var $createKeyframeStyleTag = function(id) {
         return $("<style>").attr({
-            class: "keyframe-style",
+            'class': "keyframe-style",
             id: id,
             type: "text/css"
         }).appendTo("head");
@@ -65,7 +65,7 @@
                 $frameStyle.append(css);
 
                 var $elems = $("*").filter(function() {
-                    this.style[animationString + "Name"] === frameName;
+                    return this.style[animationString + "Name"] === frameName;
                 });
 
                 $elems.each(function() {
