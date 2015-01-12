@@ -22,9 +22,9 @@
     });
 
 
-    var $createKeyframeStyleTag = function(id) {
-        return $("<style>").attr({
-            class: "keyframe-style",
+    var $createKeyframeStyleTag = function(id, css) {
+        return $("<style>" + css + "</style>").attr({
+            "class": "keyframe-style",
             id: id,
             type: "text/css"
         }).appendTo("head");
@@ -65,7 +65,7 @@
                 $frameStyle.append(css);
 
                 var $elems = $("*").filter(function() {
-                    this.style[animationString + "Name"] === frameName;
+                    return this.style[animationString + "Name"] === frameName;
                 });
 
                 $elems.each(function() {
@@ -76,7 +76,7 @@
                     });
                 });
             } else {
-                $createKeyframeStyleTag(frameName).append(css);
+                $createKeyframeStyleTag(frameName, css);
             }
         },
         define: function(frameData) {
@@ -166,6 +166,6 @@
         return this;
     };
 
-    $createKeyframeStyleTag("boost-keyframe").append(" .boostKeyframe{" + vendorPrefix + "transform:scale3d(1,1,1);}");
+    $createKeyframeStyleTag("boost-keyframe", " .boostKeyframe{" + vendorPrefix + "transform:scale3d(1,1,1);}");
 
 }).call(this);
