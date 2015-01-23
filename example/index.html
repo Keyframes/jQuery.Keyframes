@@ -59,8 +59,9 @@
             delay: 0,
             iterationCount: 'infinite',
             direction: 'normal',
-            fillMode: 'forwards'
-          }, increment);
+            fillMode: 'forwards',
+            complete: increment
+          });
 
           break;
         case 'spin':
@@ -76,8 +77,9 @@
             name: 'ball-roll',
             duration: "3s",
             timingFunction: 'linear',
-            iterationCount: 'infinite'
-          }, increment);
+            iterationCount: 'infinite',
+            complete: increment
+          });
 
           break;
         case 'delay':
@@ -88,8 +90,9 @@
             duration: "3s",
             timingFunction: 'linear',
             delay: "3s",
-            iterationCount: 'infinite'
-          }, increment);
+            iterationCount: 'infinite',
+            complete: increment
+          });
 
           break;
         case 'once':
@@ -98,8 +101,9 @@
           $('.ball').playKeyframe({
             name: 'ball-roll',
             duration: "3s",
-            timingFunction: 'ease'
-          }, increment);
+            timingFunction: 'ease',
+            complete: increment
+          });
 
           break;
         case 'multi':
@@ -111,8 +115,9 @@
               duration: "3s",
               timingFunction: 'ease',
               iterationCount: 1
-            }
-          ], increment);
+            },
+            increment
+          ]);
       }
     })
 

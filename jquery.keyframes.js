@@ -42,7 +42,7 @@
             var css = "@" + vendorPrefix + "keyframes " + frameName + " {";
 
             for (var key in frameData) {
-                if (key !== "name" && key !== "media") {
+                if (key !== "name" && key !== "media" && key !== "complete") {
                     css += key + " {";
 
                     for (var property in frameData[key]) {
@@ -111,7 +111,7 @@
     };
 
     $.fn.playKeyframe = function(frameOptions, callback) {
-
+        
         var animObjToStr = function(obj){
             obj = $.extend({
                 duration: '0s',
@@ -144,6 +144,10 @@
 
         var animationkey = vendorPrefix + "animation";
         var pfx = ["webkit", "moz", "MS", "o", ""];
+
+        if(!callback && frameOptions.complete){
+            callback = frameOptions.complete;
+        }
 
         var _prefixEvent = function(element, type, callback) {
             for(var i = 0; i < pfx.length; i++){
