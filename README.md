@@ -207,7 +207,9 @@ Who is using jQuery.Keyframes?
 ------------------------------
 
 * Metrize Premium HTML5 Template: http://themeforest.net/item/metrize-responsive-flipcard-template/7415882
+* MetroCV: http://themeforest.net/item/metrocv-onepage-resume-portfolio-wordpress-theme/10266600
 * Hipster Gallery: http://labs.bebensiganteng.com/html5/hipstergallery/#thumbnails/0
+* The Startup Magazine: https://thestartupmag.com/
 
 Plugins!
 --------
