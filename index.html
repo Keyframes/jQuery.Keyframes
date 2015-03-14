@@ -39,177 +39,200 @@
         </div>
 
         <h1>
-<a name="jquerykeyframes" class="anchor" href="#jquerykeyframes"><span class="octicon octicon-link"></span></a>jQuery.Keyframes</h1>
+<a id="jquerykeyframes" class="anchor" href="#jquerykeyframes" aria-hidden="true"><span class="octicon octicon-link"></span></a>jQuery.Keyframes</h1>
 
-<p>jQuery.Keyframes generates and plays CSS3 keyframes quickly and easily allowing you to concentrate on the content of your project whilst cutting down code.</p>
+<p>jQuery-Keyframes allows dynamic generation of CSS3 keyframes with callback events and other niceness.</p>
 
 <h2>
-<a name="overview" class="anchor" href="#overview"><span class="octicon octicon-link"></span></a>Overview</h2>
+<a id="overview" class="anchor" href="#overview" aria-hidden="true"><span class="octicon octicon-link"></span></a>Overview</h2>
 
 <p>With the rise of CSS3 and HTML5, we see more and more usage of fancy features like transformations, translations, rotations and scaling.
 jQuery has a very nice built in <em>$(selector).animate()</em> function which allows for easy setup of these animations.
 However, jQuery's animate() does not support multiple keyframes. jQuery.Keyframes helps you accomplish just that.</p>
 
 <h2>
-<a name="requirements" class="anchor" href="#requirements"><span class="octicon octicon-link"></span></a>Requirements</h2>
+<a id="requirements" class="anchor" href="#requirements" aria-hidden="true"><span class="octicon octicon-link"></span></a>Requirements</h2>
 
 <p>In order for jQuery.Keyframes to work the jQuery library needs to be linked either through CDN:</p>
 
-<div class="highlight highlight-html"><pre><span class="nt">&lt;script </span><span class="na">src=</span><span class="s">'http://code.jquery.com/jquery-&lt;version&gt;[.min].js'</span><span class="nt">&gt;&lt;/script&gt;</span>
-</pre></div>
+<div class="highlight highlight-html"><pre><span class="pl-s2">&lt;<span class="pl-ent">script</span> <span class="pl-e">src</span>=<span class="pl-s1"><span class="pl-pds">'</span>http://code.jquery.com/jquery-&lt;version&gt;[.min].js<span class="pl-pds">'</span></span>&gt;&lt;/<span class="pl-ent">script</span>&gt;</span></pre></div>
 
 <p>or local copy:</p>
 
-<div class="highlight highlight-html"><pre><span class="nt">&lt;script </span><span class="na">src=</span><span class="s">'/path/to/jquery-&lt;version&gt;[.min].js'</span><span class="nt">&gt;&lt;/script&gt;</span>
-</pre></div>
+<div class="highlight highlight-html"><pre><span class="pl-s2">&lt;<span class="pl-ent">script</span> <span class="pl-e">src</span>=<span class="pl-s1"><span class="pl-pds">'</span>/path/to/jquery-&lt;version&gt;[.min].js<span class="pl-pds">'</span></span>&gt;&lt;/<span class="pl-ent">script</span>&gt;</span></pre></div>
 
 <h2>
-<a name="installation" class="anchor" href="#installation"><span class="octicon octicon-link"></span></a>Installation</h2>
+<a id="installation" class="anchor" href="#installation" aria-hidden="true"><span class="octicon octicon-link"></span></a>Installation</h2>
 
-<p>Include script in the <em>head</em> of your document using the following line:</p>
+<p>Include script in your document using the following line:</p>
 
-<div class="highlight highlight-html"><pre><span class="nt">&lt;script </span><span class="na">src=</span><span class="s">'/path/to/jquery.keyframes[.min].js'</span><span class="nt">&gt;&lt;/script&gt;</span>
-</pre></div>
+<div class="highlight highlight-html"><pre>&lt;<span class="pl-ent">script</span> <span class="pl-e">src</span>=<span class="pl-s1"><span class="pl-pds">'</span>/path/to/jquery.keyframes[.min].js<span class="pl-pds">'</span></span>&gt;&lt;/<span class="pl-ent">script</span>&gt;</pre></div>
+
+<p>Be sure to define and play animations after the page has loaded using jquerys $(window).load</p>
 
 <h2>
-<a name="usage" class="anchor" href="#usage"><span class="octicon octicon-link"></span></a>Usage</h2>
+<a id="vendor-prefixing" class="anchor" href="#vendor-prefixing" aria-hidden="true"><span class="octicon octicon-link"></span></a>Vendor Prefixing</h2>
 
-<p><strong>Get browser style prefix</strong></p>
+<p><a href="http://leaverou.github.io/prefixfree/">Prefix Free</a> is used on the generated css to automatically add vendor prefixes. This means you should avoid adding any vendor prefixes to your defined css.
+For convenience, it is bundled into the minified version.</p>
 
-<div class="highlight highlight-javascript"><pre><span class="kd">var</span> <span class="nx">vendorPrefix</span> <span class="o">=</span> <span class="nx">$</span><span class="p">.</span><span class="nx">keyframe</span><span class="p">.</span><span class="nx">getVendorPrefix</span><span class="p">();</span>
-</pre></div>
+<h2>
+<a id="usage" class="anchor" href="#usage" aria-hidden="true"><span class="octicon octicon-link"></span></a>Usage</h2>
 
 <p><strong>Detecting CSS animation support</strong></p>
 
-<div class="highlight highlight-javascript"><pre><span class="kd">var</span> <span class="nx">supportedFlag</span> <span class="o">=</span> <span class="nx">$</span><span class="p">.</span><span class="nx">keyframe</span><span class="p">.</span><span class="nx">isSupported</span><span class="p">();</span>
-</pre></div>
+<div class="highlight highlight-javascript"><pre><span class="pl-s">var</span> supportedFlag <span class="pl-k">=</span> $.keyframe.isSupported();</pre></div>
 
 <p><strong>Adding a new animation sequence (keyframe)</strong></p>
 
-<div class="highlight highlight-javascript"><pre><span class="nx">$</span><span class="p">.</span><span class="nx">keyframe</span><span class="p">.</span><span class="nx">define</span><span class="p">([{</span>
-    <span class="nx">name</span><span class="o">:</span> <span class="s1">'trapdoor-sequence'</span><span class="p">,</span>
-    <span class="s1">'0%'</span><span class="o">:</span> <span class="p">{</span><span class="s1">'height'</span><span class="o">:</span> <span class="s1">'70px'</span><span class="p">},</span>
-    <span class="s1">'30%'</span><span class="o">:</span> <span class="p">{</span><span class="s1">'height'</span><span class="o">:</span> <span class="s1">'10px'</span><span class="p">},</span>
-    <span class="s1">'60%'</span><span class="o">:</span> <span class="p">{</span><span class="s1">'height'</span><span class="o">:</span> <span class="s1">'30px'</span><span class="p">},</span>
-    <span class="s1">'100%'</span><span class="o">:</span> <span class="p">{</span><span class="s1">'height'</span><span class="o">:</span> <span class="s1">'10px'</span><span class="p">}</span>
-<span class="p">}]);</span>
-</pre></div>
+<div class="highlight highlight-javascript"><pre>$.keyframe.define([{
+    name<span class="pl-k">:</span> <span class="pl-s1"><span class="pl-pds">'</span>trapdoor-sequence<span class="pl-pds">'</span></span>,
+    <span class="pl-s1"><span class="pl-pds">'</span>0%<span class="pl-pds">'</span></span><span class="pl-k">:</span> {<span class="pl-s1"><span class="pl-pds">'</span>height<span class="pl-pds">'</span></span><span class="pl-k">:</span> <span class="pl-s1"><span class="pl-pds">'</span>70px<span class="pl-pds">'</span></span>},
+    <span class="pl-s1"><span class="pl-pds">'</span>30%<span class="pl-pds">'</span></span><span class="pl-k">:</span> {<span class="pl-s1"><span class="pl-pds">'</span>height<span class="pl-pds">'</span></span><span class="pl-k">:</span> <span class="pl-s1"><span class="pl-pds">'</span>10px<span class="pl-pds">'</span></span>},
+    <span class="pl-s1"><span class="pl-pds">'</span>60%<span class="pl-pds">'</span></span><span class="pl-k">:</span> {<span class="pl-s1"><span class="pl-pds">'</span>height<span class="pl-pds">'</span></span><span class="pl-k">:</span> <span class="pl-s1"><span class="pl-pds">'</span>30px<span class="pl-pds">'</span></span>},
+    <span class="pl-s1"><span class="pl-pds">'</span>100%<span class="pl-pds">'</span></span><span class="pl-k">:</span> {<span class="pl-s1"><span class="pl-pds">'</span>height<span class="pl-pds">'</span></span><span class="pl-k">:</span> <span class="pl-s1"><span class="pl-pds">'</span>10px<span class="pl-pds">'</span></span>}
+}]);</pre></div>
 
 <p><strong>Adding a single frame style</strong></p>
 
-<div class="highlight highlight-javascript"><pre><span class="nx">$</span><span class="p">.</span><span class="nx">keyframe</span><span class="p">.</span><span class="nx">define</span><span class="p">({</span>
-    <span class="nx">name</span><span class="o">:</span> <span class="s1">'ball-roll'</span><span class="p">,</span>
-    <span class="nx">from</span><span class="o">:</span> <span class="p">{</span>
-        <span class="nx">transform</span><span class="o">:</span> <span class="s1">'rotate(0deg)'</span>
-    <span class="p">},</span>
-    <span class="nx">to</span><span class="o">:</span> <span class="p">{</span>
-        <span class="nx">transform</span><span class="o">:</span> <span class="s1">'rotate(360deg)'</span>
-    <span class="p">}</span>
-<span class="p">});</span>
-</pre></div>
+<div class="highlight highlight-javascript"><pre>$.keyframe.define({
+    name<span class="pl-k">:</span> <span class="pl-s1"><span class="pl-pds">'</span>ball-roll<span class="pl-pds">'</span></span>,
+    from<span class="pl-k">:</span> {
+        <span class="pl-s1"><span class="pl-pds">'</span>transform<span class="pl-pds">'</span></span><span class="pl-k">:</span> <span class="pl-s1"><span class="pl-pds">'</span>rotate(0deg)<span class="pl-pds">'</span></span> <span class="pl-c">//Note that 'transform' will be autoprefixed for you</span>
+    },
+    to<span class="pl-k">:</span> {
+        <span class="pl-s1"><span class="pl-pds">'</span>transform<span class="pl-pds">'</span></span><span class="pl-k">:</span> <span class="pl-s1"><span class="pl-pds">'</span>rotate(360deg)<span class="pl-pds">'</span></span> <span class="pl-c">//Note that 'transform' will be autoprefixed for you</span>
+    }
+});</pre></div>
 
 <p><strong>Adding multiple frame styles</strong></p>
 
-<div class="highlight highlight-javascript"><pre><span class="kd">var</span> <span class="nx">pfx</span> <span class="o">=</span> <span class="nx">$</span><span class="p">.</span><span class="nx">keyframe</span><span class="p">.</span><span class="nx">getVendorPrefix</span><span class="p">();</span>
-
-<span class="c1">//Note the variable notation to be able to add vendor specific prefix</span>
-<span class="kd">var</span> <span class="nx">transform</span> <span class="o">=</span> <span class="nx">pfx</span> <span class="o">+</span> <span class="s1">'transform'</span><span class="p">;</span> 
-
-<span class="nx">$</span><span class="p">.</span><span class="nx">keyframe</span><span class="p">.</span><span class="nx">define</span><span class="p">([{</span>
-    <span class="nx">name</span><span class="o">:</span> <span class="s1">'roll-clockwise'</span><span class="p">,</span>
-    <span class="s1">'0%'</span><span class="o">:</span> <span class="p">{</span>
-        <span class="s1">'margin-left'</span> <span class="o">:</span> <span class="s1">'0px'</span><span class="p">,</span>
-        <span class="s1">'background-color'</span> <span class="o">:</span> <span class="s1">'red'</span><span class="p">,</span>
-        <span class="nx">transform</span> <span class="o">:</span> <span class="s1">'rotate(0deg)'</span>
-    <span class="p">},</span>
-    <span class="s1">'100%'</span><span class="o">:</span> <span class="p">{</span>
-        <span class="s1">'margin-left'</span> <span class="o">:</span> <span class="s1">'600px'</span><span class="p">,</span>
-        <span class="nx">transform</span> <span class="o">:</span> <span class="s1">'rotate(360deg)'</span>
-    <span class="p">}</span>
-    <span class="p">},{</span>
-    <span class="nx">name</span><span class="o">:</span> <span class="s1">'roll-anti-clockwise'</span><span class="p">,</span>
-    <span class="s1">'0%'</span><span class="o">:</span> <span class="p">{</span>
-        <span class="s1">'margin-left'</span> <span class="o">:</span> <span class="s1">'0px'</span><span class="p">,</span>
-        <span class="s1">'background-color'</span> <span class="o">:</span> <span class="s1">'red'</span><span class="p">,</span>
-        <span class="nx">transform</span> <span class="o">:</span> <span class="s1">'rotate(0deg)'</span>
-    <span class="p">},</span>
-    <span class="s1">'100%'</span><span class="o">:</span> <span class="p">{</span>
-        <span class="s1">'margin-left'</span> <span class="o">:</span> <span class="s1">'600px'</span><span class="p">,</span>
-        <span class="nx">transform</span> <span class="o">:</span> <span class="s1">'rotate(-360deg)'</span>
-    <span class="p">}</span>
-    <span class="p">}</span>
-<span class="p">]);</span>
-</pre></div>
+<div class="highlight highlight-javascript"><pre>$.keyframe.define([{
+    name<span class="pl-k">:</span> <span class="pl-s1"><span class="pl-pds">'</span>roll-clockwise<span class="pl-pds">'</span></span>,
+    <span class="pl-s1"><span class="pl-pds">'</span>0%<span class="pl-pds">'</span></span><span class="pl-k">:</span> {
+        <span class="pl-s1"><span class="pl-pds">'</span>margin-left<span class="pl-pds">'</span></span> <span class="pl-k">:</span> <span class="pl-s1"><span class="pl-pds">'</span>0px<span class="pl-pds">'</span></span>,
+        <span class="pl-s1"><span class="pl-pds">'</span>background-color<span class="pl-pds">'</span></span> <span class="pl-k">:</span> <span class="pl-s1"><span class="pl-pds">'</span>red<span class="pl-pds">'</span></span>,
+        <span class="pl-s1"><span class="pl-pds">'</span>transform<span class="pl-pds">'</span></span> <span class="pl-k">:</span> <span class="pl-s1"><span class="pl-pds">'</span>rotate(0deg)<span class="pl-pds">'</span></span>
+    },
+    <span class="pl-s1"><span class="pl-pds">'</span>100%<span class="pl-pds">'</span></span><span class="pl-k">:</span> {
+        <span class="pl-s1"><span class="pl-pds">'</span>margin-left<span class="pl-pds">'</span></span> <span class="pl-k">:</span> <span class="pl-s1"><span class="pl-pds">'</span>600px<span class="pl-pds">'</span></span>,
+        <span class="pl-s1"><span class="pl-pds">'</span>transform<span class="pl-pds">'</span></span> <span class="pl-k">:</span> <span class="pl-s1"><span class="pl-pds">'</span>rotate(360deg)<span class="pl-pds">'</span></span>
+    }
+    },{
+    name<span class="pl-k">:</span> <span class="pl-s1"><span class="pl-pds">'</span>roll-anti-clockwise<span class="pl-pds">'</span></span>,
+    <span class="pl-s1"><span class="pl-pds">'</span>0%<span class="pl-pds">'</span></span><span class="pl-k">:</span> {
+        <span class="pl-s1"><span class="pl-pds">'</span>margin-left<span class="pl-pds">'</span></span> <span class="pl-k">:</span> <span class="pl-s1"><span class="pl-pds">'</span>0px<span class="pl-pds">'</span></span>,
+        <span class="pl-s1"><span class="pl-pds">'</span>background-color<span class="pl-pds">'</span></span> <span class="pl-k">:</span> <span class="pl-s1"><span class="pl-pds">'</span>red<span class="pl-pds">'</span></span>,
+        <span class="pl-s1"><span class="pl-pds">'</span>transform<span class="pl-pds">'</span></span> <span class="pl-k">:</span> <span class="pl-s1"><span class="pl-pds">'</span>rotate(0deg)<span class="pl-pds">'</span></span>
+    },
+    <span class="pl-s1"><span class="pl-pds">'</span>100%<span class="pl-pds">'</span></span><span class="pl-k">:</span> {
+        <span class="pl-s1"><span class="pl-pds">'</span>margin-left<span class="pl-pds">'</span></span> <span class="pl-k">:</span> <span class="pl-s1"><span class="pl-pds">'</span>600px<span class="pl-pds">'</span></span>,
+        <span class="pl-s1"><span class="pl-pds">'</span>transform<span class="pl-pds">'</span></span> <span class="pl-k">:</span> <span class="pl-s1"><span class="pl-pds">'</span>rotate(-360deg)<span class="pl-pds">'</span></span>
+    }
+    }
+]);</pre></div>
 
 <p><strong>Adding styles and properties in array fashion</strong></p>
 
 <p><em>Gives resemblance to CSS styling definitions</em></p>
 
-<div class="highlight highlight-javascript"><pre><span class="kd">var</span> <span class="nx">pfx</span> <span class="o">=</span> <span class="nx">$</span><span class="p">.</span><span class="nx">keyframe</span><span class="p">.</span><span class="nx">getVendorPrefix</span><span class="p">();</span>
+<div class="highlight highlight-javascript"><pre><span class="pl-s">var</span> shake_start <span class="pl-k">=</span> {<span class="pl-s1"><span class="pl-pds">'</span>transform<span class="pl-pds">'</span></span><span class="pl-k">:</span> <span class="pl-s1"><span class="pl-pds">'</span>translate(0px)<span class="pl-pds">'</span></span>};
+<span class="pl-s">var</span> shake_odd1 <span class="pl-k">=</span> {<span class="pl-s1"><span class="pl-pds">'</span>transform<span class="pl-pds">'</span></span><span class="pl-k">:</span> <span class="pl-s1"><span class="pl-pds">'</span>translate(-10px, -10px)<span class="pl-pds">'</span></span>};
+<span class="pl-s">var</span> shake_even1 <span class="pl-k">=</span> {<span class="pl-s1"><span class="pl-pds">'</span>transform<span class="pl-pds">'</span></span><span class="pl-k">:</span> <span class="pl-s1"><span class="pl-pds">'</span>translate(10px, 10px)<span class="pl-pds">'</span></span>};
+<span class="pl-s">var</span> shake_odd2 <span class="pl-k">=</span> {<span class="pl-s1"><span class="pl-pds">'</span>transform<span class="pl-pds">'</span></span><span class="pl-k">:</span> <span class="pl-s1"><span class="pl-pds">'</span>translate(10px, -10px)<span class="pl-pds">'</span></span>};
+<span class="pl-s">var</span> shake_even2 <span class="pl-k">=</span> {<span class="pl-s1"><span class="pl-pds">'</span>transform<span class="pl-pds">'</span></span><span class="pl-k">:</span> <span class="pl-s1"><span class="pl-pds">'</span>translate(-10px, 10px)<span class="pl-pds">'</span></span>};
 
-<span class="c1">//Note the variable notation to be able to add vendor specific prefix</span>
-<span class="kd">var</span> <span class="nx">transform</span> <span class="o">=</span> <span class="nx">pfx</span> <span class="o">+</span> <span class="s1">'transform'</span><span class="p">;</span> 
-
-<span class="kd">var</span> <span class="nx">shake_start</span> <span class="o">=</span> <span class="p">{</span><span class="nx">transform</span><span class="o">:</span> <span class="s1">'translate(0px)'</span><span class="p">};</span>
-<span class="kd">var</span> <span class="nx">shake_odd1</span> <span class="o">=</span> <span class="p">{</span><span class="nx">transform</span><span class="o">:</span> <span class="s1">'translate(-10px, -10px)'</span><span class="p">};</span>
-<span class="kd">var</span> <span class="nx">shake_even1</span> <span class="o">=</span> <span class="p">{</span><span class="nx">transform</span><span class="o">:</span> <span class="s1">'translate(10px, 10px)'</span><span class="p">};</span>
-<span class="kd">var</span> <span class="nx">shake_odd2</span> <span class="o">=</span> <span class="p">{</span><span class="nx">transform</span><span class="o">:</span> <span class="s1">'translate(10px, -10px)'</span><span class="p">};</span>
-<span class="kd">var</span> <span class="nx">shake_even2</span> <span class="o">=</span> <span class="p">{</span><span class="nx">transform</span><span class="o">:</span> <span class="s1">'translate(-10px, 10px)'</span><span class="p">};</span>
-
-<span class="nx">$</span><span class="p">.</span><span class="nx">keyframe</span><span class="p">.</span><span class="nx">define</span><span class="p">([{</span>
-    <span class="nx">name</span><span class="o">:</span> <span class="s1">'crazy'</span><span class="p">,</span>
-    <span class="s1">'0%'</span><span class="o">:</span> <span class="nx">shake_start</span><span class="p">,</span>
-    <span class="s1">'10%'</span><span class="o">:</span> <span class="nx">shake_odd2</span><span class="p">,</span>
-    <span class="s1">'20%'</span><span class="o">:</span> <span class="nx">shake_even1</span><span class="p">,</span>
-    <span class="s1">'30%'</span><span class="o">:</span> <span class="nx">shake_odd2</span><span class="p">,</span>
-    <span class="s1">'40%'</span><span class="o">:</span> <span class="nx">shake_even2</span><span class="p">,</span>
-    <span class="s1">'50%'</span><span class="o">:</span> <span class="nx">shake_odd2</span><span class="p">,</span>
-    <span class="s1">'60%'</span><span class="o">:</span> <span class="nx">shake_even1</span><span class="p">,</span>
-    <span class="s1">'70%'</span><span class="o">:</span> <span class="nx">shake_odd1</span><span class="p">,</span>
-    <span class="s1">'80%'</span><span class="o">:</span> <span class="nx">shake_even2</span><span class="p">,</span>
-    <span class="s1">'90%'</span><span class="o">:</span> <span class="nx">shake_odd1</span>
-    <span class="p">}</span>
-<span class="p">]);</span>
-</pre></div>
+$.keyframe.define([{
+    name<span class="pl-k">:</span> <span class="pl-s1"><span class="pl-pds">'</span>crazy<span class="pl-pds">'</span></span>,
+    <span class="pl-s1"><span class="pl-pds">'</span>0%<span class="pl-pds">'</span></span><span class="pl-k">:</span> shake_start,
+    <span class="pl-s1"><span class="pl-pds">'</span>10%<span class="pl-pds">'</span></span><span class="pl-k">:</span> shake_odd2,
+    <span class="pl-s1"><span class="pl-pds">'</span>20%<span class="pl-pds">'</span></span><span class="pl-k">:</span> shake_even1,
+    <span class="pl-s1"><span class="pl-pds">'</span>30%<span class="pl-pds">'</span></span><span class="pl-k">:</span> shake_odd2,
+    <span class="pl-s1"><span class="pl-pds">'</span>40%<span class="pl-pds">'</span></span><span class="pl-k">:</span> shake_even2,
+    <span class="pl-s1"><span class="pl-pds">'</span>50%<span class="pl-pds">'</span></span><span class="pl-k">:</span> shake_odd2,
+    <span class="pl-s1"><span class="pl-pds">'</span>60%<span class="pl-pds">'</span></span><span class="pl-k">:</span> shake_even1,
+    <span class="pl-s1"><span class="pl-pds">'</span>70%<span class="pl-pds">'</span></span><span class="pl-k">:</span> shake_odd1,
+    <span class="pl-s1"><span class="pl-pds">'</span>80%<span class="pl-pds">'</span></span><span class="pl-k">:</span> shake_even2,
+    <span class="pl-s1"><span class="pl-pds">'</span>90%<span class="pl-pds">'</span></span><span class="pl-k">:</span> shake_odd1
+    }
+]);</pre></div>
 
 <p><em>Please note, you can add as many properties to the array as you want to</em></p>
 
+<p><strong>Responsive animations</strong></p>
+
+<div class="highlight highlight-javascript"><pre>$.keyframe.define([{
+    name<span class="pl-k">:</span> <span class="pl-s1"><span class="pl-pds">'</span>roll-clockwise<span class="pl-pds">'</span></span>,
+    media<span class="pl-k">:</span> <span class="pl-s1"><span class="pl-pds">'</span>screen and (max-width: 700px)<span class="pl-pds">'</span></span>,
+    from<span class="pl-k">:</span> {
+        <span class="pl-s1"><span class="pl-pds">'</span>margin-left<span class="pl-pds">'</span></span> <span class="pl-k">:</span> <span class="pl-s1"><span class="pl-pds">'</span>0px<span class="pl-pds">'</span></span>
+    },
+    to<span class="pl-k">:</span> {
+        <span class="pl-s1"><span class="pl-pds">'</span>margin-left<span class="pl-pds">'</span></span> <span class="pl-k">:</span> <span class="pl-s1"><span class="pl-pds">'</span>600px<span class="pl-pds">'</span></span>
+    }
+    }
+]);</pre></div>
+
 <p><strong>Playing an animation</strong></p>
 
-<div class="highlight highlight-javascript"><pre><span class="nx">$</span><span class="p">(</span><span class="nx">selector</span><span class="p">).</span><span class="nx">playKeyframe</span><span class="p">({</span>
-    <span class="nx">name</span><span class="o">:</span> <span class="s1">'trapdoor-sequence'</span><span class="p">,</span> <span class="c1">// name of the keyframe you want to bind to the selected element</span>
-    <span class="nx">duration</span><span class="o">:</span> <span class="mi">1000</span><span class="p">,</span> <span class="c1">// [optional, default: 0, in ms] how long you want it to last in milliseconds</span>
-    <span class="nx">timingFunction</span><span class="o">:</span> <span class="s1">'linear'</span><span class="p">,</span> <span class="c1">// [optional, default: ease] specifies the speed curve of the animation</span>
-    <span class="nx">delay</span><span class="o">:</span> <span class="mi">0</span><span class="p">,</span> <span class="c1">//[optional, default: 0, in ms]  how long you want to wait before the animation starts in milliseconds, default value is 0</span>
-    <span class="nx">repeat</span><span class="o">:</span> <span class="s1">'infinite'</span><span class="p">,</span> <span class="c1">//[optional, default:1]  how many times you want the animation to repeat, default value is 1</span>
-    <span class="nx">direction</span><span class="o">:</span> <span class="s1">'normal'</span><span class="p">,</span> <span class="c1">//[optional, default: 'normal']  which direction you want the frames to flow, default value is normal</span>
-    <span class="nx">fillMode</span><span class="o">:</span> <span class="s1">'forwards'</span><span class="p">,</span> <span class="c1">//[optional, default: 'forward']  how to apply the styles outside the animation time, default value is forwards</span>
-    <span class="nx">complete</span><span class="o">:</span> <span class="kd">function</span><span class="p">(){}</span> <span class="c1">//[optional]  Function fired after the animation is complete. If repeat is infinite, the function will be fired every time the animation is restarted.</span>
-<span class="p">});</span>
-</pre></div>
+<p>The css3 animation methods available are better documented here: <a href="http://www.w3schools.com/css/css3_animations.asp">http://www.w3schools.com/css/css3_animations.asp</a></p>
+
+<div class="highlight highlight-javascript"><pre>$(selector).playKeyframe({
+    name<span class="pl-k">:</span> <span class="pl-s1"><span class="pl-pds">'</span>trapdoor-sequence<span class="pl-pds">'</span></span>, <span class="pl-c">// name of the keyframe you want to bind to the selected element</span>
+    duration<span class="pl-k">:</span> <span class="pl-s1"><span class="pl-pds">'</span>1s<span class="pl-pds">'</span></span>, <span class="pl-c">// [optional, default: 0, in ms] how long you want it to last in milliseconds</span>
+    timingFunction<span class="pl-k">:</span> <span class="pl-s1"><span class="pl-pds">'</span>linear<span class="pl-pds">'</span></span>, <span class="pl-c">// [optional, default: ease] specifies the speed curve of the animation</span>
+    delay<span class="pl-k">:</span> <span class="pl-s1"><span class="pl-pds">'</span>0s<span class="pl-pds">'</span></span>, <span class="pl-c">//[optional, default: 0s]  how long you want to wait before the animation starts</span>
+    iterationCount<span class="pl-k">:</span> <span class="pl-s1"><span class="pl-pds">'</span>infinite<span class="pl-pds">'</span></span>, <span class="pl-c">//[optional, default:1]  how many times you want the animation to repeat</span>
+    direction<span class="pl-k">:</span> <span class="pl-s1"><span class="pl-pds">'</span>normal<span class="pl-pds">'</span></span>, <span class="pl-c">//[optional, default: 'normal']  which direction you want the frames to flow</span>
+    fillMode<span class="pl-k">:</span> <span class="pl-s1"><span class="pl-pds">'</span>forwards<span class="pl-pds">'</span></span>, <span class="pl-c">//[optional, default: 'forward']  how to apply the styles outside the animation time, default value is forwards</span>
+    <span class="pl-en">complete</span>: <span class="pl-st">function</span>(){} <span class="pl-c">//[optional] Function fired after the animation is complete. If repeat is infinite, the function will be fired every time the animation is restarted.</span>
+});</pre></div>
 
 <p><strong>Playing an animation (shorthand)</strong></p>
 
-<div class="highlight highlight-javascript"><pre><span class="nx">$</span><span class="p">(</span><span class="nx">selector</span><span class="p">).</span><span class="nx">playKeyframe</span><span class="p">(</span>
-    <span class="s1">'trapdoor-sequence 1000 linear 0 infinite normal forwards'</span><span class="p">,</span>
-    <span class="nx">complete</span>
-<span class="p">);</span>
-</pre></div>
+<div class="highlight highlight-javascript"><pre>$(selector).playKeyframe(
+    <span class="pl-s1"><span class="pl-pds">'</span>trapdoor-sequence 1s linear 0 infinite normal forwards<span class="pl-pds">'</span></span>,
+    complete
+);</pre></div>
+
+<p><strong>Playing multiple animations</strong></p>
+
+<div class="highlight highlight-javascript"><pre>$(selector).playKeyframe([
+    <span class="pl-s1"><span class="pl-pds">'</span>trapdoor-sequence 1s linear 0 infinite<span class="pl-pds">'</span></span>,
+    {
+      name<span class="pl-k">:</span> <span class="pl-s1"><span class="pl-pds">'</span>ball-roll<span class="pl-pds">'</span></span>,
+      duration<span class="pl-k">:</span> <span class="pl-s1"><span class="pl-pds">"</span>3s<span class="pl-pds">"</span></span>,
+      timingFunction<span class="pl-k">:</span> <span class="pl-s1"><span class="pl-pds">'</span>ease<span class="pl-pds">'</span></span>,
+      iterationCount<span class="pl-k">:</span> <span class="pl-c1">1</span>
+    }
+], complete);</pre></div>
 
 <p><strong>Reset the animation</strong></p>
 
-<div class="highlight highlight-javascript"><pre><span class="nx">$</span><span class="p">(</span><span class="nx">selector</span><span class="p">).</span><span class="nx">resetKeyframe</span><span class="p">(</span><span class="nx">callback</span><span class="p">);</span>
-</pre></div>
+<div class="highlight highlight-javascript"><pre>$(selector).resetKeyframe(callback);</pre></div>
 
 <p><strong>Freeze keyframe animation and kill callbacks</strong></p>
 
-<div class="highlight highlight-javascript"><pre><span class="nx">$</span><span class="p">(</span><span class="nx">selector</span><span class="p">).</span><span class="nx">pauseKeyframe</span><span class="p">();</span>
-</pre></div>
+<div class="highlight highlight-javascript"><pre>$(selector).pauseKeyframe();</pre></div>
 
 <p><strong>Resume keyframe animation</strong></p>
 
-<div class="highlight highlight-javascript"><pre><span class="nx">$</span><span class="p">(</span><span class="nx">selector</span><span class="p">).</span><span class="nx">resumeKeyframe</span><span class="p">();</span>
-</pre></div>
+<div class="highlight highlight-javascript"><pre>$(selector).resumeKeyframe();</pre></div>
+
+<h2>
+<a id="who-is-using-jquerykeyframes" class="anchor" href="#who-is-using-jquerykeyframes" aria-hidden="true"><span class="octicon octicon-link"></span></a>Who is using jQuery.Keyframes?</h2>
+
+<ul>
+<li>Metrize Premium HTML5 Template: <a href="http://themeforest.net/item/metrize-responsive-flipcard-template/7415882">http://themeforest.net/item/metrize-responsive-flipcard-template/7415882</a>
+</li>
+<li>Hipster Gallery: <a href="http://labs.bebensiganteng.com/html5/hipstergallery/#thumbnails/0">http://labs.bebensiganteng.com/html5/hipstergallery/#thumbnails/0</a>
+</li>
+</ul>
+
+<h2>
+<a id="plugins" class="anchor" href="#plugins" aria-hidden="true"><span class="octicon octicon-link"></span></a>Plugins!</h2>
+
+<p>See other plugins that allow for spritesheets &amp; more complex movement paths: <a href="https://github.com/jQueryKeyframes">https://github.com/jQueryKeyframes</a></p>
       </section>
 
     </div>
