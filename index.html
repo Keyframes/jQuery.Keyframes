@@ -15,6 +15,165 @@
     <link rel="stylesheet" href="stylesheets/ie.css">
     <![endif]-->
     <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+    <script type="text/javascript" src="https://rawgit.com/jQueryKeyframes/jQuery.Keyframes/master/jquery.keyframes.min.js"></script>
+
+    <script type='text/javascript'>
+      $(window).load(function() {
+
+        // Get the css browser code (ie: -moz-)
+        var pfx = $.keyframe.getVendorPrefix();
+
+        //Note the variable notation to be able to add vendor specific prefix
+        var transform = pfx + 'transform';
+
+        // Setup the initial transform style.
+        $('.ball').css(transform, 'rotate(90deg)');
+
+        // Adding a new animation sequences (keyframe)
+        $.keyframe.define([{
+          name: 'ball-roll',
+          '0%': {
+            'transform': 'rotate(90deg)',
+            'margin-left': '0px'
+          },
+          '50%': {
+            'transform': 'rotate(450deg)',
+            'margin-left': '600px'
+          },
+          '100%': {
+            'transform': 'rotate(90deg)',
+            'margin-left': '0px'
+          }
+        }, {
+          name: 'ball-spin',
+          from: {
+            'transform': 'rotate(90deg)'
+          },
+          to: {
+            'transform': 'rotate(450deg)'
+          }
+        }]);
+
+      });
+
+      function play(animation) {
+        $('.ball').resetKeyframe(function() {
+          switch (animation) {
+            case 'normal':
+
+              // roll with easing
+              $('.ball').playKeyframe({
+                name: 'ball-roll',
+                duration: "3s",
+                timingFunction: 'ease',
+                delay: 0,
+                iterationCount: 'infinite',
+                direction: 'normal',
+                fillMode: 'forwards',
+                complete: increment
+              });
+
+              break;
+            case 'spin':
+
+              // run spin keyframes using the shorthand method.
+              $('.ball').playKeyframe('ball-spin 500ms linear 0 3 normal forwards', increment);
+
+              break;
+            case 'linear':
+
+              // roll with linear timing
+              $('.ball').playKeyframe({
+                name: 'ball-roll',
+                duration: "3s",
+                timingFunction: 'linear',
+                iterationCount: 'infinite',
+                complete: increment
+              });
+
+              break;
+            case 'delay':
+
+              // set a 2 second delay before starting
+              $('.ball').playKeyframe({
+                name: 'ball-roll',
+                duration: "3s",
+                timingFunction: 'linear',
+                delay: "3s",
+                iterationCount: 'infinite',
+                complete: increment
+              });
+
+              break;
+            case 'once':
+
+              // only play the animation once
+              $('.ball').playKeyframe({
+                name: 'ball-roll',
+                duration: "3s",
+                timingFunction: 'ease',
+                complete: increment
+              });
+
+              break;
+            case 'multi':
+              // play multiple animations
+              $('.ball').playKeyframe([
+                'ball-spin 500ms linear 0 6',
+                {
+                  name: 'ball-roll',
+                  duration: "3s",
+                  timingFunction: 'ease',
+                  iterationCount: 1
+                }
+              ],
+              increment);
+          }
+        })
+
+      }
+
+      function pause() {
+        // freeze keyframe animation and kill callback
+        $('.ball').pauseKeyframe();
+      }
+
+      function resume() {
+        // resume keyframe animation
+        $('.ball').resumeKeyframe();
+      }
+
+      // example callback function
+
+      function increment() {
+        $('#cb').html(parseInt($('#cb').html()) + 1);
+      }
+    </script>
+
+    <style>
+    .example-container{
+      text-align: center;
+    }
+    .ball-container {
+      width: 600px;
+      margin-left:auto;
+      margin-right:auto;
+      text-align:center;
+      margin-top:20px;
+    }
+    .ball {
+      width:100px;
+      height:100px;
+      background-color:yellow;
+      text-align:center;
+      font-family:tahoma;
+      font-size:58px;
+      font-weight:bold;
+      border-radius: 50%;
+      box-shadow: 0px 0px 10px 0px #000;
+      color: black;
+    }
+    </style>
 
   </head>
   <body>
@@ -49,6 +208,26 @@
 <p>With the rise of CSS3 and HTML5, we see more and more usage of fancy features like transformations, translations, rotations and scaling.
 jQuery has a very nice built in <em>$(selector).animate()</em> function which allows for easy setup of these animations.
 However, jQuery's animate() does not support multiple keyframes. jQuery.Keyframes helps you accomplish just that.</p>
+
+<div class="example-container">
+  <div class="ball-container">
+    <div class="ball">: )</div>
+    <br />
+    <input type="button" onclick="play('normal')" value="Ease Roll" />
+    <input type="button" onclick="play('linear')" value="Linear Roll" />
+    <input type="button" onclick="play('delay')" value="2 Second Delay" />
+    <input type="button" onclick="play('once')" value="Roll Once" />
+    <input type="button" onclick="play('spin')" value="Spin" />
+    <input type="button" onclick="play('multi')" value="Multiple Animations" />
+    <br />
+    <input type="button" onclick="pause()" value="Pause" />
+    <input type="button" onclick="resume()" value="Resume" />
+    <input type="button" onclick="play()" value="Reset" />
+    <br />
+    <br />Callback count: <b id="cb">0</b>
+    <br />
+  </div>
+</div>
 
 <h2>
 <a id="requirements" class="anchor" href="#requirements" aria-hidden="true"><span class="octicon octicon-link"></span></a>Requirements</h2>
