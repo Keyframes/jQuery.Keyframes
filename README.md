@@ -171,7 +171,7 @@ $(selector).playKeyframe({
 
 ```javascript
 $(selector).playKeyframe(
-    'trapdoor-sequence 1s linear 0 infinite normal forwards',
+    'trapdoor-sequence 1s linear 0s infinite normal forwards',
     complete
 );
 ```
@@ -180,7 +180,7 @@ $(selector).playKeyframe(
 
 ```javascript
 $(selector).playKeyframe([
-    'trapdoor-sequence 1s linear 0 infinite',
+    'trapdoor-sequence 1s linear 0s infinite',
     {
       name: 'ball-roll',
       duration: "3s",
