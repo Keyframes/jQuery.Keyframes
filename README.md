@@ -219,3 +219,8 @@ Who is using jQuery.Keyframes?
 Plugins!
 --------
 See other plugins that allow for spritesheets & more complex movement paths: https://github.com/jQueryKeyframes
+
+Changelog
+---------
+**0.0.9**
+* Add debug output
