@@ -46,6 +46,11 @@ Usage
 var supportedFlag = $.keyframe.isSupported();
 ```
 
+**Enable debugging to the console**
+```javascript
+$.keyframe.debug = true;
+```
+
 **Adding a new animation sequence (keyframe)**
 
 ```javascript

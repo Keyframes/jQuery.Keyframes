@@ -23,6 +23,7 @@
 
 
     var $createKeyframeStyleTag = function(id, css) {
+        if($.keyframe.debug){ console.log(id + " " + css); }
         return $("<style>" + css + "</style>").attr({
             "class": "keyframe-style",
             id: id,
@@ -31,6 +32,7 @@
     };
 
     $.keyframe = {
+        debug: false,
         getVendorPrefix: function() {
             return vendorPrefix;
         },
@@ -161,7 +163,14 @@
 
         this.each(function() {
             var $el = $(this).addClass("boostKeyframe").css(vendorPrefix + animationPlayState, playStateRunning).css(animationkey, animationcss).data("keyframeOptions", frameOptions);
-
+            if($.keyframe.debug){
+                console.group();
+                if(vendorPrefix){ console.log("Vendor Prefix: " + vendorPrefix); }
+                console.log("Style Applied: " + animationcss);
+                var testCss = $el.css(animationkey);
+                console.log("Rendered Style: " + (testCss ? testCss : $el[0].style.animation));
+                console.groupEnd();
+            }
             if (callback) {
                 _prefixEvent($el, 'AnimationIteration', callback);
                 _prefixEvent($el, 'AnimationEnd', callback);
