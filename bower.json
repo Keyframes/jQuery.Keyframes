@@ -4,7 +4,7 @@
   "homepage": "https://github.com/jQueryKeyframes/jQuery.Keyframes",
   "license": "MIT",
   "private": false,
-  "main": "jquery.keyframes.js",
+  "main": "./jquery.keyframes.js",
   "ignore": [
     "**/.*",
     "node_modules",
