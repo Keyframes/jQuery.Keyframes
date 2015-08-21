@@ -32,11 +32,6 @@ Include script in your document using the following line:
 
 Be sure to define and play animations after the page has loaded using jquerys $(window).load
 
-Vendor Prefixing
-----------------
-[Prefix Free](http://leaverou.github.io/prefixfree/) is used on the generated css to automatically add vendor prefixes. This means you should avoid adding any vendor prefixes to your defined css.
-For convenience, it is bundled into the minified version.
-
 Usage
 -------------
 
@@ -44,11 +39,6 @@ Usage
 
 ```javascript
 var supportedFlag = $.keyframe.isSupported();
-```
-
-**Enable debugging to the console**
-```javascript
-$.keyframe.debug = true;
 ```
 
 **Adding a new animation sequence (keyframe)**
@@ -219,8 +209,3 @@ Who is using jQuery.Keyframes?
 Plugins!
 --------
 See other plugins that allow for spritesheets & more complex movement paths: https://github.com/jQueryKeyframes
-
-Changelog
----------
-**0.0.9**
-* Add debug output
