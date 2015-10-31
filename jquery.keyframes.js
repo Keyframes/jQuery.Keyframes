@@ -1,3 +1,7 @@
+if(typeof module === "object" && typeof module.exports === "object") {
+  var $ = require('jquery');
+}
+
 (function() {
     var animationSupport = false,
         animationString = 'animation',
