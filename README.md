@@ -221,7 +221,7 @@ Who is using jQuery.Keyframes?
 
 Plugins!
 --------
-See other plugins that allow for spritesheets & more complex movement paths: https://github.com/jQueryKeyframes
+See other plugins that allow for spritesheets & more complex movement paths: https://github.com/Keyframes
 
 Changelog
 ---------
