@@ -64,7 +64,7 @@
             var $frameStyle = $("style#" + frameData.name);
 
             if ($frameStyle.length > 0) {
-                $frameStyle.append(css);
+                $frameStyle.html(css);
 
                 var $elems = $("*").filter(function() {
                     return this.style[animationString + "Name"] === frameName;
