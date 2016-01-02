@@ -54,9 +54,10 @@
                     css += "}";
                 }
             }
-
-            css = PrefixFree.prefixCSS(css + "}");
-
+            if(window.PrefixFree)
+                css = PrefixFree.prefixCSS(css + "}");
+            else 
+                css += "}";
             if(frameData.media){
                 css = "@media " + frameData.media + "{" + css + "}";
             }
