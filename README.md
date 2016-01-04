@@ -37,8 +37,8 @@ Be sure to define and play animations after the page has loaded using jquerys $(
 
 Vendor Prefixing
 ----------------
-[Prefix Free](http://leaverou.github.io/prefixfree/) is used on the generated css to automatically add vendor prefixes. This means you should avoid adding any vendor prefixes to your defined css.
-For convenience, it is bundled into the minified version.
+By default [Prefix Free](http://leaverou.github.io/prefixfree/) is used on the generated css to automatically add vendor prefixes. This means you should avoid adding any vendor prefixes to your defined css.
+For convenience, it is bundled into the minified version. Usage of Prefix Free is optional - you can simply not include it, but then you will have to deal with vendor prefixes manually.
 
 Usage
 -------------
