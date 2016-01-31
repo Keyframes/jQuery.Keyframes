@@ -1,11 +1,17 @@
-(function() {
+(function(win, doc, $) {
     var animationSupport = false,
-        animationString = 'animation',
-        vendorPrefix = prefix = '',
-        domPrefixes = ['Webkit', 'Moz', 'O', 'ms', 'Khtml'];
-
-    $(window).load(function(){
-        var style = document.body.style;
+        animationString  = 'animation',
+        vendorPrefix     = prefix = '',
+        domPrefixes      = ['Webkit', 'Moz', 'O', 'ms', 'Khtml'],
+        //match ie 10 & 11 exclusively
+        ie1011           = (win.matchMedia && win.matchMedia('all and (-ms-high-contrast: none), (-ms-high-contrast: active)').matches),
+        $win             = $(win),
+        head             = doc.getElementsByTagName('head')[0]
+    
+    
+    // $.fn.load is deprecated, https://api.jquery.com/load-event/, use '.on' instead
+    $win.on('load', function(){
+        var style = doc.body.style;
         if( style.animationName !== undefined ) { animationSupport = true; }
 
         if( animationSupport === false ) {
@@ -20,15 +26,57 @@
             }
         }
     });
+    var
+    //update style tags with data-media attr
+    ie1011iterateStyles = function(){
+        $.each( $('[data-media]'), function(index,elem){
+            $el = $(elem);
+            if( win.matchMedia($el.attr('data-media')).matches ){
+                $el.html($el.data('keyframedata'));//set keyframe that should apply according to media query
+            } else {
+                $el.data('keyframedata', $el.html() );
+                $el.html('');//take back keyframe that should not apply according to media query
+            }
+        });
+    },
+    
+    // debounce timeout
+    dbnTout,
+    // debounce ie1011iterateStyles function
+    ie1011iterateStylesProxy = function(){
+        win.clearTimeout(dbnTout);
+        dbnTout = win.setTimeout( ie1011iterateStyles, 34 );// wait approx two frames
+    },
 
-
-    var $createKeyframeStyleTag = function(id, css) {
-        if($.keyframe.debug){ console.log(id + " " + css); }
+    $createKeyframeStyleTag = function(id, css, ie1011Media) {
+        if($.keyframe.debug){ win.console.log(id + " " + css); }
+        
+        // issue #53
+        if(ie1011 && ie1011Media){
+            var $style = $('<style></style>').attr({
+                "class":       "keyframe-style",
+                id:            id,
+                type:          "text/css",
+                'data-media' : ie1011Media
+            });
+            
+            if(win.matchMedia(ie1011Media).matches){
+                $style.html(css);
+            } else {
+                $style.data('keyframedata', css);
+            }
+            
+            $win.on('resize',            ie1011iterateStylesProxy)
+                .on('orientationchange', ie1011iterateStylesProxy);
+            
+            return $style.appendTo(head);
+        }
+        
         return $("<style>" + css + "</style>").attr({
             "class": "keyframe-style",
             id: id,
             type: "text/css"
-        }).appendTo("head");
+        }).appendTo(head);
     };
 
     $.keyframe = {
@@ -54,11 +102,13 @@
                     css += "}";
                 }
             }
-            if(window.PrefixFree)
-                css = PrefixFree.prefixCSS(css + "}");
+            if(win.PrefixFree)
+                css = win.PrefixFree.prefixCSS(css + "}");
             else 
                 css += "}";
-            if(frameData.media){
+            
+            // issue #53: if it's is responsive @keyframe, but NOT ie 10/11
+            if(frameData.media && !ie1011 ){
                 css = "@media " + frameData.media + "{" + css + "}";
             }
 
@@ -66,7 +116,8 @@
 
             if ($frameStyle.length > 0) {
                 $frameStyle.html(css);
-
+                // this needs HUGE optimization, maybe to add specific class to animation targets, so
+                // we can retrieve them easely with .classname selector
                 var $elems = $("*").filter(function() {
                     return this.style[animationString + "Name"] === frameName;
                 });
@@ -79,7 +130,12 @@
                     });
                 });
             } else {
-                $createKeyframeStyleTag(frameName, css);
+                // issue #53. pass frameData.media as third argument to @keyframe style tag creation mechanism...
+                if(ie1011 && frameData.media ){
+                    $createKeyframeStyleTag(frameName, css, frameData.media);
+                } else {
+                    $createKeyframeStyleTag(frameName, css);
+                }
             }
         },
         define: function(frameData) {
@@ -101,7 +157,7 @@
         var $el = $(this).css(vendorPrefix + animationPlayState, playStateRunning).css(vendorPrefix + "animation", "none");
 
         if (callback) {
-            setTimeout(callback, 1);
+            win.setTimeout(callback, 1);
         }
     };
 
@@ -180,6 +236,7 @@
         return this;
     };
 
+
     $createKeyframeStyleTag("boost-keyframe", " .boostKeyframe{" + vendorPrefix + "transform:scale3d(1,1,1);}");
 
-}).call(this);
+})(window,document,jQuery);
