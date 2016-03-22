@@ -4,7 +4,7 @@
         vendorPrefix = prefix = '',
         domPrefixes = ['Webkit', 'Moz', 'O', 'ms', 'Khtml'];
 
-    $(window).load(function(){
+    $(document).ready(function(){
         var style = document.body.style;
         if( style.animationName !== undefined ) { animationSupport = true; }
 
