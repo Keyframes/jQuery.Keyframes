@@ -21,6 +21,6 @@
   "homepage": "https://github.com/jQueryKeyframes/jQuery.Keyframes",
   "dependencies": {
     "jquery": "latest",
-    "prefixfree": "git://github.com/LeaVerou/prefixfree.git#gh-pages"
+    "prefixfree": "latest"
   }
 }
