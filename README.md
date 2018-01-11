@@ -1,7 +1,7 @@
 jQuery.Keyframes
 ===========
 
-![](https://badge.fury.io/gh/jQueryKeyframes%2FjQuery.Keyframes.svg)
+![](https://badge.fury.io/gh/Keyframes/jQuery.Keyframes.svg)
 
 jQuery-Keyframes allows dynamic generation of CSS3 keyframes with callback events and other niceness.
 

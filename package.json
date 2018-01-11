@@ -3,9 +3,12 @@
   "version": "0.0.10",
   "description": "jQuery-Keyframes allows dynamic generation of CSS3 keyframes with callback events and other niceness.",
   "main": "jquery.keyframes.min.js",
+  "scripts": {
+    "build": "uglifyjs --compress --mangle -- jquery.keyframes.js > jquery.keyframes.min.js"
+  },
   "repository": {
     "type": "git",
-    "url": "https://github.com/jQueryKeyframes/jQuery.Keyframes.git"
+    "url": "https://github.com/Keyframes/jQuery.Keyframes.git"
   },
   "keywords": [
     "animation",
@@ -16,11 +19,13 @@
   "author": "krazyjakee",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/jQueryKeyframes/jQuery.Keyframes/issues"
+    "url": "https://github.com/Keyframes/jQuery.Keyframes/issues"
   },
-  "homepage": "https://github.com/jQueryKeyframes/jQuery.Keyframes",
+  "homepage": "https://github.com/Keyframes/jQuery.Keyframes",
   "dependencies": {
-    "jquery": "latest",
-    "prefixfree": "latest"
+    "jquery": "latest"
+  },
+  "devDependencies": {
+    "uglify-js": "^3.3.5"
   }
 }
