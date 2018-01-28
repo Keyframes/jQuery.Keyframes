@@ -1,0 +1,13 @@
+{
+    "extends": "airbnb",
+    "env": {
+        "browser": true,
+        "node": false
+    },
+    "rules": {
+        "indent": ["warn", 4],
+        "no-restricted-syntax": 0,
+        "guard-for-in": 0,
+        "func-names": 0
+    }
+}

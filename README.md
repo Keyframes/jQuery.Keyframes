@@ -3,11 +3,11 @@ jQuery.Keyframes
 
 ![](https://badge.fury.io/gh/Keyframes/jQuery.Keyframes.svg)
 
-jQuery-Keyframes allows dynamic generation of CSS3 keyframes with callback events and other niceness.
+jQuery-Keyframes allows dynamic generation of CSS keyframes with callback events and other niceness.
 
 Overview
 --------
-With the rise of CSS3 and HTML5, we see more and more usage of fancy features like transformations, translations, rotations and scaling.
+CSS3 introduced fancy features like transformations, translations, rotations and scaling.
 jQuery has a very nice built in *$(selector).animate()* function which allows for easy setup of these animations.
 However, jQuery's animate() does not support multiple keyframes. jQuery.Keyframes helps you accomplish just that.
 
@@ -16,13 +16,7 @@ Requirements
 In order for jQuery.Keyframes to work the jQuery library needs to be linked either through CDN:
 
 ```html
-<script src='http://code.jquery.com/jquery-<version>[.min].js'></script>
-```
-
-or local copy:
-
-```html
-<script src='/path/to/jquery-<version>[.min].js'></script>
+<script src='http://code.jquery.com/jquery-3.3.1.slim.min.js'></script>
 ```
 
 Installation
@@ -33,12 +27,7 @@ Include script in your document using the following line:
 <script src='/path/to/jquery.keyframes[.min].js'></script>
 ```
 
-Be sure to define and play animations after the page has loaded using jquerys $(window).load
-
-Vendor Prefixing
-----------------
-By default [Prefix Free](http://leaverou.github.io/prefixfree/) is used on the generated css to automatically add vendor prefixes. This means you should avoid adding any vendor prefixes to your defined css.
-For convenience, it is bundled into the minified version. Usage of Prefix Free is optional - you can simply not include it, but then you will have to deal with vendor prefixes manually.
+Be sure to define and play animations after the page has loaded using `window.onload`.
 
 Usage
 -------------
@@ -47,11 +36,6 @@ Usage
 
 ```javascript
 var supportedFlag = $.keyframe.isSupported();
-```
-
-**Enable debugging to the console**
-```javascript
-$.keyframe.debug = true;
 ```
 
 **Adding a new animation sequence (keyframe)**
@@ -225,5 +209,12 @@ See other plugins that allow for spritesheets & more complex movement paths: htt
 
 Changelog
 ---------
+**0.1.0**
+* Remove all vendor prefix functionality (if you need this stick with 0.0.9)
+* Remove debug output
+* Source code now in ES6
+* Remove advanced example
+* Add jQuery 3.x to example
+* Add linting
 **0.0.9**
 * Add debug output

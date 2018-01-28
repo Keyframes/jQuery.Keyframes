@@ -4,22 +4,13 @@
 <head>
   <title>jQuery-Keyframes Example</title>
   <script type="text/javascript" src="../node_modules/jquery/dist/jquery.js"></script>
-  <script type="text/javascript" src="../jquery.keyframes.js"></script>
+  <script type="text/javascript" src="../dist/jquery.keyframes.js"></script>
 
   <script type='text/javascript'>
   $(document).ready(function() {
 
-    // Enable Debugging
-    $.keyframe.debug = true;
-
-    // Get the css browser code (ie: -moz-)
-    var pfx = $.keyframe.getVendorPrefix();
-
-    //Note the variable notation to be able to add vendor specific prefix
-    var transform = pfx + 'transform';
-
     // Setup the initial transform style.
-    $('.ball').css(transform, 'rotate(90deg)');
+    $('.ball').css('transform', 'rotate(90deg)');
 
     // Adding a new animation sequences (keyframe)
     $.keyframe.define([{
@@ -182,7 +173,6 @@
     <br />Callback count: <b id="cb">0</b>
     <br />
   </div>
-  <a href="advanced/"><h2>See an advanced example</h2></a>
 </body>
 
 </html>
