@@ -4,7 +4,12 @@ import Keyframes from '@keyframes/core';
 (() => {
     const doForEach = ($el, cb) => {
         $el.each((index, elem) => {
-            cb(new Keyframes(elem));
+            if (elem.Keyframes) {
+                cb(elem.Keyframes);
+            } else {
+                elem.Keyframes = new Keyframes(elem);
+                cb(elem.Keyframes);
+            }
         });
     };
 
@@ -15,18 +20,18 @@ import Keyframes from '@keyframes/core';
     };
 
     $.fn.resetKeyframe = function (cb) {
-        doForEach($(this), kf => kf.reset(cb));
+        doForEach(this, kf => kf.reset(cb));
     };
 
     $.fn.pauseKeyframe = function () {
-        doForEach($(this), kf => kf.pause());
+        doForEach(this, kf => kf.pause());
     };
 
     $.fn.resumeKeyframe = function () {
-        doForEach($(this), kf => kf.resume());
+        doForEach(this, kf => kf.resume());
     };
 
     $.fn.playKeyframe = function (frameOptions, callback) {
-        doForEach($(this), kf => kf.play(frameOptions, callback));
+        doForEach(this, kf => kf.play(frameOptions, callback));
     };
 })();
