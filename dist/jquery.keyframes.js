@@ -1,13 +1,34 @@
-function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+(function(){function e(t,n,r){function s(o,u){if(!n[o]){if(!t[o]){var a=typeof require=="function"&&require;if(!u&&a)return a(o,!0);if(i)return i(o,!0);var f=new Error("Cannot find module '"+o+"'");throw f.code="MODULE_NOT_FOUND",f}var l=n[o]={exports:{}};t[o][0].call(l.exports,function(e){var n=t[o][1][e];return s(n?n:e)},l,l.exports,e,t,n,r)}return n[o].exports}var i=typeof require=="function"&&require;for(var o=0;o<r.length;o++)s(r[o]);return s}return e})()({1:[function(require,module,exports){
+"use strict";
 
-function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = void 0;
 
-function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
+function _classCallCheck(instance, Constructor) {
+  if (!(instance instanceof Constructor)) {
+    throw new TypeError("Cannot call a class as a function");
+  }
+}
 
-var Keyframes =
-/*#__PURE__*/
-function () {
-  // eslint-disable-line
+function _defineProperties(target, props) {
+  for (var i = 0; i < props.length; i++) {
+    var descriptor = props[i];
+    descriptor.enumerable = descriptor.enumerable || false;
+    descriptor.configurable = true;
+    if ("value" in descriptor) descriptor.writable = true;
+    Object.defineProperty(target, descriptor.key, descriptor);
+  }
+}
+
+function _createClass(Constructor, protoProps, staticProps) {
+  if (protoProps) _defineProperties(Constructor.prototype, protoProps);
+  if (staticProps) _defineProperties(Constructor, staticProps);
+  return Constructor;
+}
+
+var Keyframes = function () {
   function Keyframes(elem) {
     _classCallCheck(this, Keyframes);
 
@@ -22,6 +43,7 @@ function () {
   }, {
     key: "reset",
     value: function reset(callback) {
+      this.removeEvents();
       this.elem.style.animationPlayState = 'running';
       this.elem.style.animation = 'none';
 
@@ -43,6 +65,13 @@ function () {
     key: "play",
     value: function play(frameOptions, callback) {
       var _this = this;
+
+      if (this.elem.style.animationName === frameOptions.name) {
+        this.reset(function () {
+          return _this.play(frameOptions, callback);
+        });
+        return this;
+      }
 
       var animObjToStr = function animObjToStr(obj) {
         var newObj = Object.assign({}, {
@@ -87,6 +116,13 @@ function () {
       this.frameOptions = frameOptions;
       addEvent('animationiteration', callback || frameOptions.complete);
       addEvent('animationend', callback || frameOptions.complete);
+      return this;
+    }
+  }, {
+    key: "removeEvents",
+    value: function removeEvents() {
+      this.elem.removeEventListener('animationiteration', this.animationiterationListener);
+      this.elem.removeEventListener('animationend', this.animationendListener);
     }
   }], [{
     key: "createKeyframeTag",
@@ -120,12 +156,13 @@ function () {
         css = "@media ".concat(frameData.media, "{").concat(css, "}");
       }
 
-      var frameStyle = document.getElementById(frameName);
+      var kfTagId = "Keyframes".concat(frameName);
+      var frameStyle = document.getElementById(kfTagId);
 
       if (frameStyle) {
         frameStyle.innerHTML = css;
       } else {
-        Keyframes.createKeyframeTag(frameName, css);
+        Keyframes.createKeyframeTag(kfTagId, css);
       }
     }
   }, {
@@ -139,10 +176,20 @@ function () {
         this.generate(frameData);
       }
     }
+  }, {
+    key: "plugin",
+    value: function plugin(pluginFunc) {
+      pluginFunc(Keyframes);
+    }
   }]);
 
   return Keyframes;
-}();(function () {
+}();
+
+exports.default = Keyframes;
+
+},{}]},{},[1]);
+(function () {
   var doForEach = function doForEach($el, cb) {
     $el.each(function (index, elem) {
       cb(new Keyframes(elem));

@@ -1,9 +1,10 @@
 {
   "name": "jquerykeyframes",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "jQuery-Keyframes allows dynamic generation of CSS3 keyframes with callback events and other niceness.",
   "main": "dist/jquery.keyframes.min.js",
   "scripts": {
+    "prepare": "npm run build",
     "build": "npm run dependency && npx babel src --no-comments >> dist/jquery.keyframes.js && npm run minify",
     "dependency": "cat node_modules/@keyframes/core/dist/keyframes.js > dist/jquery.keyframes.js",
     "minify": "uglifyjs --compress --mangle -- dist/jquery.keyframes.js > dist/jquery.keyframes.min.js"
@@ -25,7 +26,7 @@
   },
   "homepage": "https://github.com/Keyframes/jQuery.Keyframes",
   "dependencies": {
-    "@keyframes/core": "^1.0.1",
+    "@keyframes/core": "^1.0.6",
     "jquery": "latest"
   },
   "devDependencies": {
