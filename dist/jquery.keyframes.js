@@ -1,34 +1,69 @@
 (function(){function e(t,n,r){function s(o,u){if(!n[o]){if(!t[o]){var a=typeof require=="function"&&require;if(!u&&a)return a(o,!0);if(i)return i(o,!0);var f=new Error("Cannot find module '"+o+"'");throw f.code="MODULE_NOT_FOUND",f}var l=n[o]={exports:{}};t[o][0].call(l.exports,function(e){var n=t[o][1][e];return s(n?n:e)},l,l.exports,e,t,n,r)}return n[o].exports}var i=typeof require=="function"&&require;for(var o=0;o<r.length;o++)s(r[o]);return s}return e})()({1:[function(require,module,exports){
 "use strict";
 
+var _core = _interopRequireDefault(require("@keyframes/core"));
+
+function _interopRequireDefault(obj) {
+  return obj && obj.__esModule ? obj : {
+    default: obj
+  };
+}
+
+(function () {
+  var doForEach = function doForEach($el, cb) {
+    $el.each(function (index, elem) {
+      cb(new _core.default(elem));
+    });
+  };
+
+  $.keyframe = {
+    isSupported: _core.default.isSupported,
+    generate: _core.default.generate,
+    define: _core.default.define
+  };
+
+  $.fn.resetKeyframe = function (cb) {
+    doForEach($(this), function (kf) {
+      return kf.reset(cb);
+    });
+  };
+
+  $.fn.pauseKeyframe = function () {
+    doForEach($(this), function (kf) {
+      return kf.pause();
+    });
+  };
+
+  $.fn.resumeKeyframe = function () {
+    doForEach($(this), function (kf) {
+      return kf.resume();
+    });
+  };
+
+  $.fn.playKeyframe = function (frameOptions, callback) {
+    doForEach($(this), function (kf) {
+      return kf.play(frameOptions, callback);
+    });
+  };
+})();
+
+},{"@keyframes/core":2}],2:[function(require,module,exports){
+"use strict";
+
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
 exports.default = void 0;
 
-function _classCallCheck(instance, Constructor) {
-  if (!(instance instanceof Constructor)) {
-    throw new TypeError("Cannot call a class as a function");
-  }
-}
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
-function _defineProperties(target, props) {
-  for (var i = 0; i < props.length; i++) {
-    var descriptor = props[i];
-    descriptor.enumerable = descriptor.enumerable || false;
-    descriptor.configurable = true;
-    if ("value" in descriptor) descriptor.writable = true;
-    Object.defineProperty(target, descriptor.key, descriptor);
-  }
-}
+function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
 
-function _createClass(Constructor, protoProps, staticProps) {
-  if (protoProps) _defineProperties(Constructor.prototype, protoProps);
-  if (staticProps) _defineProperties(Constructor, staticProps);
-  return Constructor;
-}
+function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
 
-var Keyframes = function () {
+var Keyframes =
+/*#__PURE__*/
+function () {
   function Keyframes(elem) {
     _classCallCheck(this, Keyframes);
 
@@ -189,41 +224,3 @@ var Keyframes = function () {
 exports.default = Keyframes;
 
 },{}]},{},[1]);
-(function () {
-  var doForEach = function doForEach($el, cb) {
-    $el.each(function (index, elem) {
-      cb(new Keyframes(elem));
-    });
-  };
-
-  $.keyframe = {
-    isSupported: Keyframes.isSupported,
-    generate: Keyframes.generate,
-    define: Keyframes.define
-  };
-
-  $.fn.resetKeyframe = function (cb) {
-    doForEach($(this), function (kf) {
-      return kf.reset(cb);
-    });
-  };
-
-  $.fn.pauseKeyframe = function () {
-    doForEach($(this), function (kf) {
-      return kf.pause();
-    });
-  };
-
-  $.fn.resumeKeyframe = function () {
-    doForEach($(this), function (kf) {
-      return kf.resume();
-    });
-  };
-
-  $.fn.playKeyframe = function (frameOptions, callback) {
-    doForEach($(this), function (kf) {
-      return kf.play(frameOptions, callback);
-    });
-  };
-})();
-

@@ -1,4 +1,6 @@
-/* global $, Keyframes */
+/* global $ */
+import Keyframes from '@keyframes/core';
+
 (() => {
     const doForEach = ($el, cb) => {
         $el.each((index, elem) => {

@@ -1,12 +1,14 @@
 {
   "name": "jquerykeyframes",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "jQuery-Keyframes allows dynamic generation of CSS3 keyframes with callback events and other niceness.",
   "main": "dist/jquery.keyframes.min.js",
   "scripts": {
     "prepare": "npm run build",
-    "build": "npm run dependency && npx babel src --no-comments >> dist/jquery.keyframes.js && npm run minify",
-    "dependency": "cat node_modules/@keyframes/core/dist/keyframes.js > dist/jquery.keyframes.js",
+    "build": "npm run es6 && npm run browserify && npm run minify && npm run cleanup",
+    "es6": "babel src/jquery.keyframes.js -o dist/jquery.keyframes.es6.js --no-comments",
+    "browserify": "browserify dist/jquery.keyframes.es6.js -o dist/jquery.keyframes.js -t [ babelify --global --presets [ @babel/preset-env ] ]",
+    "cleanup": "rm dist/jquery.keyframes.es6.js",
     "minify": "uglifyjs --compress --mangle -- dist/jquery.keyframes.js > dist/jquery.keyframes.min.js"
   },
   "repository": {
@@ -33,6 +35,8 @@
     "@babel/cli": "^7.0.0-beta.38",
     "@babel/core": "^7.0.0-beta.38",
     "@babel/preset-env": "^7.0.0-beta.38",
+    "babelify": "github:ylemkimon/babelify",
+    "browserify": "^16.0.0",
     "eslint": "^4.16.0",
     "eslint-config-airbnb": "^16.1.0",
     "eslint-plugin-import": "^2.8.0",
