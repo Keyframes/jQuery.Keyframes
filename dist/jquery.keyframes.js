@@ -29,25 +29,29 @@ function _interopRequireDefault(obj) {
   };
 
   $.fn.resetKeyframe = function (cb) {
-    doForEach(this, function (kf) {
+    var $this = this;
+    doForEach($this, function (kf) {
       return kf.reset(cb);
     });
   };
 
   $.fn.pauseKeyframe = function () {
-    doForEach(this, function (kf) {
+    var $this = this;
+    doForEach($this, function (kf) {
       return kf.pause();
     });
   };
 
   $.fn.resumeKeyframe = function () {
-    doForEach(this, function (kf) {
+    var $this = this;
+    doForEach($this, function (kf) {
       return kf.resume();
     });
   };
 
   $.fn.playKeyframe = function (frameOptions, callback) {
-    doForEach(this, function (kf) {
+    var $this = this;
+    doForEach($this, function (kf) {
       return kf.play(frameOptions, callback);
     });
   };

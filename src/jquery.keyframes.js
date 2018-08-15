@@ -21,18 +21,22 @@ import Keyframes from '@keyframes/core';
     };
 
     $.fn.resetKeyframe = function (cb) {
-        doForEach(this, kf => kf.reset(cb));
+        const $this = this;
+        doForEach($this, kf => kf.reset(cb));
     };
 
     $.fn.pauseKeyframe = function () {
-        doForEach(this, kf => kf.pause());
+        const $this = this;
+        doForEach($this, kf => kf.pause());
     };
 
     $.fn.resumeKeyframe = function () {
-        doForEach(this, kf => kf.resume());
+        const $this = this;
+        doForEach($this, kf => kf.resume());
     };
 
     $.fn.playKeyframe = function (frameOptions, callback) {
-        doForEach(this, kf => kf.play(frameOptions, callback));
+        const $this = this;
+        doForEach($this, kf => kf.play(frameOptions, callback));
     };
 })();
