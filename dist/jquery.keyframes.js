@@ -1,4 +1,4 @@
-(function(){function e(t,n,r){function s(o,u){if(!n[o]){if(!t[o]){var a=typeof require=="function"&&require;if(!u&&a)return a(o,!0);if(i)return i(o,!0);var f=new Error("Cannot find module '"+o+"'");throw f.code="MODULE_NOT_FOUND",f}var l=n[o]={exports:{}};t[o][0].call(l.exports,function(e){var n=t[o][1][e];return s(n?n:e)},l,l.exports,e,t,n,r)}return n[o].exports}var i=typeof require=="function"&&require;for(var o=0;o<r.length;o++)s(r[o]);return s}return e})()({1:[function(require,module,exports){
+(function(){function r(e,n,t){function o(i,f){if(!n[i]){if(!e[i]){var c="function"==typeof require&&require;if(!f&&c)return c(i,!0);if(u)return u(i,!0);var a=new Error("Cannot find module '"+i+"'");throw a.code="MODULE_NOT_FOUND",a}var p=n[i]={exports:{}};e[i][0].call(p.exports,function(r){var n=e[i][1][r];return o(n||r)},p,p.exports,r,e,n,t)}return n[i].exports}for(var u="function"==typeof require&&require,i=0;i<t.length;i++)o(t[i]);return o}return r})()({1:[function(require,module,exports){
 "use strict";
 
 var _core = _interopRequireDefault(require("@keyframes/core"));
@@ -88,7 +88,7 @@ function () {
       this.elem.style.animation = 'none';
 
       if (callback) {
-        setTimeout(callback, 0);
+        requestAnimationFrame(callback);
       }
     }
   }, {
@@ -113,33 +113,7 @@ function () {
         return this;
       }
 
-      var animObjToStr = function animObjToStr(obj) {
-        var newObj = Object.assign({}, {
-          duration: '0s',
-          timingFunction: 'ease',
-          delay: '0s',
-          iterationCount: 1,
-          direction: 'normal',
-          fillMode: 'forwards'
-        }, obj);
-        return [newObj.name, newObj.duration, newObj.timingFunction, newObj.delay, newObj.iterationCount, newObj.direction, newObj.fillMode].join(' ');
-      };
-
-      var animationcss = '';
-
-      if (frameOptions.constructor === Array) {
-        var frameOptionsStrings = [];
-
-        for (var i = 0; i < frameOptions.length; i += 1) {
-          frameOptionsStrings.push(typeof frameOptions[i] === 'string' ? frameOptions[i] : animObjToStr(frameOptions[i]));
-        }
-
-        animationcss = frameOptionsStrings.join(', ');
-      } else if (typeof frameOptions === 'string') {
-        animationcss = frameOptions;
-      } else {
-        animationcss = animObjToStr(frameOptions);
-      }
+      var animationcss = Keyframes.playCSS(frameOptions);
 
       var addEvent = function addEvent(type, eventCallback) {
         var listenerName = "".concat(type, "Listener");
@@ -165,20 +139,38 @@ function () {
       this.elem.removeEventListener('animationend', this.animationendListener);
     }
   }], [{
-    key: "createKeyframeTag",
-    value: function createKeyframeTag(id, css) {
-      var elem = document.createElement('style');
-      elem.innerHTML = css;
-      elem.setAttribute('class', 'keyframe-style');
-      elem.setAttribute('id', id);
-      elem.setAttribute('type', 'text/css');
-      document.getElementsByTagName('head')[0].appendChild(elem);
+    key: "playCSS",
+    value: function playCSS(frameOptions) {
+      var animObjToStr = function animObjToStr(obj) {
+        var newObj = Object.assign({}, {
+          duration: '0s',
+          timingFunction: 'ease',
+          delay: '0s',
+          iterationCount: 1,
+          direction: 'normal',
+          fillMode: 'forwards'
+        }, obj);
+        return [newObj.name, newObj.duration, newObj.timingFunction, newObj.delay, newObj.iterationCount, newObj.direction, newObj.fillMode].join(' ');
+      };
+
+      if (frameOptions.constructor === Array) {
+        var frameOptionsStrings = [];
+
+        for (var i = 0; i < frameOptions.length; i += 1) {
+          frameOptionsStrings.push(typeof frameOptions[i] === 'string' ? frameOptions[i] : animObjToStr(frameOptions[i]));
+        }
+
+        return frameOptionsStrings.join(', ');
+      } else if (typeof frameOptions === 'string') {
+        return frameOptions;
+      }
+
+      return animObjToStr(frameOptions);
     }
   }, {
-    key: "generate",
-    value: function generate(frameData) {
-      var frameName = frameData.name || '';
-      var css = "@keyframes ".concat(frameName, " {");
+    key: "generateCSS",
+    value: function generateCSS(frameData) {
+      var css = "@keyframes ".concat(frameData.name, " {");
 
       for (var key in frameData) {
         if (key !== 'name' && key !== 'media' && key !== 'complete') {
@@ -192,18 +184,27 @@ function () {
         }
       }
 
+      css += '}';
+
       if (frameData.media) {
         css = "@media ".concat(frameData.media, "{").concat(css, "}");
       }
 
-      var kfTagId = "Keyframes".concat(frameName);
-      var frameStyle = document.getElementById(kfTagId);
+      return css;
+    }
+  }, {
+    key: "generate",
+    value: function generate(frameData) {
+      var css = this.generateCSS(frameData);
+      var oldFrameIndex = Keyframes.rules.indexOf(frameData.name);
 
-      if (frameStyle) {
-        frameStyle.innerHTML = css;
-      } else {
-        Keyframes.createKeyframeTag(kfTagId, css);
+      if (oldFrameIndex > -1) {
+        Keyframes.sheet.deleteRule(oldFrameIndex);
+        delete Keyframes.rules[oldFrameIndex];
       }
+
+      var ruleIndex = Keyframes.sheet.insertRule(css);
+      Keyframes.rules[ruleIndex] = frameData.name;
     }
   }, {
     key: "define",
@@ -217,15 +218,45 @@ function () {
       }
     }
   }, {
+    key: "defineCSS",
+    value: function defineCSS(frameData) {
+      if (frameData.length) {
+        var css = '';
+
+        for (var i = 0; i < frameData.length; i += 1) {
+          css += this.generateCSS(frameData[i]);
+        }
+
+        return css;
+      }
+
+      return this.generateCSS(frameData);
+    }
+  }, {
     key: "plugin",
     value: function plugin(pluginFunc) {
-      pluginFunc(Keyframes);
+      if (pluginFunc.constructor === Array) {
+        for (var i = 0; i < pluginFunc.length; i += 1) {
+          pluginFunc[i](Keyframes);
+        }
+      } else {
+        pluginFunc(Keyframes);
+      }
     }
   }]);
 
   return Keyframes;
 }();
 
-exports.default = Keyframes;
+if (typeof document !== 'undefined') {
+  var style = document.createElement('style');
+  style.setAttribute('id', 'keyframesjs-stylesheet');
+  document.head.appendChild(style);
+  Keyframes.sheet = style.sheet;
+  Keyframes.rules = [];
+}
+
+var _default = Keyframes;
+exports.default = _default;
 
 },{}]},{},[1]);
