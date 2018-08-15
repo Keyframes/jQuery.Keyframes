@@ -26,6 +26,7 @@ function _interopRequireDefault(obj) {
   $.keyframe = {
     isSupported: _core.default.isSupported,
     generate: _core.default.generate,
+    generateCSS: _core.default.generateCSS,
     define: _core.default.define
   };
 

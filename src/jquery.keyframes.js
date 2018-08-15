@@ -16,6 +16,7 @@ import Keyframes from '@keyframes/core';
     $.keyframe = {
         isSupported: Keyframes.isSupported,
         generate: Keyframes.generate,
+        generateCSS: Keyframes.generateCSS,
         define: Keyframes.define,
     };
 
