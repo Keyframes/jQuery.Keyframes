@@ -72,11 +72,11 @@ jQuery has a very nice built in <em>$(selector).animate()</em> function which al
 However, jQuery's animate() does not support multiple keyframes. jQuery.Keyframes helps you accomplish just that.</p>
 
 <script type='text/javascript'>
-  $(window).load(function() {
-    //Note the variable notation to be able to add vendor specific prefix
-    var transform = 'transform';
+  $(document).ready(function() {
+
     // Setup the initial transform style.
-    $('.ball').css(transform, 'rotate(90deg)');
+    $('.ball').css('transform', 'rotate(90deg)');
+
     // Adding a new animation sequences (keyframe)
     $.keyframe.define([{
       name: 'ball-move',
@@ -99,27 +99,33 @@ However, jQuery's animate() does not support multiple keyframes. jQuery.Keyframe
       }
     }]);
   });
+
+
   function play(animation) {
     $('.ball').resetKeyframe(function() {
       switch (animation) {
         case 'normal':
+
           // move with easing
           $('.ball').playKeyframe({
             name: 'ball-move',
             duration: "3s",
             timingFunction: 'ease',
-            delay: '0s',
             iterationCount: 'infinite',
             direction: 'normal',
             fillMode: 'forwards',
             complete: increment
           });
+
           break;
         case 'spin':
+
           // run spin keyframes using the shorthand method.
           $('.ball').playKeyframe('ball-spin 500ms linear 0s 3 normal forwards', increment);
+
           break;
         case 'linear':
+
           // move with linear timing
           $('.ball').playKeyframe({
             name: 'ball-move',
@@ -128,8 +134,10 @@ However, jQuery's animate() does not support multiple keyframes. jQuery.Keyframe
             iterationCount: 'infinite',
             complete: increment
           });
+
           break;
         case 'delay':
+
           // set a 2 second delay before starting
           $('.ball').playKeyframe({
             name: 'ball-move',
@@ -139,8 +147,10 @@ However, jQuery's animate() does not support multiple keyframes. jQuery.Keyframe
             iterationCount: 'infinite',
             complete: increment
           });
+
           break;
         case 'once':
+
           // only play the animation once
           $('.ball').playKeyframe({
             name: 'ball-move',
@@ -148,6 +158,7 @@ However, jQuery's animate() does not support multiple keyframes. jQuery.Keyframe
             timingFunction: 'ease',
             complete: increment
           });
+
           break;
         case 'multi':
           // play multiple animations
@@ -163,16 +174,21 @@ However, jQuery's animate() does not support multiple keyframes. jQuery.Keyframe
           increment);
       }
     })
+
   }
+
   function pause() {
     // freeze keyframe animation and kill callback
     $('.ball').pauseKeyframe();
   }
+
   function resume() {
     // resume keyframe animation
     $('.ball').resumeKeyframe();
   }
+
   // example callback function
+
   function increment() {
     $('#cb').html(parseInt($('#cb').html()) + 1);
   }
