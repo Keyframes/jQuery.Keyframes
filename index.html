@@ -9,7 +9,7 @@
     <link rel="stylesheet" type="text/css" href="stylesheets/stylesheet.css" media="screen">
     <link rel="stylesheet" type="text/css" href="stylesheets/github-light.css" media="screen">
     <script type="text/javascript" src="https://code.jquery.com/jquery-1.11.2.min.js"></script>
-    <script type="text/javascript" src="https://rawgit.com/jQueryKeyframes/jQuery.Keyframes/master/dist/jquery.keyframes.min.js"></script>
+    <script type="text/javascript" src="https://rawgit.com/jQueryKeyframes/jQuery.Keyframes/master/dist/jquery.keyframes.js"></script>
 
     <style>
         .ball-container {
@@ -72,7 +72,7 @@ jQuery has a very nice built in <em>$(selector).animate()</em> function which al
 However, jQuery's animate() does not support multiple keyframes. jQuery.Keyframes helps you accomplish just that.</p>
 
 <script type='text/javascript'>
-  $(document).ready(function() {
+  $(document).ready(() => {
 
     // Setup the initial transform style.
     $('.ball').css('transform', 'rotate(90deg)');
@@ -101,8 +101,8 @@ However, jQuery's animate() does not support multiple keyframes. jQuery.Keyframe
   });
 
 
-  function play(animation) {
-    $('.ball').resetKeyframe(function() {
+  const play = (animation) => {
+    $('.ball').resetKeyframe(() => {
       switch (animation) {
         case 'normal':
 
@@ -177,19 +177,19 @@ However, jQuery's animate() does not support multiple keyframes. jQuery.Keyframe
 
   }
 
-  function pause() {
+  const pause = () => {
     // freeze keyframe animation and kill callback
     $('.ball').pauseKeyframe();
   }
 
-  function resume() {
+  const resume = () => {
     // resume keyframe animation
     $('.ball').resumeKeyframe();
   }
 
   // example callback function
 
-  function increment() {
+  const increment = () => {
     $('#cb').html(parseInt($('#cb').html()) + 1);
   }
   </script>
