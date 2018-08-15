@@ -73,12 +73,8 @@ However, jQuery's animate() does not support multiple keyframes. jQuery.Keyframe
 
 <script type='text/javascript'>
   $(window).load(function() {
-    // Enable Debugging
-    $.keyframe.debug = true;
-    // Get the css browser code (ie: -moz-)
-    var pfx = $.keyframe.getVendorPrefix();
     //Note the variable notation to be able to add vendor specific prefix
-    var transform = pfx + 'transform';
+    var transform = 'transform';
     // Setup the initial transform style.
     $('.ball').css(transform, 'rotate(90deg)');
     // Adding a new animation sequences (keyframe)
