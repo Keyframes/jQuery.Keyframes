@@ -19,19 +19,19 @@ import Keyframes from '@keyframes/core';
         define: Keyframes.define,
     };
 
-    $.fn.resetKeyframe = function (cb) {
+    $.fn.resetKeyframe = (cb) => {
         doForEach(this, kf => kf.reset(cb));
     };
 
-    $.fn.pauseKeyframe = function () {
+    $.fn.pauseKeyframe = () => {
         doForEach(this, kf => kf.pause());
     };
 
-    $.fn.resumeKeyframe = function () {
+    $.fn.resumeKeyframe = () => {
         doForEach(this, kf => kf.resume());
     };
 
-    $.fn.playKeyframe = function (frameOptions, callback) {
+    $.fn.playKeyframe = (frameOptions, callback) => {
         doForEach(this, kf => kf.play(frameOptions, callback));
     };
 })();
