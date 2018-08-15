@@ -3,8 +3,6 @@
 
 var _core = _interopRequireDefault(require("@keyframes/core"));
 
-var _this = void 0;
-
 function _interopRequireDefault(obj) {
   return obj && obj.__esModule ? obj : {
     default: obj
@@ -31,25 +29,25 @@ function _interopRequireDefault(obj) {
   };
 
   $.fn.resetKeyframe = function (cb) {
-    doForEach(_this, function (kf) {
+    doForEach(this, function (kf) {
       return kf.reset(cb);
     });
   };
 
   $.fn.pauseKeyframe = function () {
-    doForEach(_this, function (kf) {
+    doForEach(this, function (kf) {
       return kf.pause();
     });
   };
 
   $.fn.resumeKeyframe = function () {
-    doForEach(_this, function (kf) {
+    doForEach(this, function (kf) {
       return kf.resume();
     });
   };
 
   $.fn.playKeyframe = function (frameOptions, callback) {
-    doForEach(_this, function (kf) {
+    doForEach(this, function (kf) {
       return kf.play(frameOptions, callback);
     });
   };
