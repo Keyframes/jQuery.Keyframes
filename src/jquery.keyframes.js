@@ -3,7 +3,7 @@ import Keyframes from '@keyframes/core';
 
 (() => {
     const doForEach = ($el, cb) => {
-        $el.each((index, elem) => {
+        $el.each((_, elem) => {
             if (elem.Keyframes) {
                 cb(elem.Keyframes);
             } else {

@@ -29,7 +29,7 @@
   },
   "homepage": "https://github.com/Keyframes/jQuery.Keyframes",
   "dependencies": {
-    "@keyframes/core": "^1.1.1",
+    "@keyframes/core": "^1.1.2",
     "jquery": "^3.3.1"
   },
   "devDependencies": {

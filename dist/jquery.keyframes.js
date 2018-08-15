@@ -13,7 +13,7 @@ function _interopRequireDefault(obj) {
 
 (function () {
   var doForEach = function doForEach($el, cb) {
-    $el.each(function (index, elem) {
+    $el.each(function (_, elem) {
       if (elem.Keyframes) {
         cb(elem.Keyframes);
       } else {
@@ -163,7 +163,9 @@ function () {
         }
 
         return frameOptionsStrings.join(', ');
-      } else if (typeof frameOptions === 'string') {
+      }
+
+      if (typeof frameOptions === 'string') {
         return frameOptions;
       }
 
