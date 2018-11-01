@@ -1,7 +1,7 @@
 /* global $ */
 import Keyframes from '@keyframes/core';
 
-(() => {
+(($) => {
     const doForEach = ($el, cb) => {
         $el.each((_, elem) => {
             if (elem.Keyframes) {
@@ -39,4 +39,4 @@ import Keyframes from '@keyframes/core';
         const $this = this;
         doForEach($this, kf => kf.play(frameOptions, callback));
     };
-})();
+})(jQuery);
