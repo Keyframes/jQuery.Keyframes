@@ -3,7 +3,7 @@ jQuery.Keyframes
 
 ![](https://badge.fury.io/gh/Keyframes/jQuery.Keyframes.svg)
 
-jQuery-Keyframes allows dynamic generation of CSS keyframes with callback events and other niceness.
+This library is a wrapper around [Keyframes.js](https://github.com/Keyframes/Keyframes), a vanilla js library that allows dynamic generation of CSS keyframes with callback events and other niceness.
 
 Overview
 --------
@@ -13,7 +13,6 @@ However, jQuery's animate() does not support multiple keyframes. jQuery.Keyframe
 
 Requirements
 ------------
-In order for jQuery.Keyframes to work the jQuery library needs to be linked either through CDN:
 
 ```html
 <script src='http://code.jquery.com/jquery-3.3.1.slim.min.js'></script>
@@ -27,7 +26,7 @@ Include script in your document using the following line:
 <script src='/path/to/jquery.keyframes[.min].js'></script>
 ```
 
-Be sure to define and play animations after the page has loaded using `window.onload`.
+Be sure to define and play animations only after the page has loaded using `window.onload`.
 
 Usage
 -------------
@@ -56,10 +55,10 @@ $.keyframe.define([{
 $.keyframe.define({
     name: 'ball-roll',
     from: {
-        'transform': 'rotate(0deg)' //Note that 'transform' will be autoprefixed for you
+        'transform': 'rotate(0deg)'
     },
     to: {
-        'transform': 'rotate(360deg)' //Note that 'transform' will be autoprefixed for you
+        'transform': 'rotate(360deg)'
     }
 });
 ```
@@ -113,9 +112,9 @@ $.keyframe.define([{
 	'40%': shake_even2,
 	'50%': shake_odd2,
 	'60%': shake_even1,
-	'70%': shake_odd1,
-	'80%': shake_even2,
-	'90%': shake_odd1
+	'75.3%': shake_odd1,
+	'80.45%': shake_even2,
+	'91.6%': shake_odd1
     }
 ]);
 ```
@@ -198,17 +197,24 @@ $(selector).resumeKeyframe();
 Who is using jQuery.Keyframes?
 ------------------------------
 
-* Metrize Premium HTML5 Template: http://themeforest.net/item/metrize-responsive-flipcard-template/7415882
-* MetroCV: http://themeforest.net/item/metrocv-onepage-resume-portfolio-wordpress-theme/10266600
 * Hipster Gallery: http://labs.bebensiganteng.com/html5/hipstergallery/#thumbnails/0
-* The Startup Magazine: https://thestartupmag.com/
+* Ronneby Wordpress Theme: https://themeforest.net/item/ronneby-highperformance-wordpress-theme/11776839?s_rank=1
+* Brooklyn Wordpress Theme: https://themeforest.net/item/brooklyn-responsive-multipurpose-wordpress-theme/6221179
+* Contrive Wordpress Theme: https://themeforest.net/item/contrive-building-construction-html5-template/14535825
+* DFD-Native Wordpress Theme: https://themeforest.net/item/native-powerful-startup-development-tool/19200310
+* Sunday Wordpress Theme: http://themes.dfd.name/sunday/promo/
 
 Plugins!
 --------
 See other plugins that allow for spritesheets & more complex movement paths: https://github.com/Keyframes
 
+- [Keyframes.Pathfinder](https://github.com/Keyframes/Keyframes.Pathfinder): A plugin for jQuery.Keyframes that generates complex movement paths
+- [Keyframes.Spritesheet](https://github.com/Keyframes/Keyframes.Spritesheet): Keyframes.Spritesheet easily generates css3 keyframes for elements using animated spritesheets.
+
 Changelog
 ---------
+**1.0.0**
+* Moved to use [keyframes.js](https://github.com/Keyframes/Keyframes) as a base
 **0.1.0**
 * Remove all vendor prefix functionality (if you need this stick with 0.0.9)
 * Remove debug output

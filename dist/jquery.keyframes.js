@@ -9,7 +9,7 @@ function _interopRequireDefault(obj) {
   };
 }
 
-(function () {
+(function ($) {
   var doForEach = function doForEach($el, cb) {
     $el.each(function (_, elem) {
       if (elem.Keyframes) {
@@ -55,7 +55,7 @@ function _interopRequireDefault(obj) {
       return kf.play(frameOptions, callback);
     });
   };
-})();
+})(jQuery);
 
 },{"@keyframes/core":2}],2:[function(require,module,exports){
 "use strict";
