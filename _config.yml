@@ -1,0 +1,8 @@
+title: Jquery.keyframes
+description: jQuery.Keyframes generates and runs CSS3 keyframes quickly and easily allowing you to concentrate on the content of your project whilst cutting down code.
+google_analytics: UA-47285338-1
+show_downloads: true
+theme: jekyll-theme-cayman
+
+gems:
+  - jekyll-mentions
