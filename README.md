@@ -1,7 +1,7 @@
 jQuery.Keyframes
 ===========
 
-![](https://badge.fury.io/js/jquerykeyframes.svg)
+![https://www.npmjs.com/package/jquerykeyframes](https://badge.fury.io/js/jquerykeyframes.svg)
 
 This library is a wrapper around [Keyframes.js](https://github.com/Keyframes/Keyframes), a vanilla js library that allows dynamic generation of CSS keyframes with callback events and other niceness.
 
