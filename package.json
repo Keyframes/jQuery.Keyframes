@@ -1,6 +1,6 @@
 {
   "name": "jquerykeyframes",
-  "version": "1.0.6",
+  "version": "1.0.7",
   "description": "jQuery-Keyframes allows dynamic generation of CSS3 keyframes with callback events and other niceness.",
   "main": "dist/jquery.keyframes.min.js",
   "scripts": {
@@ -29,21 +29,21 @@
   },
   "homepage": "https://github.com/Keyframes/jQuery.Keyframes",
   "dependencies": {
-    "@keyframes/core": "^1.1.4",
+    "@keyframes/core": "^1.1.7",
     "jquery": "^3.3.1"
   },
   "devDependencies": {
-    "@babel/cli": "^7.2.0",
-    "@babel/core": "^7.2.0",
-    "@babel/preset-env": "^7.2.0",
+    "@babel/cli": "^7.2.3",
+    "@babel/core": "^7.2.2",
+    "@babel/preset-env": "^7.3.1",
     "babelify": "^10.0.0",
     "browserify": "^16.2.3",
-    "eslint": "^5.9.0",
+    "eslint": "^5.13.0",
     "eslint-config-airbnb": "^17.1.0",
-    "eslint-plugin-import": "^2.14.0",
-    "eslint-plugin-jsx-a11y": "^6.1.2",
-    "eslint-plugin-react": "^7.11.1",
-    "nodemon": "^1.18.7",
+    "eslint-plugin-import": "^2.16.0",
+    "eslint-plugin-jsx-a11y": "^6.2.1",
+    "eslint-plugin-react": "^7.12.4",
+    "nodemon": "^1.18.10",
     "uglify-js": "^3.4.9"
   }
 }
