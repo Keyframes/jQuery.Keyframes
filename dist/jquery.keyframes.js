@@ -240,10 +240,11 @@ var Keyframes = function () {
 
       if (oldFrameIndex > -1) {
         Keyframes.sheet.deleteRule(oldFrameIndex);
-        delete Keyframes.rules[oldFrameIndex];
+        Keyframes.rules.splice(oldFrameIndex, 1);
       }
 
-      var ruleIndex = Keyframes.sheet.insertRule(css, 0);
+      var ruleIndex = (Keyframes.sheet.cssRules || Keyframes.sheet.rules).length;
+      Keyframes.sheet.insertRule(css, ruleIndex);
       Keyframes.rules[ruleIndex] = frameData.name;
     }
   }, {
