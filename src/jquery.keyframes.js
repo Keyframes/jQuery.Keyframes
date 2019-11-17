@@ -22,7 +22,7 @@ import Keyframes from '@keyframes/core';
 
     $.fn.resetKeyframe = function (cb) {
         const $this = this;
-        doForEach($this, kf => kf.reset(cb));
+        doForEach($this, kf => kf.reset().then(cb));
     };
 
     $.fn.pauseKeyframe = function () {
@@ -35,8 +35,18 @@ import Keyframes from '@keyframes/core';
         doForEach($this, kf => kf.resume());
     };
 
-    $.fn.playKeyframe = function (frameOptions, callback) {
+    $.fn.playKeyframe = function (frameOptions, callbacks) {
         const $this = this;
-        doForEach($this, kf => kf.play(frameOptions, callback));
+        let cb = callbacks;
+        if (frameOptions.complete) {
+            callbacks = frameOptions.complete;
+        }
+        if (typeof callbacks === 'function') {
+            cb = {
+                onIteration: callbacks,
+                onEnd: callbacks,
+            };
+        }
+        doForEach($this, kf => kf.play(frameOptions, cb));
     };
 })(jQuery);
