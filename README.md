@@ -31,7 +31,7 @@ Be sure to define and play animations only after the page has loaded using `wind
 Usage
 -------------
 
-**Detecting CSS animation support**
+**Detecting [CSS animation](https://www.scaler.com/topics/css/animation-css/) support**
 
 ```javascript
 var supportedFlag = $.keyframe.isSupported();
