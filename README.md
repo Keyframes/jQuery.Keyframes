@@ -211,8 +211,26 @@ See other plugins that allow for spritesheets & more complex movement paths: htt
 - [Keyframes.Pathfinder](https://github.com/Keyframes/Keyframes.Pathfinder): A plugin for jQuery.Keyframes that generates complex movement paths
 - [Keyframes.Spritesheet](https://github.com/Keyframes/Keyframes.Spritesheet): Keyframes.Spritesheet easily generates css3 keyframes for elements using animated spritesheets.
 
+## 💖 Support Me
+Hi! I’m krazyjakee 🎮, creator and maintain­er of Keyframes & NodotProject - a suite of open‑source Godot tools (e.g. Nodot, Gedis etc) that empower game developers to build faster and maintain cleaner code.
+
+I’m looking for sponsors to help sustain and grow the project: more dev time, better docs, more features, and deeper community support. Your support means more stable, polished tools used by indie makers and studios alike.
+
+[![ko-fi](https://ko-fi.com/img/githubbutton_sm.svg)](https://ko-fi.com/krazyjakee)
+
+Every contribution helps maintain and improve this project. And encourage me to make more projects like this!
+
+*This is optional support. The tool remains free and open-source regardless.*
+
+---
+
+**Created with ❤️**  
+For contributions, please open issues on GitHub
+
 Changelog
 ---------
+**2.0.0**
+* Update dependencies
 **1.0.0**
 * Moved to use [keyframes.js](https://github.com/Keyframes/Keyframes) as a base
 **0.1.0**
