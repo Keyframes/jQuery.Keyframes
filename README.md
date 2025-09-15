@@ -229,10 +229,13 @@ For contributions, please open issues on GitHub
 
 Changelog
 ---------
+
 **2.0.0**
 * Update dependencies
+
 **1.0.0**
 * Moved to use [keyframes.js](https://github.com/Keyframes/Keyframes) as a base
+
 **0.1.0**
 * Remove all vendor prefix functionality (if you need this stick with 0.0.9)
 * Remove debug output
@@ -240,5 +243,6 @@ Changelog
 * Remove advanced example
 * Add jQuery 3.x to example
 * Add linting
+
 **0.0.9**
 * Add debug output
