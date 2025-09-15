@@ -17,7 +17,9 @@ import Keyframes from '@keyframes/core';
         isSupported: Keyframes.isSupported,
         generate: Keyframes.generate,
         generateCSS: Keyframes.generateCSS,
-        define: Keyframes.define,
+        define: (obj) => {
+            return Keyframes.define(obj);
+        },
     };
 
     $.fn.resetKeyframe = function (cb) {
